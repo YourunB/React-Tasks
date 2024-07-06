@@ -4,10 +4,12 @@ import { getCharactersPageApi, searchCharactersApi } from '../modules/api';
 import CardCharacter from '../components/cardCharacter';
 import React from 'react';
 import { DisneyObject } from '../state/types';
+import Loading from '../components/loading';
 
 class PageMain extends Component {
   state = {
     search: '',
+    load: true,
     page: 1,
     obj: {} as DisneyObject,
   };
@@ -24,6 +26,7 @@ class PageMain extends Component {
     if (value !== '') {
       this.setState({
         search: value,
+        load: true,
       }, this.createCards);
       this.saveSearchToLocalStoraage(value);
     }
@@ -54,6 +57,7 @@ class PageMain extends Component {
     const value = input.value.trim();
     if (value === '') this.setState({
       search: '',
+      load: true,
     }, this.createCards);
   }
 
@@ -61,13 +65,19 @@ class PageMain extends Component {
     if (this.state.search === '') {
       this.setState({
         obj: await getCharactersPageApi(1, 500),
+        load: false,
       });
     } else {
       this.setState({
         obj: await searchCharactersApi(this.state.search, 10),
+        load: false,
       });
     }
   }
+
+  createError() {
+    this.setState({obj: {data: {name: 'for error'}}})
+  };
 
   render() {
     let cardCode = null;
@@ -89,6 +99,8 @@ class PageMain extends Component {
       ));
     }
 
+    const loading = <Loading/>;
+
     return (
       <div className='page-main'>
         
@@ -100,11 +112,14 @@ class PageMain extends Component {
         </header>
 
         <main className='page-main__main'>
+          <button className='btn-error' onClick={() => this.createError()}>Error</button>
           <h1>Disney Characters</h1>
           <section className='cards'>
             {cardCode}
           </section>
         </main>
+
+        {this.state.load ? loading : null}
       </div>
     );
   }
