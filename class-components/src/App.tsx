@@ -6,10 +6,10 @@ class App extends Component {
   render() {
     return (
       <>
-        <PageMain/>
+        <PageMain />
       </>
     );
   }
 }
 
-export default App
+export default App;

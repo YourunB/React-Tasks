@@ -10,7 +10,7 @@
   transition: 0.7s;
 }
 
-@media (hover:hover) {
+@media (hover: hover) {
   .card-char:hover {
     cursor: pointer;
     transform: scale(1.02);
@@ -24,7 +24,6 @@
   transform: scale(0.95);
 }
 
-
 .card-char__img {
   width: 100%;
   height: 150px;
@@ -36,7 +35,7 @@
 
 .card-char__title {
   text-align: center;
-  border-top: solid 1px #FFDEE9;
+  border-top: solid 1px #ffdee9;
 }
 
 .card-char__description {

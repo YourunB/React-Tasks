@@ -49,12 +49,12 @@
   display: block;
 }
 
-@media (hover:hover) {
+@media (hover: hover) {
   .search__btn:hover,
   .btn-error:hover {
     cursor: pointer;
     transform: scale(1.1);
-  }  
+  }
 }
 
 .search__btn:active,

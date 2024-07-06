@@ -5,24 +5,20 @@ module.exports = {
     'eslint:recommended',
     'plugin:@typescript-eslint/recommended',
     'plugin:react-hooks/recommended',
-    'eslint:recommended',
     'plugin:react/recommended',
     'plugin:react/jsx-runtime',
   ],
   ignorePatterns: ['dist', '.eslintrc.cjs'],
   parser: '@typescript-eslint/parser',
-  plugins: ['react-refresh', 'react'],
+  plugins: ['react-refresh', 'react', 'react-compiler'],
   rules: {
-    'react-refresh/only-export-components': [
-      'warn',
-      { allowConstantExport: true },
-    ],
-    "@typescript-eslint/no-explicit-any": "error",
-    "react-compiler/react-compiler": "error",
+    'react-refresh/only-export-components': ['error', { allowConstantExport: true }],
+    '@typescript-eslint/no-explicit-any': 'error',
+    'react-compiler/react-compiler': 'error',
   },
   settings: {
     react: {
       version: 'detect',
     },
   },
-}
+};

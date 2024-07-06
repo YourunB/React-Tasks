@@ -1,3 +1,5 @@
+import React from 'react';
+
 export interface DisneyObject {
   data: [Character] | Character;
   info: Info;
@@ -16,7 +18,7 @@ export interface Character {
 export interface Info {
   count: number;
   nextPage: string;
-  previousPage: string | null
+  previousPage: string | null;
   totalPages: number;
 }
 
