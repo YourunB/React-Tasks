@@ -37,14 +37,28 @@
   transition: 0.7s;
 }
 
+.btn-error {
+  background: rgb(200, 11, 11);
+  border: rgb(200, 11, 11);
+  padding: 5px;
+  color: white;
+  border-radius: 3px;
+  transition: 0.7s;
+  font-weight: 700;
+  margin: auto;
+  display: block;
+}
+
 @media (hover:hover) {
-  .search__btn:hover {
+  .search__btn:hover,
+  .btn-error:hover {
     cursor: pointer;
     transform: scale(1.1);
   }  
 }
 
-.search__btn:active {
+.search__btn:active,
+.btn-error:active {
   transition: 0.2s;
   transform: scale(0.9);
 }
