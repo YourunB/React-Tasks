@@ -1,1 +1,1 @@
-# React-Tasks
+Repository for React tasks from RS School.
