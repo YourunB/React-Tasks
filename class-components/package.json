@@ -13,8 +13,8 @@
   },
   "husky": {
     "hooks": {
-      "pre-commit": "npx prettier . --check",
-      "pre-push": "npx eslint **/*.tsx"
+      "pre-commit": "npx eslint **/*.tsx",
+      "pre-push": "npx prettier . --check"
     }
   },
   "lint-staged": {
