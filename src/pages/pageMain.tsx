@@ -38,9 +38,10 @@ class PageMain extends Component {
 
   saveSearchToLocalStoraage(value: string) {
     if (localStorage.searchHistory) {
-      const arr = JSON.parse(localStorage.searchHistory);
+      let arr = JSON.parse(localStorage.searchHistory) as string[];
+      arr = arr.filter((el) => el !== value);
       arr.push(value);
-      localStorage.searchHistory = JSON.stringify(Array.from(new Set(arr)));
+      localStorage.searchHistory = JSON.stringify(arr);
     } else {
       const arr: string[] = [value];
       localStorage.searchHistory = JSON.stringify(arr);
