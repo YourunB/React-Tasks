@@ -5,6 +5,7 @@ import CardCharacter from '../components/cardCharacter';
 import React from 'react';
 import { DisneyObject } from '../state/types';
 import Loading from '../components/loading';
+import Footer from '../components/footer';
 
 class PageMain extends Component {
   state = {
@@ -129,6 +130,8 @@ class PageMain extends Component {
           <h1>Disney Characters</h1>
           <section className="cards">{cardCode}</section>
         </main>
+
+        <Footer />
 
         {this.state.load ? loading : null}
       </div>
