@@ -1,0 +1,48 @@
+.card-char {
+  display: block;
+  width: 240px;
+  height: 350px;
+  background: white;
+  border-radius: 3px;
+  border: solid 5px white;
+  padding: 15px;
+  overflow-y: auto;
+  transition: 0.7s;
+}
+
+@media (hover: hover) {
+  .card-char:hover {
+    cursor: pointer;
+    transform: scale(1.02);
+    background: rgba(255, 255, 255, 0.5);
+    backdrop-filter: blur(10px);
+  }
+}
+
+.card-char:active {
+  transition: 0.2s;
+  transform: scale(0.95);
+}
+
+.card-char__img {
+  width: 100%;
+  height: 150px;
+  object-fit: cover;
+  object-position: center;
+  border-radius: 3px;
+  border: solid 5px white;
+}
+
+.card-char__title {
+  text-align: center;
+  border-top: solid 1px #ffdee9;
+}
+
+.card-char__description {
+  margin: 0;
+  padding: 0;
+}
+
+.card-char__description span {
+  font-weight: 700;
+}
