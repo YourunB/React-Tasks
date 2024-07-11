@@ -22,7 +22,7 @@ export interface Info {
   totalPages: number;
 }
 
-export interface CardCharacterProps {
+export interface CardProps {
   key: number;
   image: string;
   name: string;

@@ -1,7 +1,7 @@
 import { Component } from 'react';
 import './pageMain.css';
 import { getCharactersPageApi, searchCharactersApi } from '../modules/api';
-import CardCharacter from '../components/cardCharacter';
+import Card from '../components/card';
 import React from 'react';
 import { DisneyObject } from '../state/types';
 import Loading from '../components/loading';
@@ -94,7 +94,7 @@ class PageMain extends Component {
       const data = Array.isArray(this.state.obj.data) ? this.state.obj.data : [this.state.obj.data];
 
       cardCode = data.map((v) => (
-        <CardCharacter
+        <Card
           key={v._id}
           image={v.imageUrl}
           name={v.name}

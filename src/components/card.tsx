@@ -1,7 +1,7 @@
-import './cardCharacter.css';
-import { CardCharacterProps } from '../state/types';
+import './card.css';
+import { CardProps } from '../state/types';
 
-const CardCharacter = (props: CardCharacterProps) => {
+const Card = (props: CardProps) => {
   return (
     <a className="card-char" href={props.source} target="_blank" rel="noreferrer">
       <img
@@ -26,4 +26,4 @@ const CardCharacter = (props: CardCharacterProps) => {
   );
 };
 
-export default CardCharacter;
+export default Card;
