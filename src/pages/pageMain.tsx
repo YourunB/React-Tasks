@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect } from 'react';
+import { useState, useRef, useEffect, useCallback } from 'react';
 import './pageMain.css';
 import { getCharactersPageApi, searchCharactersApi } from '../modules/api';
 import Card from '../components/card';
@@ -9,14 +9,52 @@ import Footer from '../components/footer';
 const PageMain = () => {
   const [search, setSearch] = useState('');
   const [load, setLoad] = useState(true);
-  const [page, setPage] = useState(1);
+  const [firstLoad, setFirstLoad] = useState(true);
+  //const [page, setPage] = useState(1);
   const [obj, setObj] = useState({});
 
   const serchInputRef = useRef(null);
 
+  const createCards = useCallback(async () => {
+    async function createPageCards() {
+      const newObj = await getCharactersPageApi(1, 500);
+      if (newObj) {
+        setObj(newObj);
+        setLoad(false);
+      }
+    }
+
+    async function createSearchCards() {
+      const newObj = await searchCharactersApi(search, 10);
+      if (newObj) {
+        setObj(newObj);
+        setLoad(false);
+      }
+    }
+
+    if (firstLoad && load && localStorage.searchHistory) {
+      const arr = JSON.parse(localStorage.searchHistory) as string[];
+      const input = serchInputRef.current as HTMLInputElement | null;
+      if (input) {
+        input.value = arr[arr.length - 1];
+        setSearch(arr[arr.length - 1]);
+        setFirstLoad(false);
+        createSearchCards();
+      }
+    }
+
+    if (firstLoad && load && !localStorage.searchHistory) {
+      setFirstLoad(false);
+      createPageCards();
+    }
+    
+    if (!firstLoad && load && search === '') createPageCards();
+    if (!firstLoad && load && search !== '') createSearchCards();
+  }, [firstLoad, load, search]);
+
   useEffect(() => {
     createCards();
-  }, [load]);
+  }, [load, createCards]);
   
   function changeSearchCharacters() {
     if (serchInputRef.current) {
@@ -43,18 +81,6 @@ const PageMain = () => {
     }
   }
 
-  function firstCreateCards() {
-    if (localStorage.searchHistory) {
-      const arr = JSON.parse(localStorage.searchHistory) as string[];
-      const input = serchInputRef.current as HTMLInputElement | null;
-      if (input) {
-        input.value = arr[arr.length - 1];
-        setSearch(arr[arr.length - 1]);
-        createCards();
-      }
-    } else createCards();
-  }
-
   function clearSearch() {
     const input = serchInputRef.current as HTMLInputElement | null;
     if (input) {
@@ -63,23 +89,6 @@ const PageMain = () => {
         setLoad(true);
         setSearch('');
         createCards();
-    }
-  }
-
-  async function createCards() {
-    if (search === '' && load) {
-      const newObj = await getCharactersPageApi(1, 500);
-      if (newObj) {
-        setObj(newObj);
-        setLoad(false);
-      }
-    }
-    if (search !== '' && load) {
-      const newObj = await searchCharactersApi(search, 10);
-      if (newObj) {
-        setObj(newObj);
-        setLoad(false);
-      }
     }
   }
 
