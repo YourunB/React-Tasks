@@ -7,17 +7,35 @@ import Loading from '../components/loading';
 import Footer from '../components/footer';
 
 const PageMain = () => {
-  const [search, setSearch] = useState('');
+  function getUrlPage() {
+    const searchParams = new URLSearchParams(location.search);
+    const page = searchParams.get('page');
+    return page;
+  }
+
+  function getUrlSearch() {
+    const searchParams = new URLSearchParams(location.search);
+    const search = searchParams.get('search');
+    return search;
+  }
+
+  const [search, setSearch] = useState(getUrlSearch() || '');
   const [load, setLoad] = useState(true);
   const [firstLoad, setFirstLoad] = useState(true);
-  //const [page, setPage] = useState(1);
+  const [page, setPage] = useState(Number(getUrlPage()) && Number(getUrlPage()) >= 1 ? Number(getUrlPage()) : 1);
   const [obj, setObj] = useState({});
-
+  
   const serchInputRef = useRef(null);
+
+  function updateUrlWithoutReload() {
+    history.pushState(null, '', `?page=${page}${search ? `&search=${search}` : ''}`);
+  }
+
+  updateUrlWithoutReload();
 
   const createCards = useCallback(async () => {
     async function createPageCards() {
-      const newObj = await getCharactersPageApi(1, 500);
+      const newObj = await getCharactersPageApi(page, 10);
       if (newObj) {
         setObj(newObj);
         setLoad(false);
@@ -25,7 +43,7 @@ const PageMain = () => {
     }
 
     async function createSearchCards() {
-      const newObj = await searchCharactersApi(search, 10);
+      const newObj = await searchCharactersApi(search, page, 10);
       if (newObj) {
         setObj(newObj);
         setLoad(false);
@@ -50,7 +68,9 @@ const PageMain = () => {
     
     if (!firstLoad && load && search === '') createPageCards();
     if (!firstLoad && load && search !== '') createSearchCards();
-  }, [firstLoad, load, search]);
+
+    updateUrlWithoutReload();
+  }, [load, search]);
 
   useEffect(() => {
     createCards();
@@ -58,12 +78,12 @@ const PageMain = () => {
   
   function changeSearchCharacters() {
     if (serchInputRef.current) {
-      setLoad(true);
       const input = serchInputRef.current as HTMLInputElement;
       const value = input.value.trim();
       if (value !== '') {
         setSearch(value);
-        createCards();
+        setPage(1);
+        setLoad(true);
         saveSearchToLocalStoraage(value);
       }
     }
@@ -85,15 +105,49 @@ const PageMain = () => {
     const input = serchInputRef.current as HTMLInputElement | null;
     if (input) {
       const value = input.value.trim();
+      console.log(value);
       if (value === '')
         setLoad(true);
+        setPage(1);
         setSearch('');
-        createCards();
     }
   }
 
   function createError() {
     setObj({ data: { name: 'for error' } });
+  }
+
+  function changePage(value: number) {
+    const changePageNumber = () => {
+      setPage(page + value);
+      setLoad(true);
+    }
+
+    if ('info' in obj && typeof obj.info === 'object' && obj.info) {
+      if (value < 0 && 'previousPage' in obj.info && obj.info.previousPage) changePageNumber();
+      if (value > 0 && 'nextPage' in obj.info && obj.info.nextPage) changePageNumber();
+    }
+  }
+
+  /*useEffect(() => {
+    location.search = `?page=${page}${search ? `&search=${search}` : ''}`;
+  },[location.search])*/
+
+  const Pagination = () => {
+    let disableBtnPrev = true;
+    let disableBtnNext = true;
+    if ('info' in obj && typeof obj.info === 'object' && obj.info && 'previousPage' in obj.info && 'nextPage' in obj.info) {
+      if (obj.info.previousPage) disableBtnPrev = false;
+      if (obj.info.nextPage) disableBtnNext = false;
+    }
+
+    return (
+      <div className='pagination'>
+      <button onClick={() => changePage(-1)} disabled={disableBtnPrev}>Prev</button>
+      <span>{page}</span>
+      <button onClick={() => changePage(+1)} disabled={disableBtnNext}>Next</button>
+    </div>
+    );
   }
 
   let cardCode = null;
@@ -124,7 +178,8 @@ const PageMain = () => {
             ref={serchInputRef as React.LegacyRef<HTMLInputElement>}
             className="search__input"
             placeholder="Search..."
-          ></input>
+            defaultValue={search}
+          />
           <button onClick={() => changeSearchCharacters()} className="search__btn">
             Search
           </button>
@@ -138,6 +193,8 @@ const PageMain = () => {
         <h1>Disney Characters</h1>
         <section className="cards">{cardCode}</section>
       </main>
+
+      <Pagination />
 
       <Footer />
 
