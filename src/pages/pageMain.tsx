@@ -1,42 +1,37 @@
-import { Component } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import './pageMain.css';
 import { getCharactersPageApi, searchCharactersApi } from '../modules/api';
 import Card from '../components/card';
 import React from 'react';
-import { DisneyObject } from '../state/types';
 import Loading from '../components/loading';
 import Footer from '../components/footer';
 
-class PageMain extends Component {
-  state = {
-    search: '',
-    load: true,
-    page: 1,
-    obj: {} as DisneyObject,
-  };
+const PageMain = () => {
+  const [search, setSearch] = useState('');
+  const [load, setLoad] = useState(true);
+  const [page, setPage] = useState(1);
+  const [obj, setObj] = useState({});
 
-  serchInputRef = React.createRef();
+  const serchInputRef = useRef(null);
 
-  componentDidMount(): void {
-    this.firstCreateCards();
-  }
-
-  changeSearchCharacters() {
-    const input = this.serchInputRef.current as HTMLInputElement;
-    const value = input.value.trim();
-    if (value !== '') {
-      this.setState(
-        {
-          search: value,
-          load: true,
-        },
-        this.createCards
-      );
-      this.saveSearchToLocalStoraage(value);
+  useEffect(() => {
+    createCards();
+  }, [load]);
+  
+  function changeSearchCharacters() {
+    if (serchInputRef.current) {
+      setLoad(true);
+      const input = serchInputRef.current as HTMLInputElement;
+      const value = input.value.trim();
+      if (value !== '') {
+        setSearch(value);
+        createCards();
+        saveSearchToLocalStoraage(value);
+      }
     }
   }
 
-  saveSearchToLocalStoraage(value: string) {
+  function saveSearchToLocalStoraage(value: string) {
     if (localStorage.searchHistory) {
       let arr = JSON.parse(localStorage.searchHistory) as string[];
       arr = arr.filter((el) => el !== value);
@@ -48,96 +43,98 @@ class PageMain extends Component {
     }
   }
 
-  firstCreateCards() {
+  function firstCreateCards() {
     if (localStorage.searchHistory) {
       const arr = JSON.parse(localStorage.searchHistory) as string[];
-      const input = this.serchInputRef.current as HTMLInputElement;
-      input.value = arr[arr.length - 1];
-      this.setState({ search: arr[arr.length - 1] }, this.createCards);
-    } else this.createCards();
+      const input = serchInputRef.current as HTMLInputElement | null;
+      if (input) {
+        input.value = arr[arr.length - 1];
+        setSearch(arr[arr.length - 1]);
+        createCards();
+      }
+    } else createCards();
   }
 
-  clearSearch() {
-    const input = this.serchInputRef.current as HTMLInputElement;
-    const value = input.value.trim();
-    if (value === '')
-      this.setState(
-        {
-          search: '',
-          load: true,
-        },
-        this.createCards
-      );
-  }
-
-  async createCards() {
-    if (this.state.search === '') {
-      this.setState({
-        obj: await getCharactersPageApi(1, 500),
-        load: false,
-      });
-    } else {
-      this.setState({
-        obj: await searchCharactersApi(this.state.search, 10),
-        load: false,
-      });
+  function clearSearch() {
+    const input = serchInputRef.current as HTMLInputElement | null;
+    if (input) {
+      const value = input.value.trim();
+      if (value === '')
+        setLoad(true);
+        setSearch('');
+        createCards();
     }
   }
 
-  createError() {
-    this.setState({ obj: { data: { name: 'for error' } } });
+  async function createCards() {
+    if (search === '' && load) {
+      const newObj = await getCharactersPageApi(1, 500);
+      if (newObj) {
+        setObj(newObj);
+        setLoad(false);
+      }
+    }
+    if (search !== '' && load) {
+      const newObj = await searchCharactersApi(search, 10);
+      if (newObj) {
+        setObj(newObj);
+        setLoad(false);
+      }
+    }
   }
 
-  render() {
-    let cardCode = null;
-    if ('data' in this.state.obj) {
-      const data = Array.isArray(this.state.obj.data) ? this.state.obj.data : [this.state.obj.data];
+  function createError() {
+    setObj({ data: { name: 'for error' } });
+  }
 
-      cardCode = data.map((v) => (
-        <Card
-          key={v._id}
-          image={v.imageUrl}
-          name={v.name}
-          films={v.films.join(', ')}
-          tvShows={v.tvShows.join(', ')}
-          games={v.videoGames.join(', ')}
-          source={v.sourceUrl}
-        />
-      ));
-    }
+  let cardCode = null;
+  if ('data' in obj) {
+    const data = Array.isArray(obj.data) ? obj.data : [obj.data];
 
-    const loading = <Loading />;
+    cardCode = data.map((v) => (
+      <Card
+        key={v._id}
+        image={v.imageUrl}
+        name={v.name}
+        films={v.films.join(', ')}
+        tvShows={v.tvShows.join(', ')}
+        games={v.videoGames.join(', ')}
+        source={v.sourceUrl}
+      />
+    ));
+  }
 
-    return (
-      <div className="page-main">
-        <header className="page-main__header">
-          <div className="search">
-            <input
-              onInput={() => this.clearSearch()}
-              ref={this.serchInputRef as React.LegacyRef<HTMLInputElement>}
-              className="search__input"
-              placeholder="Search..."
-            ></input>
-            <button onClick={() => this.changeSearchCharacters()} className="search__btn">
-              Search
-            </button>
-          </div>
-        </header>
+  const loading = <Loading />;
 
-        <main className="page-main__main">
-          <button className="btn-error" onClick={() => this.createError()}>
-            Error
+  return (
+    <div className="page-main">
+      <header className="page-main__header">
+        <div className="search">
+          <input
+            onInput={() => clearSearch()}
+            ref={serchInputRef as React.LegacyRef<HTMLInputElement>}
+            className="search__input"
+            placeholder="Search..."
+          ></input>
+          <button onClick={() => changeSearchCharacters()} className="search__btn">
+            Search
           </button>
-          <h1>Disney Characters</h1>
-          <section className="cards">{cardCode}</section>
-        </main>
+        </div>
+      </header>
 
-        <Footer />
+      <main className="page-main__main">
+        <button className="btn-error" onClick={() => createError()}>
+          Error
+        </button>
+        <h1>Disney Characters</h1>
+        <section className="cards">{cardCode}</section>
+      </main>
 
-        {this.state.load ? loading : null}
-      </div>
-    );
-  }
+      <Footer />
+
+      {load ? loading : null}
+    </div>
+  );
 }
 
 export default PageMain;
