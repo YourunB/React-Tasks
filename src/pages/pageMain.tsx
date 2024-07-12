@@ -8,30 +8,25 @@ import Footer from '../components/footer';
 
 const PageMain = () => {
   function getUrlPage() {
-    const searchParams = new URLSearchParams(location.search);
-    const page = searchParams.get('page');
-    return page;
+    return new URLSearchParams(location.search).get('page');
   }
 
   function getUrlSearch() {
-    const searchParams = new URLSearchParams(location.search);
-    const search = searchParams.get('search');
-    return search;
+    return new URLSearchParams(location.search).get('search');
   }
 
   const [search, setSearch] = useState(getUrlSearch() || '');
   const [load, setLoad] = useState(true);
-  const [firstLoad, setFirstLoad] = useState(true);
+  //const [firstLoad, setFirstLoad] = useState(true);
   const [page, setPage] = useState(Number(getUrlPage()) && Number(getUrlPage()) >= 1 ? Number(getUrlPage()) : 1);
   const [obj, setObj] = useState({});
+  const [newPath, setNewPath] = useState(true);
   
   const serchInputRef = useRef(null);
 
   function updateUrlWithoutReload() {
     history.pushState(null, '', `?page=${page}${search ? `&search=${search}` : ''}`);
   }
-
-  updateUrlWithoutReload();
 
   const createCards = useCallback(async () => {
     async function createPageCards() {
@@ -50,7 +45,7 @@ const PageMain = () => {
       }
     }
 
-    if (firstLoad && load && localStorage.searchHistory) {
+    /*if (firstLoad && load && localStorage.searchHistory) {
       const arr = JSON.parse(localStorage.searchHistory) as string[];
       const input = serchInputRef.current as HTMLInputElement | null;
       if (input) {
@@ -64,12 +59,12 @@ const PageMain = () => {
     if (firstLoad && load && !localStorage.searchHistory) {
       setFirstLoad(false);
       createPageCards();
-    }
+    }*/
     
-    if (!firstLoad && load && search === '') createPageCards();
-    if (!firstLoad && load && search !== '') createSearchCards();
-
-    updateUrlWithoutReload();
+    if (load && search === '') createPageCards();
+    if (load && search !== '') createSearchCards();
+    console.log('render')
+    if (newPath && location.search !== `?page=${page}${search ? `&search=${search}` : ''}`) updateUrlWithoutReload();
   }, [load, search]);
 
   useEffect(() => {
@@ -81,9 +76,10 @@ const PageMain = () => {
       const input = serchInputRef.current as HTMLInputElement;
       const value = input.value.trim();
       if (value !== '') {
+        setLoad(true);
+        setNewPath(true);
         setSearch(value);
         setPage(1);
-        setLoad(true);
         saveSearchToLocalStoraage(value);
       }
     }
@@ -108,6 +104,7 @@ const PageMain = () => {
       console.log(value);
       if (value === '')
         setLoad(true);
+        setNewPath(true);
         setPage(1);
         setSearch('');
     }
@@ -119,8 +116,8 @@ const PageMain = () => {
 
   function changePage(value: number) {
     const changePageNumber = () => {
-      setPage(page + value);
       setLoad(true);
+      setPage(page + value);
     }
 
     if ('info' in obj && typeof obj.info === 'object' && obj.info) {
@@ -129,9 +126,18 @@ const PageMain = () => {
     }
   }
 
+  window.onpopstate = () => {
+    setNewPath(false);
+    setPage(Number(getUrlPage() || 1));
+    setSearch(getUrlSearch() || '');
+    setLoad(true);
+
+    console.log(location.search);
+  };
+
   /*useEffect(() => {
     location.search = `?page=${page}${search ? `&search=${search}` : ''}`;
-  },[location.search])*/
+  },[window.onpopstate])*/
 
   const Pagination = () => {
     let disableBtnPrev = true;
