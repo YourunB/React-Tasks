@@ -1,9 +1,9 @@
-import './pagination.css';
+import './cardList.css';
 import { CardListProps } from '../state/types';
 
 const CardList = (props: CardListProps) => {
   return (
-    <main className="page-main__main">
+    <main className="card-list">
       <button className="btn-error" onClick={() => props.createError()}>
         Error
       </button>
