@@ -16,7 +16,7 @@ export async function searchCharactersApi(search: string, page: number, count: n
   return result;
 }
 
-export async function getOneCharacter(id: number) {
+export async function getOneCharacterApi(id: number) {
   let result;
   await fetch(`${url}/${id}`)
     .then((response) => (result = response.json()))
