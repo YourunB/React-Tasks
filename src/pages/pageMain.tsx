@@ -2,11 +2,11 @@ import { useState, useRef, useEffect, useCallback } from 'react';
 import './pageMain.css';
 import { getCharactersPageApi, searchCharactersApi } from '../modules/api';
 import Card from '../components/card';
-import React from 'react';
 import Loading from '../components/loading';
 import Footer from '../components/footer';
 import Pagination from '../components/pagination';
 import CardList from '../components/cardList';
+import Search from '../components/search';
 
 const PageMain = () => {
   function getUrlPage() {
@@ -65,7 +65,7 @@ const PageMain = () => {
     
     if (load && search === '') createPageCards();
     if (load && search !== '') createSearchCards();
-    
+
     if (newPath && location.search !== `?page=${page}${search ? `&search=${search}` : ''}`) updateUrlWithoutReload();
   }, [load, search, newPath, page, updateUrlWithoutReload]);
 
@@ -155,7 +155,7 @@ const PageMain = () => {
   }
 
   const paginationCode = <Pagination
-    key={1000}
+    key={3001}
     page={page}
     obj={obj}
     changePage={changePage}
@@ -164,26 +164,23 @@ const PageMain = () => {
   const loading = <Loading />;
 
   const cardListCode = <CardList
-    key={2000}
+    key={3002}
     cardCode={cardCode}
     createError={createError}
+  />
+
+  const searchCode = <Search
+    key={3003}
+    serchInputRef={serchInputRef}
+    search={search}
+    clearSearch={clearSearch}
+    changeSearchCharacters={changeSearchCharacters}
   />
 
   return (
     <div className="page-main">
       <header className="page-main__header">
-        <div className="search">
-          <input
-            onInput={() => clearSearch()}
-            ref={serchInputRef as React.LegacyRef<HTMLInputElement>}
-            className="search__input"
-            placeholder="Search..."
-            defaultValue={search}
-          />
-          <button onClick={() => changeSearchCharacters()} className="search__btn">
-            Search
-          </button>
-        </div>
+        {searchCode}
       </header>
 
       {cardListCode}
