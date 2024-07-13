@@ -102,13 +102,11 @@ const PageMain = () => {
   function clearSearch() {
     const input = serchInputRef.current as HTMLInputElement | null;
     if (input) {
-      const value = input.value.trim();
-      console.log(value);
-      if (value === '')
-        setLoad(true);
-        setNewPath(true);
-        setPage(1);
-        setSearch('');
+      input.value = '';
+      setLoad(true);
+      setNewPath(true);
+      setPage(1);
+      setSearch('');
     }
   }
 

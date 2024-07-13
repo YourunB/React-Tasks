@@ -4,9 +4,8 @@ import { SearchProps } from '../state/types';
 const Search = (props: SearchProps) => {
   return (
     <div className="search">
-      <button className='search__btn-clear'>X</button>
+      <button onClick={() => props.clearSearch()} className='search__btn-clear'>X</button>
       <input
-        onInput={() => props.clearSearch()}
         ref={props.serchInputRef as React.LegacyRef<HTMLInputElement>}
         className="search__input"
         placeholder="Search..."
