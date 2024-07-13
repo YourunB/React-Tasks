@@ -42,3 +42,9 @@ export interface PaginationProps {
   obj: object;
   changePage: (value: number) => void;
 }
+
+export interface CardListProps {
+  key: number;
+  cardCode: JSX.Element | null | object;
+  createError: () => void;
+}

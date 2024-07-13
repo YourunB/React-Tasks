@@ -6,6 +6,7 @@ import React from 'react';
 import Loading from '../components/loading';
 import Footer from '../components/footer';
 import Pagination from '../components/pagination';
+import CardList from '../components/cardList';
 
 const PageMain = () => {
   function getUrlPage() {
@@ -64,7 +65,7 @@ const PageMain = () => {
     
     if (load && search === '') createPageCards();
     if (load && search !== '') createSearchCards();
-    console.log('render')
+    
     if (newPath && location.search !== `?page=${page}${search ? `&search=${search}` : ''}`) updateUrlWithoutReload();
   }, [load, search, newPath, page, updateUrlWithoutReload]);
 
@@ -136,7 +137,7 @@ const PageMain = () => {
     console.log(location.search);
   };
 
-  let cardCode = null;
+  let cardCode: JSX.Element | null | object = null;
   if ('data' in obj) {
     const data = Array.isArray(obj.data) ? obj.data : [obj.data];
 
@@ -153,7 +154,7 @@ const PageMain = () => {
     ));
   }
 
-  const pagination = <Pagination
+  const paginationCode = <Pagination
     key={1000}
     page={page}
     obj={obj}
@@ -161,6 +162,12 @@ const PageMain = () => {
   />
 
   const loading = <Loading />;
+
+  const cardListCode = <CardList
+    key={2000}
+    cardCode={cardCode}
+    createError={createError}
+  />
 
   return (
     <div className="page-main">
@@ -179,16 +186,8 @@ const PageMain = () => {
         </div>
       </header>
 
-      <main className="page-main__main">
-        <button className="btn-error" onClick={() => createError()}>
-          Error
-        </button>
-        <h1>Disney Characters</h1>
-        <section className="cards">{cardCode}</section>
-      </main>
-
-      {pagination}
-
+      {cardListCode}
+      {paginationCode}
       <Footer />
 
       {load ? loading : null}
