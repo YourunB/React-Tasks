@@ -5,6 +5,7 @@ import Card from '../components/card';
 import React from 'react';
 import Loading from '../components/loading';
 import Footer from '../components/footer';
+import Pagination from '../components/pagination';
 
 const PageMain = () => {
   function getUrlPage() {
@@ -135,27 +136,6 @@ const PageMain = () => {
     console.log(location.search);
   };
 
-  /*useEffect(() => {
-    location.search = `?page=${page}${search ? `&search=${search}` : ''}`;
-  },[window.onpopstate])*/
-
-  const Pagination = () => {
-    let disableBtnPrev = true;
-    let disableBtnNext = true;
-    if ('info' in obj && typeof obj.info === 'object' && obj.info && 'previousPage' in obj.info && 'nextPage' in obj.info) {
-      if (obj.info.previousPage) disableBtnPrev = false;
-      if (obj.info.nextPage) disableBtnNext = false;
-    }
-
-    return (
-      <div className='pagination'>
-      <button onClick={() => changePage(-1)} disabled={disableBtnPrev}>Prev</button>
-      <span>{page}</span>
-      <button onClick={() => changePage(+1)} disabled={disableBtnNext}>Next</button>
-    </div>
-    );
-  }
-
   let cardCode = null;
   if ('data' in obj) {
     const data = Array.isArray(obj.data) ? obj.data : [obj.data];
@@ -172,6 +152,13 @@ const PageMain = () => {
       />
     ));
   }
+
+  const pagination = <Pagination
+    key={1000}
+    page={page}
+    obj={obj}
+    changePage={changePage}
+  />
 
   const loading = <Loading />;
 
@@ -200,7 +187,7 @@ const PageMain = () => {
         <section className="cards">{cardCode}</section>
       </main>
 
-      <Pagination />
+      {pagination}
 
       <Footer />
 

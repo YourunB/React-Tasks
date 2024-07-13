@@ -35,3 +35,10 @@ export interface CardProps {
 export interface PropsChildren {
   children: React.ReactNode;
 }
+
+export interface PaginationProps {
+  key: number;
+  page: number;
+  obj: {};
+  changePage: (value: number) => void;
+}
