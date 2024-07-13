@@ -11,9 +11,9 @@ const Pagination = (props: PaginationProps) => {
 
   return (
     <div className='pagination'>
-    <button onClick={() => props.changePage(-1)} disabled={disableBtnPrev}>Prev</button>
-    <span>{props.page}</span>
-    <button onClick={() => props.changePage(+1)} disabled={disableBtnNext}>Next</button>
+    <button className='pagination__btn' onClick={() => props.changePage(-1)} disabled={disableBtnPrev}>&#60;</button>
+    <span className='pagination__count'>{props.page}</span>
+    <button className='pagination__btn' onClick={() => props.changePage(+1)} disabled={disableBtnNext}>&#62;</button>
   </div>
   );
 }
