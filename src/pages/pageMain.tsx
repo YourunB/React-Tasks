@@ -25,9 +25,9 @@ const PageMain = () => {
   
   const serchInputRef = useRef(null);
 
-  function updateUrlWithoutReload() {
+  const updateUrlWithoutReload = useCallback(() => {
     history.pushState(null, '', `?page=${page}${search ? `&search=${search}` : ''}`);
-  }
+  }, [page, search]);
 
   const createCards = useCallback(async () => {
     async function createPageCards() {
@@ -66,7 +66,7 @@ const PageMain = () => {
     if (load && search !== '') createSearchCards();
     console.log('render')
     if (newPath && location.search !== `?page=${page}${search ? `&search=${search}` : ''}`) updateUrlWithoutReload();
-  }, [load, search]);
+  }, [load, search, newPath, page, updateUrlWithoutReload]);
 
   useEffect(() => {
     createCards();

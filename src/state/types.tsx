@@ -39,6 +39,6 @@ export interface PropsChildren {
 export interface PaginationProps {
   key: number;
   page: number;
-  obj: {};
+  obj: object;
   changePage: (value: number) => void;
 }
