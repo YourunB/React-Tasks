@@ -27,9 +27,6 @@ export interface CardProps {
   image: string;
   name: string;
   films: string;
-  tvShows: string;
-  games: string;
-  source: string;
 }
 
 export interface PropsChildren {

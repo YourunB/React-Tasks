@@ -14,14 +14,6 @@ const Card = (props: CardProps) => {
         <span>Films: </span>
         {props.films || 'none'}
       </p>
-      <p className="card-char__description">
-        <span>TV Shows: </span>
-        {props.tvShows || 'none'}
-      </p>
-      <p className="card-char__description">
-        <span>Games: </span>
-        {props.games || 'none'}
-      </p>
     </a>
   );
 };

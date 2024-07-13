@@ -145,9 +145,6 @@ const PageMain = () => {
         image={v.imageUrl}
         name={v.name}
         films={v.films.join(', ')}
-        tvShows={v.tvShows.join(', ')}
-        games={v.videoGames.join(', ')}
-        source={v.sourceUrl}
       />
     ));
   }
