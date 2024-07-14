@@ -1,8 +1,8 @@
 import { render, screen, fireEvent } from '@testing-library/react';
-import React from 'react';
+import React from "react";
 import '@testing-library/jest-dom';
 import PageMain from '../../src/pages/pageMain';
-import { describe, test, expect } from 'vitest';
+import { describe, test, expect, vi } from 'vitest';
 
 describe('PageMain Component', () => {
   test('renders without crashing', () => {
@@ -35,5 +35,14 @@ describe('PageMain Component', () => {
     fireEvent.click(mainPanelElement);
     const cardDescriptionElement = screen.queryByText('cardDescriptionCode');
     expect(cardDescriptionElement).not.toBeInTheDocument();
+  });
+  
+  test('window.onpopstate', () => {
+    const mockEvent = {
+      state: { page: 2 },
+    };
+    window.onpopstate = vi.fn();
+    window.dispatchEvent(new PopStateEvent('popstate', mockEvent));
+    window.onpopstate = window.onpopstate;
   });
 });

@@ -10,6 +10,10 @@ export default mergeConfig(
       setupFiles: '/test/setup.ts',
       css: true,
       globals: true,
+      coverage: {
+        include: ['src/**/*.ts', 'src/**/*.tsx'],
+        exclude: ['src/**/excluded-folder/**', 'src/main.tsx'],
+      },
     },
   })
 );
