@@ -197,7 +197,7 @@ const PageMain = () => {
   />
 
   return (
-    <div className="page-main">
+    <div className="page-main" data-testid={'page-main'}>
       <div className='main-panel' onClick={() => hideDescription()}>
         <header className="page-main__header">
           {searchCode}
