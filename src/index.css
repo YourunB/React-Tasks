@@ -20,13 +20,13 @@ a {
 }
 
 *::-webkit-scrollbar-track {
-  background-color: white;
+  background-color: rgba(0, 0, 0, 0);
 }
 *::-webkit-scrollbar-track:hover {
-  background-color: white;
+  background-color: rgba(0, 0, 0, 0);
 }
 *::-webkit-scrollbar-track:active {
-  background-color: white;
+  background-color: rgba(0, 0, 0, 0);
 }
 
 *::-webkit-scrollbar-thumb {

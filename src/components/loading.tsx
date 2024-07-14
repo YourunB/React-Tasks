@@ -1,15 +1,12 @@
-import { Component } from 'react';
 import './loading.css';
 import loadingImg from '../assets/images/loading.gif';
 
-class Loading extends Component {
-  render() {
-    return (
-      <div className="loading">
-        <img className="loading__img" src={loadingImg} alt="Loading" />
-      </div>
-    );
-  }
-}
+const Loading = () => {
+  return (
+    <div className="loading" data-testid={'loading'}>
+      <img className="loading__img" src={loadingImg} alt="Loading" />
+    </div>
+  );
+};
 
 export default Loading;

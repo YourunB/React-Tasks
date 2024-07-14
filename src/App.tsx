@@ -1,13 +1,16 @@
 import { Component } from 'react';
 import './App.css';
-import PageMain from './pages/pageMain';
+import { BrowserRouter } from 'react-router-dom';
+import { PagesRouter } from './modules/pagesRouter';
 
 class App extends Component {
   render() {
     return (
-      <>
-        <PageMain />
-      </>
+      <div data-testid={'App'}>
+        <BrowserRouter>
+          <PagesRouter />
+        </BrowserRouter>
+      </div>
     );
   }
 }

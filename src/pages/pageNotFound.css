@@ -1,0 +1,62 @@
+.page-not-found {
+  min-height: calc(100vh - 20px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+}
+
+.error-box {
+  max-width: 400px;
+  width: 100%;
+  padding: 20px;
+  backdrop-filter: blur(10px);
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.error-box__title {
+  text-align: center;
+  color: rgb(204, 47, 47);
+}
+
+.error-box__description {
+  color: white;
+  text-align: center;
+}
+
+.error-box__img {
+  width: 100%;
+  animation: earth-rotate 10s linear infinite;
+}
+
+.error-box__link {
+  display: block;
+  background: rgb(98, 197, 98);
+  text-align: center;
+  color: white;
+  padding: 8px;
+  border-radius: 3px;
+  transition: 0.7s;
+}
+
+@media (hover: hover) {
+  .error-box__link:hover {
+    cursor: pointer;
+    transform: scale(1.05);
+  }
+}
+
+.error-box__link:active {
+  transition: 0.2s;
+  transform: scale(0.9);
+}
+
+@keyframes earth-rotate {
+  0% {
+    transform: rotate(0);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
