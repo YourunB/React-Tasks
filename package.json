@@ -11,13 +11,13 @@
     "format:fix": "npx prettier . --write",
     "format:check": "npx prettier . --check",
     "prepare": "husky",
-    "test": "vitest",
-    "test:coverage": "vitest run --coverage"
+    "test": "npx vitest",
+    "test:coverage": "npx vitest run --coverage"
   },
   "husky": {
     "hooks": {
       "pre-commit": "npx eslint **/*.tsx",
-      "pre-push": "vitest run --coverage"
+      "pre-push": "npx vitest"
     }
   },
   "dependencies": {
