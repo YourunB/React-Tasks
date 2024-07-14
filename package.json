@@ -11,7 +11,8 @@
     "format:fix": "npx prettier . --write",
     "format:check": "npx prettier . --check",
     "prepare": "husky",
-    "test": "jest"
+    "test": "vitest",
+    "coverage": "vitest run --coverage"
   },
   "husky": {
     "hooks": {
@@ -24,7 +25,10 @@
   },
   "devDependencies": {
     "@testing-library/dom": "^10.3.1",
+    "@testing-library/jest-dom": "^6.4.6",
     "@testing-library/react": "^16.0.0",
+    "@testing-library/user-event": "^14.5.2",
+    "@types/jest": "^29.5.12",
     "@types/react": "^18.3.3",
     "@types/react-dom": "^18.3.0",
     "@typescript-eslint/eslint-plugin": "^7.13.1",
@@ -36,6 +40,7 @@
     "eslint-plugin-react-hooks": "^4.6.2",
     "eslint-plugin-react-refresh": "^0.4.7",
     "husky": "^9.0.11",
+    "jsdom": "^24.1.0",
     "prettier": "^3.3.2",
     "react-router-dom": "^6.24.1",
     "ts-node": "^10.9.2",
