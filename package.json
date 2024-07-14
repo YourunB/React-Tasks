@@ -12,11 +12,12 @@
     "format:check": "npx prettier . --check",
     "prepare": "husky",
     "test": "vitest",
-    "coverage": "vitest run --coverage"
+    "test:coverage": "vitest run --coverage"
   },
   "husky": {
     "hooks": {
-      "pre-commit": "npx eslint **/*.tsx"
+      "pre-commit": "npx eslint **/*.tsx",
+      "pre-push": "vitest run --coverage"
     }
   },
   "dependencies": {
