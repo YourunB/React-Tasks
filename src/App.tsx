@@ -6,11 +6,11 @@ import { PagesRouter } from './modules/pagesRouter';
 class App extends Component {
   render() {
     return (
-      <>
+      <div data-testid={'App'}>
         <BrowserRouter>
           <PagesRouter />
         </BrowserRouter>
-      </>
+      </div>
     );
   }
 }
