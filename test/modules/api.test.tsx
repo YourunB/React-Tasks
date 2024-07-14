@@ -2,7 +2,7 @@ import { describe, test, expect, vi } from 'vitest';
 import { getCharactersPageApi, searchCharactersApi, getOneCharacterApi } from '../../src/modules/api'
 import '@testing-library/jest-dom';
 
-const mockResponse = (data: any) => {
+const mockResponse = (data: object) => {
   return {
     json: () => Promise.resolve(data),
   };
