@@ -36,13 +36,4 @@ describe('PageMain Component', () => {
     const cardDescriptionElement = screen.queryByText('cardDescriptionCode');
     expect(cardDescriptionElement).not.toBeInTheDocument();
   });
-  
-  test('window.onpopstate', () => {
-    const mockEvent = {
-      state: { page: 2 },
-    };
-    window.onpopstate = vi.fn();
-    window.dispatchEvent(new PopStateEvent('popstate', mockEvent));
-    window.onpopstate = window.onpopstate;
-  });
 });
