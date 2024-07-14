@@ -26,4 +26,17 @@ describe('CardList Component', () => {
     fireEvent.click(screen.getByText('Error'));
     expect(props.createError).toHaveBeenCalled();
   });
+
+  test('renders correctly with cards', () => {
+    const mockProps = {
+      key: 3002,
+      cardCode: ['Card 1'],
+      createError: vi.fn(),
+    };
+    const { getByText } = render(<CardList {...mockProps} />);
+    expect(getByText('Disney Characters')).toBeInTheDocument();
+    expect(getByText('Card 1')).toBeInTheDocument();
+    const errorButton = getByText('Error');
+    expect(errorButton).toBeInTheDocument();
+  });
 });

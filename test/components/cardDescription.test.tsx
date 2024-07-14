@@ -44,4 +44,23 @@ describe('check CardDescription', () => {
       'https://github.com/YourunB/Test1/blob/main/images/noimage.jpg?raw=true'
     );
   });
+
+  test('displays default values when props are missing', () => {
+    const lossProps: CardDescriptionProps = {
+      key: 20,
+      hideDescription: vi.fn(),
+      image: '',
+      name: '',
+      films: '',
+      tvShows: '',
+      shortFilms: '',
+      videoGames: '',
+    };
+    
+    const { getByText } = render(<CardDescription {...lossProps}/>);
+    expect(getByText('Films: none')).toBeInTheDocument();
+    expect(getByText('TV Shows: none')).toBeInTheDocument();
+    expect(getByText('Short Films: none')).toBeInTheDocument();
+    expect(getByText('Video Games: none')).toBeInTheDocument();
+  });
 });
