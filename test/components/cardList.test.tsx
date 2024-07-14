@@ -7,7 +7,7 @@ import { CardListProps } from '../../src/state/types';
 
 describe('CardList Component', () => {
   const props: CardListProps = {
-    key: 3001,
+    key: 3002,
     cardCode: [],
     createError: vi.fn(),
   };
