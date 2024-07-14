@@ -24,9 +24,11 @@ export interface Info {
 
 export interface CardProps {
   key: number;
-  image: string;
+  id: number;
+  image: string;  
   name: string;
   films: string;
+  showDescription: (value: number) => void;
 }
 
 export interface PropsChildren {
@@ -52,4 +54,15 @@ export interface SearchProps {
   search: string;
   clearSearch: () => void;
   changeSearchCharacters: () => void;
+}
+
+export interface CardDescriptionProps {
+  key: number;
+  image: string;
+  name: string;
+  films: string;
+  tvShows: string;
+  shortFilms: string;
+  videoGames: string;
+  hideDescription: () => void;
 }

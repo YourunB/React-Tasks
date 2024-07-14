@@ -3,7 +3,7 @@ import { CardProps } from '../state/types';
 
 const Card = (props: CardProps) => {
   return (
-    <a className="card-char" href={props.source} target="_blank" rel="noreferrer">
+    <div onClick={() => props.showDescription(props.id)} className="card-char">
       <img
         className="card-char__img"
         src={props.image || 'https://github.com/YourunB/Test1/blob/main/images/noimage.jpg?raw=true'}
@@ -14,7 +14,7 @@ const Card = (props: CardProps) => {
         <span>Films: </span>
         {props.films || 'none'}
       </p>
-    </a>
+    </div>
   );
 };
 

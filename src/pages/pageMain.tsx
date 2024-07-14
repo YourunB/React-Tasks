@@ -1,40 +1,50 @@
-import { useState, useRef, useEffect, useCallback } from 'react';
+import { useState, useRef, useEffect, useLayoutEffect, useCallback } from 'react';
 import './pageMain.css';
-import { getCharactersPageApi, searchCharactersApi } from '../modules/api';
+import { getCharactersPageApi, searchCharactersApi, getOneCharacterApi } from '../modules/api';
 import Card from '../components/card';
 import Loading from '../components/loading';
 import Footer from '../components/footer';
 import Pagination from '../components/pagination';
 import CardList from '../components/cardList';
 import Search from '../components/search';
+import CardDescription from '../components/cardDescription';
 
 const PageMain = () => {
-  function getUrlPage() {
-    return new URLSearchParams(location.search).get('page');
+  function getUrlSearchPart(part: string) {
+    return new URLSearchParams(location.search).get(part);
   }
 
-  function getUrlSearch() {
-    return new URLSearchParams(location.search).get('search');
-  }
-
-  const [search, setSearch] = useState(getUrlSearch() || '');
   const [load, setLoad] = useState(true);
-  //const [firstLoad, setFirstLoad] = useState(true);
-  const [page, setPage] = useState(Number(getUrlPage()) && Number(getUrlPage()) >= 1 ? Number(getUrlPage()) : 1);
+  const [updateCards, setUpdateCards] = useState(true);
+  const [page, setPage] = useState(Number(getUrlSearchPart('page')) && Number(getUrlSearchPart('page')) >= 1 ? Number(getUrlSearchPart('page')) : 1);
+  const [search, setSearch] = useState(getUrlSearchPart('search') || '');
+  const [details, setDetails] = useState(getUrlSearchPart('details') || '');
   const [obj, setObj] = useState({});
   const [newPath, setNewPath] = useState(true);
+  const [objDescription, setObjDescription] = useState({
+    data: {
+      imageUrl: '',
+      name: '',
+      sourceUrl: '',
+      films: [''],
+      tvShows: [''],
+      shortFilms: [''],
+      videoGames: [''],
+    }
+  });
   
   const serchInputRef = useRef(null);
 
   const updateUrlWithoutReload = useCallback(() => {
-    history.pushState(null, '', `?page=${page}${search ? `&search=${search}` : ''}`);
-  }, [page, search]);
+    history.pushState(null, '', `?page=${page}${search ? `&search=${search}` : ''}${details ? `&details=${details}` : ''}`);
+  }, [page, search, details]);
 
   const createCards = useCallback(async () => {
     async function createPageCards() {
       const newObj = await getCharactersPageApi(page, 10);
       if (newObj) {
         setObj(newObj);
+        setUpdateCards(false);
         setLoad(false);
       }
     }
@@ -43,31 +53,27 @@ const PageMain = () => {
       const newObj = await searchCharactersApi(search, page, 10);
       if (newObj) {
         setObj(newObj);
+        setUpdateCards(false);
         setLoad(false);
       }
     }
 
-    /*if (firstLoad && load && localStorage.searchHistory) {
-      const arr = JSON.parse(localStorage.searchHistory) as string[];
-      const input = serchInputRef.current as HTMLInputElement | null;
-      if (input) {
-        input.value = arr[arr.length - 1];
-        setSearch(arr[arr.length - 1]);
-        setFirstLoad(false);
-        createSearchCards();
-      }
+    if (updateCards && load && search === '') createPageCards();
+    if (updateCards && load && search !== '') createSearchCards();
+
+    if (details) {
+      const data = await getOneCharacterApi(Number(details));
+      if (data) setObjDescription(data);
+      setUpdateCards(false);
+      setLoad(false);
     }
 
-    if (firstLoad && load && !localStorage.searchHistory) {
-      setFirstLoad(false);
-      createPageCards();
-    }*/
-    
-    if (load && search === '') createPageCards();
-    if (load && search !== '') createSearchCards();
+    if (newPath && location.search !== `?page=${page}${search ? `&search=${search}` : ''}${details ? `&search=${details}` : ''}`) updateUrlWithoutReload();
+  }, [load, search, newPath, page, details, updateCards, updateUrlWithoutReload]);
 
-    if (newPath && location.search !== `?page=${page}${search ? `&search=${search}` : ''}`) updateUrlWithoutReload();
-  }, [load, search, newPath, page, updateUrlWithoutReload]);
+  useLayoutEffect(() => {
+    setTimeout(() => getSearchFromLocalStorage(), 500);
+  }, [])
 
   useEffect(() => {
     createCards();
@@ -83,6 +89,21 @@ const PageMain = () => {
         setSearch(value);
         setPage(1);
         saveSearchToLocalStoraage(value);
+        setUpdateCards(true);
+      }
+    }
+  }
+
+  function getSearchFromLocalStorage() {
+    if (updateCards && load && localStorage.searchHistory) {
+      const arr = JSON.parse(localStorage.searchHistory) as string[];
+      const input = serchInputRef.current as HTMLInputElement | null;
+      if (input) {
+        input.value = arr[arr.length - 1];
+        setSearch(arr[arr.length - 1]);
+        setPage(1);
+        setUpdateCards(true);
+        setLoad(true);
       }
     }
   }
@@ -107,6 +128,7 @@ const PageMain = () => {
       setNewPath(true);
       setPage(1);
       setSearch('');
+      setUpdateCards(true);
     }
   }
 
@@ -117,6 +139,7 @@ const PageMain = () => {
   function changePage(value: number) {
     const changePageNumber = () => {
       setLoad(true);
+      setUpdateCards(true);
       setPage(page + value);
     }
 
@@ -126,13 +149,26 @@ const PageMain = () => {
     }
   }
 
+  async function showDescription(id: number) {
+    const data = await getOneCharacterApi(id);
+    if (data) setObjDescription(data);
+    setLoad(true);
+    setNewPath(true);
+    setDetails(String(id));
+  }
+
+  function hideDescription() {
+    setNewPath(true);
+    setDetails('');
+  }
+
   window.onpopstate = () => {
     setNewPath(false);
-    setPage(Number(getUrlPage() || 1));
-    setSearch(getUrlSearch() || '');
+    setPage(Number(getUrlSearchPart('page') || 1));
+    setSearch(getUrlSearchPart('search') || '');
+    setDetails(getUrlSearchPart('details') || '');
+    setUpdateCards(true);
     setLoad(true);
-
-    console.log(location.search);
   };
 
   let cardCode: JSX.Element | null | object = null;
@@ -142,9 +178,11 @@ const PageMain = () => {
     cardCode = data.map((v) => (
       <Card
         key={v._id}
+        id={v._id}
         image={v.imageUrl}
         name={v.name}
         films={v.films.join(', ')}
+        showDescription={showDescription}
       />
     ));
   }
@@ -172,17 +210,32 @@ const PageMain = () => {
     changeSearchCharacters={changeSearchCharacters}
   />
 
+  const cardDescriptionCode = <CardDescription
+    key={3004}
+    image={objDescription.data.imageUrl}
+    name={objDescription.data.name}
+    films={objDescription.data.films.join(', ')}
+    tvShows={objDescription.data.tvShows.join(', ')}
+    shortFilms={objDescription.data.shortFilms.join(', ')}
+    videoGames={objDescription.data.videoGames.join(', ')}
+    hideDescription={hideDescription}
+  />
+
   return (
     <div className="page-main">
-      <header className="page-main__header">
-        {searchCode}
-      </header>
+      <div className='main-panel' onClick={() => hideDescription()}>
+        <header className="page-main__header">
+          {searchCode}
+        </header>
 
-      {cardListCode}
-      {paginationCode}
-      <Footer />
+        {cardListCode}
+        {paginationCode}
+        <Footer />
 
-      {load ? loading : null}
+        {load ? loading : null}
+      </div>
+      
+      {details ? cardDescriptionCode : null}
     </div>
   );
 }

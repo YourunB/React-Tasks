@@ -2,7 +2,6 @@ import './cardList.css';
 import { CardListProps } from '../state/types';
 
 const CardList = (props: CardListProps) => {
-  console.log(props.cardCode)
   return (
     <main className="card-list">
       <button className="btn-error" onClick={() => props.createError()}>
