@@ -8,6 +8,7 @@ import Pagination from '../components/pagination';
 import CardList from '../components/cardList';
 import Search from '../components/search';
 import CardDescription from '../components/cardDescription';
+import useSaveSearch from '../hooks/useSaveSearch';
 
 const PageMain = () => {
   function getUrlSearchPart(part: string) {
@@ -16,8 +17,9 @@ const PageMain = () => {
 
   const [load, setLoad] = useState(true);
   const [updateCards, setUpdateCards] = useState(true);
+  const [searchLS, setSearchLS] = useSaveSearch();
   const [page, setPage] = useState(Number(getUrlSearchPart('page')) && Number(getUrlSearchPart('page')) >= 1 ? Number(getUrlSearchPart('page')) : 1);
-  const [search, setSearch] = useState(getUrlSearchPart('search') || '');
+  const [search, setSearch] = useState(searchLS || getUrlSearchPart('search') || '');
   const [details, setDetails] = useState(getUrlSearchPart('details') || '');
   const [obj, setObj] = useState({});
   const [newPath, setNewPath] = useState(true);
@@ -71,10 +73,6 @@ const PageMain = () => {
     if (newPath && location.search !== `?page=${page}${search ? `&search=${search}` : ''}${details ? `&search=${details}` : ''}`) updateUrlWithoutReload();
   }, [load, search, newPath, page, details, updateCards, updateUrlWithoutReload]);
 
-  useLayoutEffect(() => {
-    setTimeout(() => getSearchFromLocalStorage(), 500);
-  }, [])
-
   useEffect(() => {
     createCards();
   }, [load, createCards]);
@@ -88,42 +86,17 @@ const PageMain = () => {
         setNewPath(true);
         setSearch(value);
         setPage(1);
-        saveSearchToLocalStoraage(value);
+        setSearchLS(value);
         setUpdateCards(true);
       }
-    }
-  }
-
-  function getSearchFromLocalStorage() {
-    if (updateCards && load && localStorage.searchHistory) {
-      const arr = JSON.parse(localStorage.searchHistory) as string[];
-      const input = serchInputRef.current as HTMLInputElement | null;
-      if (input) {
-        input.value = arr[arr.length - 1];
-        setSearch(arr[arr.length - 1]);
-        setPage(1);
-        setUpdateCards(true);
-        setLoad(true);
-      }
-    }
-  }
-
-  function saveSearchToLocalStoraage(value: string) {
-    if (localStorage.searchHistory) {
-      let arr = JSON.parse(localStorage.searchHistory) as string[];
-      arr = arr.filter((el) => el !== value);
-      arr.push(value);
-      localStorage.searchHistory = JSON.stringify(arr);
-    } else {
-      const arr: string[] = [value];
-      localStorage.searchHistory = JSON.stringify(arr);
     }
   }
 
   function clearSearch() {
     const input = serchInputRef.current as HTMLInputElement | null;
-    if (input) {
-      input.value = '';
+    if (input) input.value = '';
+    if (localStorage.searchHistory && input) {
+      localStorage.removeItem('searchHistory');
       setLoad(true);
       setNewPath(true);
       setPage(1);
@@ -162,14 +135,16 @@ const PageMain = () => {
     setDetails('');
   }
 
-  window.onpopstate = () => {
-    setNewPath(false);
-    setPage(Number(getUrlSearchPart('page') || 1));
-    setSearch(getUrlSearchPart('search') || '');
-    setDetails(getUrlSearchPart('details') || '');
-    setUpdateCards(true);
-    setLoad(true);
-  };
+  useEffect(() => {
+    window.onpopstate = () => {
+      setNewPath(false);
+      setPage(Number(getUrlSearchPart('page') || 1));
+      setSearch(getUrlSearchPart('search') || '');
+      setDetails(getUrlSearchPart('details') || '');
+      setUpdateCards(true);
+      setLoad(true);
+    };
+  }, []);
 
   let cardCode: JSX.Element | null | object = null;
   if ('data' in obj) {
