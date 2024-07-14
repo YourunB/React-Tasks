@@ -9,10 +9,10 @@ const CardDescription = (props: CardDescriptionProps) => {
       </div>
       <img className='card-description__img' src={props.image || 'https://github.com/YourunB/Test1/blob/main/images/noimage.jpg?raw=true'} alt='Character'></img>
       <h3 className='card-description__name'>{props.name}</h3>
-      <p className='card-description__description'><span>Films: </span>{props.films || 'none'}</p>
-      <p className='card-description__description'><span>TV Shows: </span>{props.tvShows || 'none'}</p>
-      <p className='card-description__description'><span>Short Films: </span>{props.shortFilms || 'none'}</p>
-      <p className='card-description__description'><span>Video Games: </span>{props.videoGames || 'none'}</p>
+      <p className='card-description__description'>Films: {props.films || 'none'}</p>
+      <p className='card-description__description'>TV Shows: {props.tvShows || 'none'}</p>
+      <p className='card-description__description'>Short Films: {props.shortFilms || 'none'}</p>
+      <p className='card-description__description'>Video Games: {props.videoGames || 'none'}</p>
     </div>
   );
 }

@@ -17,9 +17,11 @@ describe('check Card', () => {
 
     render(<Card {...props} />);
 
+    const imgElement = screen.getByAltText('Elena of Avalor');
     const nameElement = screen.getByText('Elena of Avalor');
     const filmsElement = screen.getByText('none');
 
+    expect(imgElement).toHaveAttribute('src', 'https://static.wikia.nocookie.net/disney/images/f/fa/Normal_EoA_S3_E4_0217.jpg');
     expect(nameElement).toBeInTheDocument();
     expect(filmsElement).toBeInTheDocument();
   });

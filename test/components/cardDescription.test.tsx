@@ -14,18 +14,18 @@ describe('check CardDescription', () => {
     films: '',
     tvShows: 'Elena of Avalor',
     shortFilms: '',
-    videoGames: ''
+    videoGames: '',
   };
 
   test('renders CardDescription with props', () => {
     render(<CardDescription {...mockProps} />);
     
     expect(screen.getByAltText('Character')).toHaveAttribute('src', mockProps.image);
-    expect(screen.getByText('Elena of Avalor')).toBeInTheDocument();
-    expect(screen.getByText('')).toHaveTextContent('Films: none');
-    expect(screen.getByText('Elena of Avalor')).toHaveTextContent('TV Shows: Elena of Avalor');
-    expect(screen.getByText('')).toHaveTextContent('Short Films: none');
-    expect(screen.getByText('')).toHaveTextContent('Video Games: none');
+    expect(screen.getByText(mockProps.name)).toBeInTheDocument();
+    expect(screen.getByText(`Films: ${mockProps.films || 'none'}`)).toBeInTheDocument();
+    expect(screen.getByText(`TV Shows: ${mockProps.tvShows || 'none'}`)).toBeInTheDocument();
+    expect(screen.getByText(`Short Films: ${mockProps.shortFilms || 'none'}`)).toBeInTheDocument();
+    expect(screen.getByText(`Video Games: ${mockProps.videoGames || 'none'}`)).toBeInTheDocument();
   });
 
   test('calls hideDescription on button click', () => {
@@ -40,15 +40,5 @@ describe('check CardDescription', () => {
     render(<CardDescription {...propsWithoutImage} />);
     
     expect(screen.getByAltText('Character')).toHaveAttribute('src', 'https://github.com/YourunB/Test1/blob/main/images/noimage.jpg?raw=true');
-  });
-
-  test('renders default text when no films, tvShows, shortFilms, or videoGames are provided', () => {
-    const propsWithDefaults = { ...mockProps, films: '', tvShows: 'Elena of Avalor', shortFilms: '', videoGames: '' };
-    render(<CardDescription {...propsWithDefaults} />);
-    
-    expect(screen.getByText('')).toHaveTextContent('Films: none');
-    expect(screen.getByText('Elena of Avalor')).toHaveTextContent('TV Shows: none');
-    expect(screen.getByText('')).toHaveTextContent('Short Films: none');
-    expect(screen.getByText('')).toHaveTextContent('Video Games: none');
   });
 });
