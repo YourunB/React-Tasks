@@ -1,7 +1,7 @@
-import { render, screen, fireEvent } from "@testing-library/react";
-import { vi, expect } from "vitest";
+import { render, screen, fireEvent } from '@testing-library/react';
+import { vi, expect } from 'vitest';
 import '@testing-library/jest-dom';
-import React from "react";
+import React from 'react';
 import CardList from '../../src/components/cardList';
 import { CardListProps } from '../../src/state/types';
 

@@ -27,14 +27,14 @@
 }
 
 .card-description__description span {
-  font-weight: 700; 
+  font-weight: 700;
 }
 
 .controls {
   display: flex;
   justify-content: flex-end;
   padding: 0;
-  padding:  0 0 10px 0;
+  padding: 0 0 10px 0;
 }
 
 .controls__btn {
@@ -48,7 +48,7 @@
   transition: 0.7s;
 }
 
-@media (hover:hover) {
+@media (hover: hover) {
   .controls__btn:hover {
     cursor: pointer;
     transform: scale(1.2);

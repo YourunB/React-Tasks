@@ -40,7 +40,7 @@
   transition: 0.7s;
 }
 
-@media (hover:hover) {
+@media (hover: hover) {
   .error-box__link:hover {
     cursor: pointer;
     transform: scale(1.05);

@@ -8,9 +8,11 @@ const CardList = (props: CardListProps) => {
         Error
       </button>
       <h1>Disney Characters</h1>
-      <section className="cards">{Array.isArray(props.cardCode) && props.cardCode.length > 0 ? props.cardCode : 'Nothing found...'}</section>
+      <section className="cards">
+        {Array.isArray(props.cardCode) && props.cardCode.length > 0 ? props.cardCode : 'Nothing found...'}
+      </section>
     </main>
   );
-}
+};
 
-export default CardList
+export default CardList;

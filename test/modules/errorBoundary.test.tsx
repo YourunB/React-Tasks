@@ -1,6 +1,6 @@
 import { render, screen } from '@testing-library/react';
 import ErrorBoundary from '../../src/modules/errorBoundary';
-import React from "react";
+import React from 'react';
 import '@testing-library/jest-dom';
 
 const ProblemChild = () => {

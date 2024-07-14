@@ -1,8 +1,8 @@
-import { render, screen, fireEvent  } from '@testing-library/react';
+import { render, screen, fireEvent } from '@testing-library/react';
 import { describe, test, vi } from 'vitest';
 import { SearchProps } from '../../src/state/types';
 import Search from '../../src/components/search';
-import React from "react";
+import React from 'react';
 import '@testing-library/jest-dom';
 
 describe('Search Component', () => {
@@ -15,7 +15,7 @@ describe('Search Component', () => {
     clearSearch: mockClearSearch,
     changeSearchCharacters: mockChangeSearchCharacters,
     serchInputRef: mockSearchInputRef,
-    search: 'test'
+    search: 'test',
   };
 
   test('renders correctly', () => {

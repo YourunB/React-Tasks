@@ -2,7 +2,7 @@ import { render, screen } from '@testing-library/react';
 import { BrowserRouter } from 'react-router-dom';
 import { describe, test, expect } from 'vitest';
 import { PagesRouter } from '../../src/modules/pagesRouter';
-import React from "react";
+import React from 'react';
 import '@testing-library/jest-dom';
 
 describe('PagesRouter', () => {

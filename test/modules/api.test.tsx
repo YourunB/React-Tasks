@@ -1,5 +1,5 @@
 import { describe, test, expect, vi } from 'vitest';
-import { getCharactersPageApi, searchCharactersApi, getOneCharacterApi } from '../../src/modules/api'
+import { getCharactersPageApi, searchCharactersApi, getOneCharacterApi } from '../../src/modules/api';
 import '@testing-library/jest-dom';
 
 const mockResponse = (data: object) => {

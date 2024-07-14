@@ -1,7 +1,7 @@
-import { render, screen, fireEvent } from "@testing-library/react";
-import { vi, expect } from "vitest";
+import { render, screen, fireEvent } from '@testing-library/react';
+import { vi, expect } from 'vitest';
 import '@testing-library/jest-dom';
-import React from "react";
+import React from 'react';
 import CardDescription from '../../src/components/cardDescription';
 import { CardDescriptionProps } from '../../src/state/types';
 
@@ -19,7 +19,7 @@ describe('check CardDescription', () => {
 
   test('renders CardDescription with props', () => {
     render(<CardDescription {...mockProps} />);
-    
+
     expect(screen.getByAltText('Character')).toHaveAttribute('src', mockProps.image);
     expect(screen.getByText(mockProps.name)).toBeInTheDocument();
     expect(screen.getByText(`Films: ${mockProps.films || 'none'}`)).toBeInTheDocument();
@@ -30,7 +30,7 @@ describe('check CardDescription', () => {
 
   test('calls hideDescription on button click', () => {
     render(<CardDescription {...mockProps} />);
-    
+
     fireEvent.click(screen.getByText('X'));
     expect(mockProps.hideDescription).toHaveBeenCalled();
   });
@@ -38,7 +38,10 @@ describe('check CardDescription', () => {
   test('renders default image when no image is provided', () => {
     const propsWithoutImage = { ...mockProps, image: '' };
     render(<CardDescription {...propsWithoutImage} />);
-    
-    expect(screen.getByAltText('Character')).toHaveAttribute('src', 'https://github.com/YourunB/Test1/blob/main/images/noimage.jpg?raw=true');
+
+    expect(screen.getByAltText('Character')).toHaveAttribute(
+      'src',
+      'https://github.com/YourunB/Test1/blob/main/images/noimage.jpg?raw=true'
+    );
   });
 });

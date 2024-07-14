@@ -1,7 +1,7 @@
 import { render, screen } from '@testing-library/react';
 import { describe, test, expect } from 'vitest';
 import Loading from '../../src/components/loading';
-import React from "react";
+import React from 'react';
 import '@testing-library/jest-dom';
 
 describe('Loading Component', () => {

@@ -1,5 +1,14 @@
 import { describe, test, expect } from 'vitest';
-import { DisneyObject, Character, Info, CardProps, PaginationProps, CardListProps, SearchProps, CardDescriptionProps } from '../../src/state/types';
+import {
+  DisneyObject,
+  Character,
+  Info,
+  CardProps,
+  PaginationProps,
+  CardListProps,
+  SearchProps,
+  CardDescriptionProps,
+} from '../../src/state/types';
 import '@testing-library/jest-dom';
 
 const character: Character = {
@@ -9,19 +18,19 @@ const character: Character = {
   tvShows: ['Mickey Mouse Clubhouse'],
   videoGames: ['Kingdom Hearts'],
   imageUrl: 'http://example.com/mickey.jpg',
-  sourceUrl: 'http://example.com/mickey'
+  sourceUrl: 'http://example.com/mickey',
 };
 
 const info: Info = {
   count: 1,
   nextPage: 'http://disney.app/3',
   previousPage: null,
-  totalPages: 1
+  totalPages: 1,
 };
 
 const disneyObject: DisneyObject = {
   data: character,
-  info: info
+  info: info,
 };
 
 describe('DisneyObject', () => {
@@ -38,7 +47,7 @@ describe('CardProps', () => {
     image: 'http://example.com/mickey.jpg',
     name: 'Mickey Mouse',
     films: 'Fantasia',
-    showDescription: (value: number) => {}
+    showDescription: (value: number) => {},
   };
 
   test('should have correct properties', () => {
@@ -53,7 +62,7 @@ describe('PaginationProps', () => {
     key: 1,
     page: 1,
     obj: {},
-    changePage: (value: number) => {}
+    changePage: (value: number) => {},
   };
 
   it('should have correct properties', () => {
@@ -65,7 +74,7 @@ describe('CardListProps', () => {
   const cardListProps: CardListProps = {
     key: 1,
     cardCode: null,
-    createError: () => {}
+    createError: () => {},
   };
 
   test('should have correct properties', () => {
@@ -79,7 +88,7 @@ describe('SearchProps', () => {
     serchInputRef: { current: null },
     search: 'Mickey',
     clearSearch: () => {},
-    changeSearchCharacters: () => {}
+    changeSearchCharacters: () => {},
   };
 
   test('should have correct properties', () => {
@@ -96,7 +105,7 @@ describe('CardDescriptionProps', () => {
     tvShows: 'Mickey Mouse Clubhouse',
     shortFilms: 'Steamboat Willie',
     videoGames: 'Kingdom Hearts',
-    hideDescription: () => {}
+    hideDescription: () => {},
   };
 
   test('should have correct properties', () => {

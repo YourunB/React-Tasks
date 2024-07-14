@@ -18,7 +18,9 @@ const PageMain = () => {
   const [load, setLoad] = useState(true);
   const [updateCards, setUpdateCards] = useState(true);
   const [searchLS, setSearchLS] = useSaveSearch();
-  const [page, setPage] = useState(Number(getUrlSearchPart('page')) && Number(getUrlSearchPart('page')) >= 1 ? Number(getUrlSearchPart('page')) : 1);
+  const [page, setPage] = useState(
+    Number(getUrlSearchPart('page')) && Number(getUrlSearchPart('page')) >= 1 ? Number(getUrlSearchPart('page')) : 1
+  );
   const [search, setSearch] = useState(searchLS || getUrlSearchPart('search') || '');
   const [details, setDetails] = useState(getUrlSearchPart('details') || '');
   const [obj, setObj] = useState({});
@@ -32,13 +34,17 @@ const PageMain = () => {
       tvShows: [''],
       shortFilms: [''],
       videoGames: [''],
-    }
+    },
   });
-  
+
   const serchInputRef = useRef(null);
 
   const updateUrlWithoutReload = useCallback(() => {
-    history.pushState(null, '', `?page=${page}${search ? `&search=${search}` : ''}${details ? `&details=${details}` : ''}`);
+    history.pushState(
+      null,
+      '',
+      `?page=${page}${search ? `&search=${search}` : ''}${details ? `&details=${details}` : ''}`
+    );
   }, [page, search, details]);
 
   const createCards = useCallback(async () => {
@@ -70,13 +76,17 @@ const PageMain = () => {
       setLoad(false);
     }
 
-    if (newPath && location.search !== `?page=${page}${search ? `&search=${search}` : ''}${details ? `&search=${details}` : ''}`) updateUrlWithoutReload();
+    if (
+      newPath &&
+      location.search !== `?page=${page}${search ? `&search=${search}` : ''}${details ? `&search=${details}` : ''}`
+    )
+      updateUrlWithoutReload();
   }, [load, search, newPath, page, details, updateCards, updateUrlWithoutReload]);
 
   useEffect(() => {
     createCards();
   }, [load, createCards]);
-  
+
   function changeSearchCharacters() {
     if (serchInputRef.current) {
       const input = serchInputRef.current as HTMLInputElement;
@@ -114,7 +124,7 @@ const PageMain = () => {
       setLoad(true);
       setUpdateCards(true);
       setPage(page + value);
-    }
+    };
 
     if ('info' in obj && typeof obj.info === 'object' && obj.info) {
       if (value < 0 && 'previousPage' in obj.info && obj.info.previousPage) changePageNumber();
@@ -162,46 +172,39 @@ const PageMain = () => {
     ));
   }
 
-  const paginationCode = <Pagination
-    key={3001}
-    page={page}
-    obj={obj}
-    changePage={changePage}
-  />
+  const paginationCode = <Pagination key={3001} page={page} obj={obj} changePage={changePage} />;
 
   const loading = <Loading />;
 
-  const cardListCode = <CardList
-    key={3002}
-    cardCode={cardCode}
-    createError={createError}
-  />
+  const cardListCode = <CardList key={3002} cardCode={cardCode} createError={createError} />;
 
-  const searchCode = <Search
-    key={3003}
-    serchInputRef={serchInputRef}
-    search={search}
-    clearSearch={clearSearch}
-    changeSearchCharacters={changeSearchCharacters}
-  />
+  const searchCode = (
+    <Search
+      key={3003}
+      serchInputRef={serchInputRef}
+      search={search}
+      clearSearch={clearSearch}
+      changeSearchCharacters={changeSearchCharacters}
+    />
+  );
 
-  const cardDescriptionCode = <CardDescription
-    key={3004}
-    image={objDescription.data.imageUrl}
-    name={objDescription.data.name}
-    films={objDescription.data.films.join(', ')}
-    tvShows={objDescription.data.tvShows.join(', ')}
-    shortFilms={objDescription.data.shortFilms.join(', ')}
-    videoGames={objDescription.data.videoGames.join(', ')}
-    hideDescription={hideDescription}
-  />
+  const cardDescriptionCode = (
+    <CardDescription
+      key={3004}
+      image={objDescription.data.imageUrl}
+      name={objDescription.data.name}
+      films={objDescription.data.films.join(', ')}
+      tvShows={objDescription.data.tvShows.join(', ')}
+      shortFilms={objDescription.data.shortFilms.join(', ')}
+      videoGames={objDescription.data.videoGames.join(', ')}
+      hideDescription={hideDescription}
+    />
+  );
 
   return (
     <div className="page-main" data-testid={'page-main'}>
-      <div className='main-panel' onClick={() => hideDescription()}>
-        <header className="page-main__header">
-          {searchCode}
-        </header>
+      <div className="main-panel" onClick={() => hideDescription()}>
+        <header className="page-main__header">{searchCode}</header>
 
         {cardListCode}
         {paginationCode}
@@ -209,10 +212,10 @@ const PageMain = () => {
 
         {load ? loading : null}
       </div>
-      
+
       {details ? cardDescriptionCode : null}
     </div>
   );
-}
+};
 
 export default PageMain;

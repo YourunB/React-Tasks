@@ -2,7 +2,7 @@ import { render, screen, fireEvent } from '@testing-library/react';
 import { describe, test, expect, vi } from 'vitest';
 import Pagination from '../../src/components/pagination';
 import { PaginationProps } from '../../src/state/types';
-import React from "react";
+import React from 'react';
 import '@testing-library/jest-dom';
 
 describe('Pagination Component', () => {
@@ -33,11 +33,11 @@ describe('Pagination Component', () => {
     obj: {
       info: {
         previousPage: 'somePage',
-        nextPage: 'somePage'
-      }
+        nextPage: 'somePage',
+      },
     },
     page: 1,
-    changePage: vi.fn()
+    changePage: vi.fn(),
   };
 
   test('calls changePage with -1 when previous button is clicked', () => {

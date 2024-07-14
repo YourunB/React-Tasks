@@ -1,7 +1,7 @@
 import { render, screen } from '@testing-library/react';
 import { describe, test, expect } from 'vitest';
 import Footer from '../../src/components/footer';
-import React from "react";
+import React from 'react';
 import '@testing-library/jest-dom';
 
 describe('Footer Component', () => {

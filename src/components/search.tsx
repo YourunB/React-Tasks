@@ -4,7 +4,9 @@ import { SearchProps } from '../state/types';
 const Search = (props: SearchProps) => {
   return (
     <div className="search">
-      <button onClick={() => props.clearSearch()} className='search__btn-clear'>X</button>
+      <button onClick={() => props.clearSearch()} className="search__btn-clear">
+        X
+      </button>
       <input
         ref={props.serchInputRef as React.LegacyRef<HTMLInputElement>}
         className="search__input"
@@ -16,6 +18,6 @@ const Search = (props: SearchProps) => {
       </button>
     </div>
   );
-}
+};
 
-export default Search
+export default Search;

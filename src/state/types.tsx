@@ -25,7 +25,7 @@ export interface Info {
 export interface CardProps {
   key: number;
   id: number;
-  image: string;  
+  image: string;
   name: string;
   films: string;
   showDescription: (value: number) => void;

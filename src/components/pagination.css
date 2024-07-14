@@ -28,7 +28,7 @@
   transition: 0.7s;
 }
 
-@media (hover:hover) {
+@media (hover: hover) {
   .pagination__btn:hover {
     cursor: pointer;
     transform: scale(1.2);
