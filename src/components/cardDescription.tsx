@@ -5,7 +5,7 @@ const CardDescription = (props: CardDescriptionProps) => {
   return (
     <div className="card-description">
       <div className="controls">
-        <button onClick={() => props.hideDescription()} className="controls__btn">
+        <button onClick={() => props.hideDescription()} className="controls__btn" data-testid={'card-details'}>
           X
         </button>
       </div>

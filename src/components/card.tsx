@@ -3,7 +3,7 @@ import { CardProps } from '../state/types';
 
 const Card = (props: CardProps) => {
   return (
-    <div onClick={() => props.showDescription(props.id)} className="card-char">
+    <div onClick={() => props.showDescription(props.id)} className="card-char" data-testid={'card'}>
       <img
         className="card-char__img"
         src={props.image || 'https://github.com/YourunB/Test1/blob/main/images/noimage.jpg?raw=true'}

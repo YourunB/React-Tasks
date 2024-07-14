@@ -56,8 +56,8 @@ describe('check CardDescription', () => {
       shortFilms: '',
       videoGames: '',
     };
-    
-    const { getByText } = render(<CardDescription {...lossProps}/>);
+
+    const { getByText } = render(<CardDescription {...lossProps} />);
     expect(getByText('Films: none')).toBeInTheDocument();
     expect(getByText('TV Shows: none')).toBeInTheDocument();
     expect(getByText('Short Films: none')).toBeInTheDocument();
