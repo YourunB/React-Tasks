@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 
-export function useSaveSearch() {
+function useSaveSearch() {
   const [search, setSearch] = useState(getSearchValue);
 
   useEffect(() => {
@@ -17,3 +17,5 @@ export function useSaveSearch() {
 
   return [search, setSearch];
 }
+
+export default useSaveSearch;

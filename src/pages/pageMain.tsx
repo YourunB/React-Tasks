@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect, useLayoutEffect, useCallback } from 'react';
+import { useState, useRef, useEffect, useCallback } from 'react';
 import './pageMain.css';
 import { getCharactersPageApi, searchCharactersApi, getOneCharacterApi } from '../modules/api';
 import Card from '../components/card';
