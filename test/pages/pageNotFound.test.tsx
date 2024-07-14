@@ -2,6 +2,7 @@ import { render, screen } from '@testing-library/react';
 import React from "react";
 import '@testing-library/jest-dom';
 import PageNotFound from '../../src/pages/pageNotFound';
+import { describe, test, expect } from 'vitest';
 
 describe('PageNotFound Component', () => {
   test('renders without crashing', () => {
