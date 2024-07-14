@@ -1,6 +1,5 @@
 import { render, screen } from '@testing-library/react';
 import ErrorBoundary from '../../src/modules/errorBoundary';
-import { PropsChildren } from '../../src/state/types';
 import React from "react";
 import '@testing-library/jest-dom';
 
