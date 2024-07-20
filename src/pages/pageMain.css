@@ -5,30 +5,6 @@
   padding: 20px;
 }
 
-.btn-error {
-  background: rgb(200, 11, 11);
-  border: rgb(200, 11, 11);
-  padding: 5px;
-  color: white;
-  border-radius: 3px;
-  transition: 0.7s;
-  font-weight: 700;
-  margin: auto;
-  display: block;
-}
-
-@media (hover: hover) {
-  .btn-error:hover {
-    cursor: pointer;
-    transform: scale(1.1);
-  }
-}
-
-.btn-error:active {
-  transition: 0.2s;
-  transform: scale(0.9);
-}
-
 .page-main__header {
   height: 30px;
 }

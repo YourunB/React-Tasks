@@ -1,10 +1,14 @@
+
 import { configureStore } from '@reduxjs/toolkit';
-import dataCharacterReducer from './dataSliceCharacter';
-import dataPageReducer from './dataSlicePage';
+import dataReducerPage from './dataSlicePage';
+import dataReducerCharacter from './dataSliceCharacter';
 
 export const store = configureStore({
   reducer: {
-    dataPage: dataCharacterReducer,
-    dataCharacter: dataPageReducer,
+    dataPage: dataReducerPage,
+    dataCharacter: dataReducerCharacter,
   },
 })
+
+export type RootState = ReturnType<typeof store.getState>
+export type AppDispatch = typeof store.dispatch

@@ -45,7 +45,6 @@ export interface PaginationProps {
 export interface CardListProps {
   key: number;
   cardCode: JSX.Element | null | object;
-  createError: () => void;
 }
 
 export interface SearchProps {
