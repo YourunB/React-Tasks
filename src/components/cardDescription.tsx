@@ -1,4 +1,4 @@
-import './cardDescription.modules.css';
+import './cardDescription.css';
 import { useDispatch, useSelector } from 'react-redux';
 import { useGetDetailsApiQuery } from '../redux/api/api';
 import { RootState } from '../redux/store';

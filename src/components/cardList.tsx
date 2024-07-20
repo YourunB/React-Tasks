@@ -1,4 +1,4 @@
-import './cardList.modules.css';
+import './cardList.css';
 import { CardListProps } from '../state/types';
 
 const CardList = (props: CardListProps) => {

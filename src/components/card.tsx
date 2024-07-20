@@ -1,4 +1,4 @@
-import './card.modules.css';
+import './card.css';
 import { CardProps } from '../state/types';
 import { Link } from 'react-router-dom';
 

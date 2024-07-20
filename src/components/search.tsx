@@ -1,4 +1,4 @@
-import './search.modules.css';
+import './search.css';
 import { SearchProps } from '../state/types';
 
 const Search = (props: SearchProps) => {
