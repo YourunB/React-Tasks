@@ -1,18 +1,19 @@
-import { Component } from 'react';
 import './App.css';
 import { BrowserRouter } from 'react-router-dom';
 import { PagesRouter } from './modules/pagesRouter';
+import { Provider } from 'react-redux';
+import { store } from './redux/store';
 
-class App extends Component {
-  render() {
-    return (
-      <div data-testid={'App'}>
+const App = () => {
+  return (
+    <div data-testid={'App'}>
+      <Provider store={store}>
         <BrowserRouter>
           <PagesRouter />
         </BrowserRouter>
-      </div>
-    );
-  }
+      </Provider>
+    </div>
+  );
 }
 
 export default App;
