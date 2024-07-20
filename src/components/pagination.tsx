@@ -9,7 +9,7 @@ const Pagination = () => {
   return (
     <div className="pagination">
       <button className="pagination__btn" disabled={dataReduxPage.page > 1 ? false : true}>
-        <Link to={`/${Number(dataReduxPage.page) - 1}/${dataReduxPage.search}`}>&#60;</Link>
+        <Link to={`/${dataReduxPage.page - 1}/${dataReduxPage.search}`}>&#60;</Link>
       </button>
       <span className="pagination__count">{dataReduxPage.page}</span>
       <button className="pagination__btn" disabled={dataReduxPage.page < dataReduxPage.totalPages ? false : true}>
