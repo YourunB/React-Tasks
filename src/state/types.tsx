@@ -28,7 +28,6 @@ export interface CardProps {
   image: string;
   name: string;
   films: string;
-  showDescription: (value: number) => void;
 }
 
 export interface PropsChildren {

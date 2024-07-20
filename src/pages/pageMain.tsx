@@ -25,10 +25,6 @@ const PageMain = () => {
     if (dataCharacters.data && dataCharacters.data.info) dispatch(updateTotalPages(dataCharacters.data.info.totalPages));
   }, [dataCharacters, dispatch])
 
-  function showDescription(id: number) {
-    dispatch(updateId(id));
-  }
-
   function clearSearch() {
     const input = serchInputRef.current as HTMLInputElement | null;
     if (input) input.value = '';
@@ -72,7 +68,6 @@ const PageMain = () => {
         image={character.imageUrl}
         name={character.name}
         films={character.films.join(', ')}
-        showDescription={showDescription}
       />
     ));
   }
