@@ -4,6 +4,7 @@ const initialState={
   page: 1,
   totalPages: 1,
   search: '',
+  characters: {},
 }
 
 export const dataSlicePage = createSlice({
@@ -23,8 +24,12 @@ export const dataSlicePage = createSlice({
       state.search = action.payload;
     },
 
+    updateCharacters: (state, action) => {
+      state.characters = action.payload;
+    },
+
   },
 });
 
-export const { updateTotalPages, updateSearch, updatePage } = dataSlicePage.actions;
+export const { updateTotalPages, updateSearch, updatePage, updateCharacters } = dataSlicePage.actions;
 export default dataSlicePage.reducer;

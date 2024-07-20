@@ -1,7 +1,8 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 const initialState={
-  chartacterDescription: {
+  id: 1,
+  details: {
     data: {
       imageUrl: '',
       name: '',
@@ -19,13 +20,16 @@ export const dataSliceCharacter = createSlice({
   initialState,
   reducers: {
 
-    updateCharacter: (state, action) => {
-
+    updateDetails: (state, action) => {
+      state.details = action.payload;
     },
 
+    updateId: (state, action) => {
+      state.id = action.payload;
+    }
   },
 });
 
-export const { updateCharacter } = dataSliceCharacter.actions;
+export const { updateDetails, updateId } = dataSliceCharacter.actions;
 
 export default dataSliceCharacter.reducer;
