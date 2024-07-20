@@ -11,7 +11,7 @@ import { useGetCharactersApiQuery } from '../redux/api/api';
 import { Character } from '../state/types';
 import Pagination from '../components/pagination';
 import Loading from '../components/loading';
-import { Outlet, useParams } from 'react-router-dom';
+import { Outlet, useParams, useNavigate } from 'react-router-dom';
 
 const PageMain = () => {
   const dispatch = useDispatch();
@@ -21,11 +21,12 @@ const PageMain = () => {
   const params = useParams();
   const prodPage = params.page;
   const prodSearch = params.search;
+  const navigate = useNavigate();
   
   useEffect(() => {
     if (prodPage && Number(prodPage)) dispatch(updatePage(prodPage));
-    if (prodSearch && Number(prodSearch)) dispatch(updatePage(prodSearch));
-  }, [prodPage, dispatch]);
+    if (prodSearch) dispatch(updateSearch(prodSearch));
+  }, [prodPage, prodSearch, dispatch]);
 
   useEffect(() => {
     if (dataCharacters.data && dataCharacters.data.info) dispatch(updateTotalPages(dataCharacters.data.info.totalPages));
@@ -36,6 +37,7 @@ const PageMain = () => {
     if (input) input.value = '';
     dispatch(updatePage(1));
     dispatch(updateSearch(''));
+    navigate(`/${1}/${''}`);
   }
 
   function changeSearchCharacters() {
@@ -45,6 +47,7 @@ const PageMain = () => {
       if (value !== '') {
         dispatch(updatePage(1));
         dispatch(updateSearch(value));
+        navigate(`/${1}/${value}`);
       }
     }
   }
@@ -74,14 +77,13 @@ const PageMain = () => {
   }
   
   const cardListCode = <CardList key={3002} cardCode={cardCode} />;
-  const paginationCode = <Pagination key={3001} page={dataReduxPage.page} btnPrevIsDisabled={dataReduxPage.page > 1 ? false : true} btnNextIsDisabled={dataReduxPage.page < dataReduxPage.totalPages ? false : true} />;
 
   return (
     <div className="page-main" data-testid={'page-main'}>
       <div className="main-panel">
         <header className="page-main__header">{searchCode}</header>
         {cardListCode}
-        {paginationCode}
+        <Pagination />
         <Outlet />
         {dataCharacters.isLoading || dataCharacters.isFetching ? <Loading /> : null}
         <Footer />
