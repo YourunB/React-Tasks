@@ -48,6 +48,14 @@
   transition: 0.7s;
 }
 
+.overflow {
+  position: fixed;
+  width: 100%;
+  min-height: 100vh;
+  left: 0;
+  top: 0;
+}
+
 @media (hover: hover) {
   .controls__btn:hover {
     cursor: pointer;

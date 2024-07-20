@@ -2,17 +2,7 @@ import { createSlice } from '@reduxjs/toolkit';
 
 const initialState={
   id: 10,
-  details: {
-    data: {
-      imageUrl: '',
-      name: '',
-      sourceUrl: '',
-      films: [''],
-      tvShows: [''],
-      shortFilms: [''],
-      videoGames: [''],
-    },
-  }
+  details: {},
 }
 
 export const dataSliceCharacter = createSlice({
@@ -21,6 +11,7 @@ export const dataSliceCharacter = createSlice({
   reducers: {
 
     updateDetails: (state, action) => {
+      console.log(action.payload)
       state.details = action.payload;
     },
 
