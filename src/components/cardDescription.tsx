@@ -1,4 +1,4 @@
-import './cardDescription.css';
+import './cardDescription.modules.css';
 import { useDispatch, useSelector } from 'react-redux';
 import { useGetDetailsApiQuery } from '../redux/api/api';
 import { RootState } from '../redux/store';
@@ -16,9 +16,7 @@ const CardDescription = (): JSX.Element | null => {
   const params = useParams();
   const prodId = params.id;
 
-  function closeDetails() {
-    navigate('/');
-  }
+  const closeDetails = () => navigate('/');
   
   useEffect(() => {
     if (prodId && Number(prodId)) dispatch(updateId(prodId));
