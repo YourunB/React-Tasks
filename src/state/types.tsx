@@ -12,7 +12,7 @@ export interface Character {
   tvShows: string[];
   videoGames: string[];
   imageUrl: string;
-  sourceUrl: string;
+  showDescription: (value: number) => void;
 }
 
 export interface Info {

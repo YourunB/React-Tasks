@@ -1,14 +1,17 @@
-
 import { configureStore } from '@reduxjs/toolkit';
 import dataReducerPage from './dataSlicePage';
-import dataReducerCharacter from './dataSliceCharacter';
+import dataSliceCharacter from './dataSliceCharacter';
+import { apiSlicePage } from './dataSlicePage';
 
 export const store = configureStore({
   reducer: {
     dataPage: dataReducerPage,
-    dataCharacter: dataReducerCharacter,
+    [apiSlicePage.reducerPath]: apiSlicePage.reducer,
+    dataCharacter: dataSliceCharacter
   },
-})
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware().concat(apiSlicePage.middleware),
+});
 
-export type RootState = ReturnType<typeof store.getState>
-export type AppDispatch = typeof store.dispatch
+export type RootState = ReturnType<typeof store.getState>;
+export type AppDispatch = typeof store.dispatch;
