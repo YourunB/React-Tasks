@@ -5,6 +5,7 @@ const initialState={
   totalPages: 1,
   search: '',
   characters: {},
+  theme: 'light',
 }
 
 export const dataSlicePage = createSlice({
@@ -28,8 +29,12 @@ export const dataSlicePage = createSlice({
       state.characters = action.payload;
     },
 
+    updateTheme: (state, action) => {
+      state.theme = action.payload;
+    },
+
   },
 });
 
-export const { updateTotalPages, updateSearch, updatePage, updateCharacters } = dataSlicePage.actions;
+export const { updateTotalPages, updateSearch, updatePage, updateCharacters, updateTheme } = dataSlicePage.actions;
 export default dataSlicePage.reducer;

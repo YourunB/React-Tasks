@@ -6,12 +6,13 @@ import CardList from '../components/cardList';
 import { useRef, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../redux/store';
-import { updatePage, updateTotalPages, updateSearch } from '../redux/dataSlicePage';
+import { updatePage, updateTotalPages, updateSearch, updateTheme } from '../redux/dataSlicePage';
 import { useGetCharactersApiQuery } from '../redux/api/api';
 import { Character } from '../state/types';
 import Pagination from '../components/pagination';
 import Loading from '../components/loading';
 import { Outlet, useParams, useNavigate } from 'react-router-dom';
+import themeImg from '../assets/images/svg/theme.svg';
 
 const PageMain = () => {
   const dispatch = useDispatch();
@@ -51,6 +52,11 @@ const PageMain = () => {
       }
     }
   }
+
+  function changeTheme() {
+    if (dataReduxPage.theme === 'light') dispatch(updateTheme('dark'));
+    else dispatch(updateTheme('light'));
+  }
   
   const searchCode = (
     <Search
@@ -79,15 +85,18 @@ const PageMain = () => {
   const cardListCode = <CardList key={3002} cardCode={cardCode} />;
 
   return (
-    <div className="page-main" data-testid={'page-main'}>
-      <div className="main-panel">
-        <header className="page-main__header">{searchCode}</header>
+    <div className={`page-main ${dataReduxPage.theme === 'light' ? '' : 'light'}`} data-testid={'page-main'}>
+      <header className="page-main__header">
+        {searchCode}
+        <img onClick={() => changeTheme()} className={`theme-img ${dataReduxPage.theme === 'light' ? 'theme-img_light' : ''}`} src={themeImg} alt='Theme' title='Change theme'/>
+      </header>
+      <main className="page-main__main">
         {cardListCode}
         <Pagination />
         <Outlet />
         {dataCharacters.isLoading || dataCharacters.isFetching ? <Loading /> : null}
-        <Footer />
-      </div>
+      </main>
+      <Footer />
     </div>
   );
 };
