@@ -4,7 +4,6 @@ const initialState={
   page: 1,
   totalPages: 1,
   search: '',
-  characters: {},
 }
 
 export const dataSlicePage = createSlice({
@@ -20,14 +19,14 @@ export const dataSlicePage = createSlice({
       state.totalPages = action.payload;
     },
 
-    updateCharacters: (state, action) => {
-      state.characters = action.payload;
+    updateSearch: (state, action) => {
+      state.search = action.payload;
     },
 
   },
 });
 
-export const { updateTotalPages, updateCharacters, updatePage } = dataSlicePage.actions;
+export const { updateTotalPages, updateSearch, updatePage } = dataSlicePage.actions;
 export default dataSlicePage.reducer;
 
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
@@ -36,11 +35,8 @@ export const apiSlicePage = createApi({
   baseQuery: fetchBaseQuery({ baseUrl: API_URL }),
   endpoints: (builder) => ({
     getCharactersApi: builder.query({
-      query: (page: number) => `?page=${page}&pageSize=10`,
-    }),
-    searchCharactersApi: builder.query({
-      query: ({search, page}) => `?name=${search}&pageSize=10&page=${page}`,
+      query: ({page, search = ''}) => `?name=${search}&pageSize=10&page=${page}`,
     }),
   }),
 });
-export const { useGetCharactersApiQuery, useSearchCharactersApiQuery } = apiSlicePage;
+export const { useGetCharactersApiQuery } = apiSlicePage;

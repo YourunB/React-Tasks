@@ -6,16 +6,17 @@ import CardList from '../components/cardList';
 import { useRef, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../redux/store';
-import { updatePage, updateTotalPages, useGetCharactersApiQuery } from '../redux/dataSlicePage';
+import { updatePage, updateTotalPages, updateSearch, useGetCharactersApiQuery } from '../redux/dataSlicePage';
 import { Character } from '../state/types';
 import Pagination from '../components/pagination';
 import Loading from '../components/loading';
 
 const PageMain = () => {
   const dispatch = useDispatch();
+  const serchInputRef = useRef(null);
   const dataReduxPage = useSelector( (state: RootState) => state.dataPage );
-
-  const dataCharacters = useGetCharactersApiQuery(dataReduxPage.page);
+  const dataCharacters = useGetCharactersApiQuery({page: dataReduxPage.page, search: dataReduxPage.search});
+  
   useEffect(() => {
     if (dataCharacters.data && dataCharacters.data.info) dispatch(updateTotalPages(dataCharacters.data.info.totalPages));
   }, [dataCharacters])
@@ -26,11 +27,21 @@ const PageMain = () => {
   }
 
   function clearSearch() {
-    console.log('changeSearchCharacters');
+    const input = serchInputRef.current as HTMLInputElement | null;
+    if (input) input.value = '';
+    dispatch(updatePage(1));
+    dispatch(updateSearch(''));
   }
 
   function changeSearchCharacters() {
-    console.log('changeSearchCharacters');
+    if (serchInputRef.current) {
+      const input = serchInputRef.current as HTMLInputElement;
+      const value = input.value.trim();
+      if (value !== '') {
+        dispatch(updatePage(1));
+        dispatch(updateSearch(value))
+      }
+    }
   }
 
   function hideDescription() {
@@ -41,8 +52,7 @@ const PageMain = () => {
     dispatch(updatePage(dataReduxPage.page + value));
     dispatch(updateTotalPages(dataCharacters.data.info.totalPages));
   }
-
-  const serchInputRef = useRef(null);
+  
   const searchCode = (
     <Search
       key={3003}
@@ -55,7 +65,8 @@ const PageMain = () => {
 
   let cardCode: JSX.Element | null | object = null;
   if (dataCharacters.data) {
-    cardCode = dataCharacters.data.data.map((character: Character) => (
+    const data = Array.isArray(dataCharacters.data.data) ? dataCharacters.data.data : [dataCharacters.data.data];
+    cardCode = data.map((character: Character) => (
       <Card
         key={character._id}
         id={character._id}
