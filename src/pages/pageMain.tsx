@@ -14,7 +14,7 @@ const PageMain = () => {
   const dataReduxPage = useSelector( (state: RootState) => state.dataPage );
   //const dataReduxCharacter = useSelector( (state: State) => state.dataCharacter );
 
-  let dataCharacters = useGetCharactersApiQuery(dataReduxPage.page);
+  const dataCharacters = useGetCharactersApiQuery(dataReduxPage.page);
 
   async function showDescription(id: number) {
     dispatch(updatePage(2));
