@@ -28,15 +28,3 @@ export const dataSlicePage = createSlice({
 
 export const { updateTotalPages, updateSearch, updatePage } = dataSlicePage.actions;
 export default dataSlicePage.reducer;
-
-import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
-const API_URL = 'https://api.disneyapi.dev/character';
-export const apiSlicePage = createApi({
-  baseQuery: fetchBaseQuery({ baseUrl: API_URL }),
-  endpoints: (builder) => ({
-    getCharactersApi: builder.query({
-      query: ({page, search = ''}) => `?name=${search}&pageSize=10&page=${page}`,
-    }),
-  }),
-});
-export const { useGetCharactersApiQuery } = apiSlicePage;

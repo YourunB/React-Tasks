@@ -6,7 +6,8 @@ import CardList from '../components/cardList';
 import { useRef, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../redux/store';
-import { updatePage, updateTotalPages, updateSearch, useGetCharactersApiQuery } from '../redux/dataSlicePage';
+import { updatePage, updateTotalPages, updateSearch } from '../redux/dataSlicePage';
+import { useGetCharactersApiQuery } from '../redux/api/api';
 import { Character } from '../state/types';
 import Pagination from '../components/pagination';
 import Loading from '../components/loading';
@@ -19,11 +20,10 @@ const PageMain = () => {
   
   useEffect(() => {
     if (dataCharacters.data && dataCharacters.data.info) dispatch(updateTotalPages(dataCharacters.data.info.totalPages));
-  }, [dataCharacters])
+  }, [dataCharacters, dispatch])
 
-  async function showDescription(id: number) {
-    console.log(dataCharacters);
-    console.log('showDescription');
+  function showDescription(id: number) {
+    console.log('showDescription:', id);
   }
 
   function clearSearch() {
@@ -85,8 +85,9 @@ const PageMain = () => {
     <div className="page-main" data-testid={'page-main'}>
       <div className="main-panel" onClick={() => hideDescription()}>
         <header className="page-main__header">{searchCode}</header>
-        {dataCharacters.isLoading ? <Loading /> : cardListCode}
+        {cardListCode}
         {paginationCode}
+        {dataCharacters.isLoading || dataCharacters.isFetching ? <Loading /> : null}
         <Footer />
       </div>
     </div>
