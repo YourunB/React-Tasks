@@ -1,21 +1,27 @@
 import './cardDescription.css';
 import { Link } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useGetDetailsApiQuery } from '../redux/api/api';
 import { RootState } from '../redux/store';
 import { useParams } from 'react-router-dom';
+import { updateId } from '../redux/dataSliceCharacter';
+import { useEffect } from 'react';
+import Loading from './loading';
 
-const CardDescription = () => {
-  function getDetailIdFromUrl() {
-    const params = useParams();
-    const prodId = params.id;
-    return prodId;
-  }
-
+const CardDescription = (): JSX.Element | null => {
+  const dispatch = useDispatch();
   const dataReduxDetails = useSelector( (state: RootState) => state.dataCharacter );
-  const dataDetails = useGetDetailsApiQuery(Number(getDetailIdFromUrl()) || 10);
+  const dataDetails = useGetDetailsApiQuery(dataReduxDetails.id);
 
-  if (!dataDetails.data || !('data' in dataDetails.data) && !('name' in dataDetails.data.data)) return;
+  const params = useParams();
+  const prodId = params.id;
+  
+  useEffect(() => {
+    if (prodId && Number(prodId)) dispatch(updateId(prodId));
+  }, [prodId, dispatch]);
+
+
+  if (!dataDetails.data || !('data' in dataDetails.data) && !('name' in dataDetails.data.data)) return null;
 
   return (
     <div className="card-description">
@@ -32,6 +38,7 @@ const CardDescription = () => {
       <p className="card-description__description">TV Shows: {dataDetails.data.data.tvShows.join(', ') || 'none'}</p>
       <p className="card-description__description">Short Films: {dataDetails.data.data.shortFilms.join(', ') || 'none'}</p>
       <p className="card-description__description">Video Games: {dataDetails.data.data.videoGames.join(', ') || 'none'}</p>
+      {dataDetails.isLoading || dataDetails.isFetching ? <Loading /> : null}
     </div>
   );
 };

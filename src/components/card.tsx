@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 
 const Card = (props: CardProps) => {
   return (
-    <Link to={`/details/${props.id}`} className="card-char" data-testid={'card'} onClick={() => props.showDescription(props.id)}> 
+    <Link to={`/details/${props.id}`} className="card-char" data-testid={'card'}> 
       <img
         className="card-char__img"
         src={props.image || 'https://github.com/YourunB/Test1/blob/main/images/noimage.jpg?raw=true'}
