@@ -1,8 +1,8 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 const initialState={
-  load: true,
   page: 1,
+  totalPages: 1,
   search: '',
   characters: {},
 }
@@ -12,12 +12,12 @@ export const dataSlicePage = createSlice({
   initialState,
   reducers: {
 
-    updateLoad: (state, action) => {
-      state.load = action.payload;
-    },
-
     updatePage: (state, action) => {
       state.page = action.payload;
+    },
+
+    updateTotalPages: (state, action) => {
+      state.totalPages = action.payload;
     },
 
     updateCharacters: (state, action) => {
@@ -27,7 +27,7 @@ export const dataSlicePage = createSlice({
   },
 });
 
-export const { updateLoad, updateCharacters, updatePage } = dataSlicePage.actions;
+export const { updateTotalPages, updateCharacters, updatePage } = dataSlicePage.actions;
 export default dataSlicePage.reducer;
 
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';

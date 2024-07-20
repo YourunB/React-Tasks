@@ -38,7 +38,8 @@ export interface PropsChildren {
 export interface PaginationProps {
   key: number;
   page: number;
-  obj: object;
+  btnPrevIsDisabled: boolean;
+  btnNextIsDisabled: boolean;
   changePage: (value: number) => void;
 }
 
