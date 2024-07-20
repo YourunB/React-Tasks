@@ -1,9 +1,10 @@
 import './card.css';
 import { CardProps } from '../state/types';
+import { Link } from 'react-router-dom';
 
 const Card = (props: CardProps) => {
   return (
-    <div onClick={() => props.showDescription(props.id)} className="card-char" data-testid={'card'}>
+    <Link to={`/details/${props.id}`} className="card-char" data-testid={'card'} onClick={() => props.showDescription(props.id)}> 
       <img
         className="card-char__img"
         src={props.image || 'https://github.com/YourunB/Test1/blob/main/images/noimage.jpg?raw=true'}
@@ -14,7 +15,7 @@ const Card = (props: CardProps) => {
         <span>Films: </span>
         {props.films || 'none'}
       </p>
-    </div>
+    </Link>
   );
 };
 
