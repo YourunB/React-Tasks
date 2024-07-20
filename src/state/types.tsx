@@ -39,7 +39,6 @@ export interface PaginationProps {
   page: number;
   btnPrevIsDisabled: boolean;
   btnNextIsDisabled: boolean;
-  changePage: (value: number) => void;
 }
 
 export interface CardListProps {

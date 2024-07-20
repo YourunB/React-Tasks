@@ -11,15 +11,21 @@ import { useGetCharactersApiQuery } from '../redux/api/api';
 import { Character } from '../state/types';
 import Pagination from '../components/pagination';
 import Loading from '../components/loading';
-import { updateId } from '../redux/dataSliceCharacter';
-import { Outlet } from 'react-router-dom';
-
+import { Outlet, useParams } from 'react-router-dom';
 
 const PageMain = () => {
   const dispatch = useDispatch();
   const serchInputRef = useRef(null);
   const dataReduxPage = useSelector( (state: RootState) => state.dataPage );
   const dataCharacters = useGetCharactersApiQuery({page: dataReduxPage.page, search: dataReduxPage.search});
+  const params = useParams();
+  const prodPage = params.page;
+  const prodSearch = params.search;
+  
+  useEffect(() => {
+    if (prodPage && Number(prodPage)) dispatch(updatePage(prodPage));
+    if (prodSearch && Number(prodSearch)) dispatch(updatePage(prodSearch));
+  }, [prodPage, dispatch]);
 
   useEffect(() => {
     if (dataCharacters.data && dataCharacters.data.info) dispatch(updateTotalPages(dataCharacters.data.info.totalPages));
@@ -38,14 +44,9 @@ const PageMain = () => {
       const value = input.value.trim();
       if (value !== '') {
         dispatch(updatePage(1));
-        dispatch(updateSearch(value))
+        dispatch(updateSearch(value));
       }
     }
-  }
-
-  function changePage(value: number) {
-    dispatch(updatePage(dataReduxPage.page + value));
-    dispatch(updateTotalPages(dataCharacters.data.info.totalPages));
   }
   
   const searchCode = (
@@ -73,7 +74,7 @@ const PageMain = () => {
   }
   
   const cardListCode = <CardList key={3002} cardCode={cardCode} />;
-  const paginationCode = <Pagination key={3001} page={dataReduxPage.page} btnPrevIsDisabled={dataReduxPage.page > 1 ? false : true} btnNextIsDisabled={dataReduxPage.page < dataReduxPage.totalPages ? false : true} changePage={changePage} />;
+  const paginationCode = <Pagination key={3001} page={dataReduxPage.page} btnPrevIsDisabled={dataReduxPage.page > 1 ? false : true} btnNextIsDisabled={dataReduxPage.page < dataReduxPage.totalPages ? false : true} />;
 
   return (
     <div className="page-main" data-testid={'page-main'}>

@@ -1,15 +1,16 @@
 import './pagination.css';
 import { PaginationProps } from '../state/types';
+import { Link } from 'react-router-dom';
 
 const Pagination = (props: PaginationProps) => {
   return (
     <div className="pagination">
-      <button className="pagination__btn" onClick={() => props.changePage(-1)} disabled={props.btnPrevIsDisabled}>
-        &#60;
+      <button className="pagination__btn" disabled={props.btnPrevIsDisabled}>
+        <Link to={`/${props.page - 1}`}>&#60;</Link>
       </button>
       <span className="pagination__count">{props.page}</span>
-      <button className="pagination__btn" onClick={() => props.changePage(+1)} disabled={props.btnNextIsDisabled}>
-        &#62;
+      <button className="pagination__btn" disabled={props.btnNextIsDisabled}>
+        <Link to={`/${Number(props.page) + 1}`}> &#62;</Link>
       </button>
     </div>
   );
