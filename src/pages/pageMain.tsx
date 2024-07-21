@@ -13,11 +13,13 @@ import Pagination from '../components/pagination';
 import Loading from '../components/loading';
 import { Outlet, useParams, useNavigate } from 'react-router-dom';
 import themeImg from '../assets/images/svg/theme.svg';
+import Msg from '../components/msg';
 
 const PageMain = () => {
   const dispatch = useDispatch();
   const serchInputRef = useRef(null);
   const dataReduxPage = useSelector( (state: RootState) => state.dataPage );
+  const dataReduxElements = useSelector( (state: RootState) => state.dataElements );
   const dataCharacters = useGetCharactersApiQuery({page: dataReduxPage.page, search: dataReduxPage.search});
   const params = useParams();
   const prodPage = params.page;
@@ -84,6 +86,8 @@ const PageMain = () => {
   
   const cardListCode = <CardList key={3002} cardCode={cardCode} />;
 
+  const msg = dataReduxElements.checkedCards.length > 1 ? <Msg /> : null;
+
   return (
     <div className={`page-main ${dataReduxPage.theme === 'light' ? '' : 'light'}`} data-testid={'page-main'}>
       <header className="page-main__header">
@@ -95,6 +99,7 @@ const PageMain = () => {
         <Pagination />
         <Outlet />
         {dataCharacters.isLoading || dataCharacters.isFetching ? <Loading /> : null}
+        {msg}
       </main>
       <Footer />
     </div>

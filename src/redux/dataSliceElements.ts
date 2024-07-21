@@ -29,9 +29,13 @@ export const dataSliceElements = createSlice({
       state.checkedCards = arr;
     },
 
+    clearAll: (state) => {
+      state.checkedCards = [{ id: null, name: '', image: '', films: '', url: '', }];
+    },
+
   },
 });
 
-export const { updateCheckedCards, removeCheckedCards } = dataSliceElements.actions;
+export const { updateCheckedCards, removeCheckedCards, clearAll } = dataSliceElements.actions;
 
 export default dataSliceElements.reducer;
