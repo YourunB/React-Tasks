@@ -38,9 +38,11 @@ const PageMain = () => {
   function clearSearch() {
     const input = serchInputRef.current as HTMLInputElement | null;
     if (input) input.value = '';
-    dispatch(updatePage(1));
-    dispatch(updateSearch(''));
-    navigate(`/${1}/${''}`);
+    if (dataReduxPage.search) {
+      dispatch(updatePage(1));
+      dispatch(updateSearch(''));
+      navigate(`/${1}/${''}`);
+    }
   }
 
   function changeSearchCharacters() {
