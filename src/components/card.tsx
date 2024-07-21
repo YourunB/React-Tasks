@@ -6,7 +6,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../redux/store';
 import { updateCheckedCards, removeCheckedCards } from '../redux/dataSliceElements';
 
-
 const Card = (props: CardProps) => {
   const dispatch = useDispatch();
   const dataReduxElements = useSelector( (state: RootState) => state.dataElements );
