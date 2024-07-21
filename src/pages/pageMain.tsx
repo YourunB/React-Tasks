@@ -3,7 +3,7 @@ import Footer from '../components/footer';
 import Search from '../components/search';
 import Card from '../components/card';
 import CardList from '../components/cardList';
-import { useRef, useEffect } from 'react';
+import { useRef, useEffect, useContext } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../redux/store';
 import { updatePage, updateTotalPages, updateSearch, updateTheme } from '../redux/dataSlicePage';
@@ -14,8 +14,10 @@ import Loading from '../components/loading';
 import { Outlet, useParams, useNavigate } from 'react-router-dom';
 import themeImg from '../assets/images/svg/theme.svg';
 import Msg from '../components/msg';
+import ThemeContext from '../components/themeContext';
 
 const PageMain = () => {
+  const theme = useContext(ThemeContext);
   const dispatch = useDispatch();
   const serchInputRef = useRef(null);
   const dataReduxPage = useSelector( (state: RootState) => state.dataPage );
@@ -25,7 +27,7 @@ const PageMain = () => {
   const prodPage = params.page;
   const prodSearch = params.search;
   const navigate = useNavigate();
-  
+
   useEffect(() => {
     if (prodPage && Number(prodPage)) dispatch(updatePage(prodPage));
     if (prodSearch) dispatch(updateSearch(prodSearch));
@@ -33,7 +35,7 @@ const PageMain = () => {
 
   useEffect(() => {
     if (dataCharacters.data && dataCharacters.data.info) dispatch(updateTotalPages(dataCharacters.data.info.totalPages));
-  }, [dataCharacters, dispatch])
+  }, [dataCharacters, dispatch]);
 
   function clearSearch() {
     const input = serchInputRef.current as HTMLInputElement | null;
@@ -58,8 +60,8 @@ const PageMain = () => {
   }
 
   function changeTheme() {
-    if (dataReduxPage.theme === 'light') dispatch(updateTheme('dark'));
-    else dispatch(updateTheme('light'));
+    theme.change();
+    dispatch(updateTheme(theme.light));
   }
   
   const searchCode = (
@@ -91,10 +93,10 @@ const PageMain = () => {
   const msg = dataReduxElements.checkedCards.length > 1 ? <Msg /> : null;
 
   return (
-    <div className={`page-main ${dataReduxPage.theme === 'light' ? '' : 'light'}`} data-testid={'page-main'}>
+    <div className={`page-main ${theme.light ? 'light' : ''}`} data-testid={'page-main'}>
       <header className="page-main__header">
         {searchCode}
-        <img onClick={() => changeTheme()} className={`theme-img ${dataReduxPage.theme === 'light' ? 'theme-img_light' : ''}`} src={themeImg} alt='Theme' title='Change theme'/>
+        <img onClick={() => changeTheme()} className={`theme-img ${theme.light ? '' : 'theme-img_light'}`} src={themeImg} alt='Theme' title='Change theme'/>
       </header>
       <main className="page-main__main">
         {cardListCode}

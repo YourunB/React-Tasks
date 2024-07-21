@@ -4,7 +4,7 @@ const initialState={
   page: 1,
   totalPages: 1,
   search: '',
-  theme: 'light',
+  theme: { light: false },
 }
 
 export const dataSlicePage = createSlice({
@@ -25,7 +25,7 @@ export const dataSlicePage = createSlice({
     },
 
     updateTheme: (state, action) => {
-      state.theme = action.payload;
+      state.theme = { light: action.payload };
     },
 
   },
