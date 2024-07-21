@@ -19,11 +19,12 @@
 }
 
 .msg__btn {
+  display:inline-block;
   background: rgb(242, 212, 44);
   border: none;
-  font-weight: 700;
   margin: 0 5px;
-  padding: 3px;
+  width: 60px;
+  height: 20px;
   border-radius: 3px;
   color: rgb(69, 69, 69);
   transition: 0.5s;
