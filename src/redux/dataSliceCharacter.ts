@@ -11,7 +11,6 @@ export const dataSliceCharacter = createSlice({
   reducers: {
 
     updateDetails: (state, action) => {
-      console.log(action.payload)
       state.details = action.payload;
     },
 

@@ -15,8 +15,6 @@ const CardDescription = (): JSX.Element | null => {
 
   const params = useParams();
   const prodId = params.id;
-
-  const closeDetails = () => navigate('/');
   
   useEffect(() => {
     if (prodId && Number(prodId)) dispatch(updateId(prodId));
@@ -26,10 +24,10 @@ const CardDescription = (): JSX.Element | null => {
   const data = {...dataDetails.data.data};
 
   return (
-    <div className='overflow' onClick={() => closeDetails()}>
+    <div className='overflow' onClick={() => navigate('/')} data-testid={'card-details'}>
       <div className="card-description" onClick={(event) => event.stopPropagation()}>
         <div className="controls">
-        <button className="controls__btn" data-testid={'card-details'} onClick={() => closeDetails()}>X</button>
+        <button className="controls__btn" data-testid={'card-details-btn'} onClick={() => navigate('/')}>X</button>
         </div>
         <img
           className="card-description__img"
@@ -37,10 +35,10 @@ const CardDescription = (): JSX.Element | null => {
           alt="Character"
         ></img>
         <h3 className="card-description__name">{data.name}</h3>
-        <p className="card-description__description">Films: {data.films.join(', ') || 'none'}</p>
-        <p className="card-description__description">TV Shows: {data.tvShows.join(', ') || 'none'}</p>
-        <p className="card-description__description">Short Films: {data.shortFilms.join(', ') || 'none'}</p>
-        <p className="card-description__description">Video Games: {data.videoGames.join(', ') || 'none'}</p>
+        <p className="card-description__description">Films: {data.films.join(', ')}</p>
+        <p className="card-description__description">TV Shows: {data.tvShows.join(', ')}</p>
+        <p className="card-description__description">Short Films: {data.shortFilms.join(', ')}</p>
+        <p className="card-description__description">Video Games: {data.videoGames.join(', ')}</p>
         {dataDetails.isLoading || dataDetails.isFetching ? <Loading /> : null}
       </div>
     </div>
