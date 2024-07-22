@@ -5,14 +5,14 @@ import { BrowserRouter as Router } from 'react-router-dom';
 import configureStore from 'redux-mock-store';
 import React from 'react';
 import Msg from '../../src/components/msg';
-import { vi } from 'vitest';
+import { vi, test, describe, expect } from 'vitest';
 
 beforeAll(() => {
   global.URL.createObjectURL = vi.fn();
 });
 
 const mockStore = configureStore([]);
-let initialState = {
+const initialState = {
   dataElements: {
     checkedCards: [
       { id: 0, name: '' },
@@ -24,7 +24,7 @@ let initialState = {
 };
 
 describe('Msg Component', () => {
-  let store = mockStore(initialState);
+  const store = mockStore(initialState);
   const renderComponent = () => {
     return render(
       <Provider store={store}>
