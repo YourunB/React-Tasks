@@ -58,7 +58,7 @@ describe('Search component', () => {
     const btnClose = screen.getByText('X');
     expect(btnClose).toBeInTheDocument();
     fireEvent.click(btnClose);
-    
+
     const btnSearch = screen.getByText('Search');
     expect(btnSearch).toBeInTheDocument();
     fireEvent.click(btnSearch);

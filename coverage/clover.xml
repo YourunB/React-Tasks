@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1721683666117" clover="3.2.0">
-  <project timestamp="1721683666117" name="All files">
-    <metrics statements="489" coveredstatements="436" conditionals="89" coveredconditionals="76" methods="48" coveredmethods="37" elements="626" coveredelements="549" complexity="0" loc="489" ncloc="489" packages="6" files="19" classes="19"/>
+<coverage generated="1721685340409" clover="3.2.0">
+  <project timestamp="1721685340410" name="All files">
+    <metrics statements="489" coveredstatements="438" conditionals="90" coveredconditionals="77" methods="48" coveredmethods="38" elements="627" coveredelements="553" complexity="0" loc="489" ncloc="489" packages="6" files="19" classes="19"/>
     <package name="src">
       <metrics statements="25" coveredstatements="25" conditionals="2" coveredconditionals="2" methods="2" coveredmethods="2"/>
       <file name="App.tsx" path="C:\Users\Admin\Desktop\React-Tasks\src\App.tsx">
@@ -34,7 +34,7 @@
       </file>
     </package>
     <package name="src.components">
-      <metrics statements="234" coveredstatements="232" conditionals="54" coveredconditionals="51" methods="24" coveredmethods="23"/>
+      <metrics statements="234" coveredstatements="234" conditionals="55" coveredconditionals="52" methods="24" coveredmethods="24"/>
       <file name="card.tsx" path="C:\Users\Admin\Desktop\React-Tasks\src\components\card.tsx">
         <metrics statements="50" coveredstatements="50" conditionals="12" coveredconditionals="12" methods="4" coveredmethods="4"/>
         <line num="1" count="1" type="stmt"/>
@@ -286,13 +286,13 @@
         <line num="54" count="1" type="stmt"/>
       </file>
       <file name="themeContext.tsx" path="C:\Users\Admin\Desktop\React-Tasks\src\components\themeContext.tsx">
-        <metrics statements="8" coveredstatements="6" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="0"/>
+        <metrics statements="8" coveredstatements="8" conditionals="1" coveredconditionals="1" methods="1" coveredmethods="1"/>
         <line num="1" count="1" type="stmt"/>
         <line num="3" count="1" type="stmt"/>
         <line num="4" count="1" type="stmt"/>
-        <line num="5" count="1" type="stmt"/>
-        <line num="6" count="0" type="stmt"/>
-        <line num="7" count="0" type="stmt"/>
+        <line num="5" count="1" type="cond" truecount="1" falsecount="0"/>
+        <line num="6" count="2" type="stmt"/>
+        <line num="7" count="2" type="stmt"/>
         <line num="8" count="1" type="stmt"/>
         <line num="10" count="1" type="stmt"/>
       </file>
