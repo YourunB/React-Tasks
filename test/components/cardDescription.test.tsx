@@ -1,15 +1,13 @@
 import { render, screen, fireEvent } from '@testing-library/react';
 import { Provider } from 'react-redux';
-import { BrowserRouter } from 'react-router-dom';
-import { updateCheckedCards, removeCheckedCards } from '../../src/redux/dataSliceElements';
 import React from 'react';
 import CardDescription from '../../src/components/cardDescription';
 import { dataSliceCharacter } from '../../src/redux/dataSliceCharacter';
-import { vi } from 'vitest';
 import { api } from '../../src/redux/api/api';
 import { configureStore } from '@reduxjs/toolkit';
 import { setupListeners } from '@reduxjs/toolkit/query';
-import { MemoryRouter, Routes, Route, Router } from 'react-router-dom';
+import { MemoryRouter, Routes, Route } from 'react-router-dom';
+import { describe, test, expect } from 'vitest';
 
 const renderWithProviders = (ui, { route }) => {
   const store = configureStore({
