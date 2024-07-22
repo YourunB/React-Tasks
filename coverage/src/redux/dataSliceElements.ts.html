@@ -3,7 +3,7 @@
 <html lang="en">
 
 <head>
-    <title>Code coverage report for src/modules/errorBoundary.tsx</title>
+    <title>Code coverage report for src/redux/dataSliceElements.ts</title>
     <meta charset="utf-8" />
     <link rel="stylesheet" href="../../prettify.css" />
     <link rel="stylesheet" href="../../base.css" />
@@ -19,34 +19,34 @@
 <body>
 <div class='wrapper'>
     <div class='pad1'>
-        <h1><a href="../../index.html">All files</a> / <a href="index.html">src/modules</a> errorBoundary.tsx</h1>
+        <h1><a href="../../index.html">All files</a> / <a href="index.html">src/redux</a> dataSliceElements.ts</h1>
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">57.14% </span>
+                <span class="strong">60.71% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>12/21</span>
+                <span class='fraction'>17/28</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">66.66% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>2/3</span>
+                <span class='fraction'>0/0</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">50% </span>
+                <span class="strong">0% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>2/4</span>
+                <span class='fraction'>0/3</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">57.14% </span>
+                <span class="strong">60.71% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>12/21</span>
+                <span class='fraction'>17/28</span>
             </div>
         
             
@@ -91,63 +91,84 @@
 <a name='L26'></a><a href='#L26'>26</a>
 <a name='L27'></a><a href='#L27'>27</a>
 <a name='L28'></a><a href='#L28'>28</a>
-<a name='L29'></a><a href='#L29'>29</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<a name='L29'></a><a href='#L29'>29</a>
+<a name='L30'></a><a href='#L30'>30</a>
+<a name='L31'></a><a href='#L31'>31</a>
+<a name='L32'></a><a href='#L32'>32</a>
+<a name='L33'></a><a href='#L33'>33</a>
+<a name='L34'></a><a href='#L34'>34</a>
+<a name='L35'></a><a href='#L35'>35</a>
+<a name='L36'></a><a href='#L36'>36</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import { Component } from 'react';
-import './errorBoundary.css';
-import { PropsChildren } from '../state/types';
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span></td><td class="text"><pre class="prettyprint lang-js">import { createSlice } from '@reduxjs/toolkit';
 &nbsp;
-class ErrorBoundary extends Component&lt;PropsChildren&gt; {
-  state = { hasError: false };
-&nbsp;
-  static <span class="fstat-no" title="function not covered" >getDerivedStateFromError(error: Error) {</span>
-<span class="cstat-no" title="statement not covered" >    console.error('ErrorBoundary:', error);</span>
-<span class="cstat-no" title="statement not covered" >    return { hasError: true };</span>
-<span class="cstat-no" title="statement not covered" >  }</span>
-&nbsp;
-<span class="fstat-no" title="function not covered" >  componentDidCatch(error: Error, errorInfo: React.ErrorInfo) {</span>
-<span class="cstat-no" title="statement not covered" >    console.error('ErrorBoundary:', error, errorInfo);</span>
-<span class="cstat-no" title="statement not covered" >  }</span>
-&nbsp;
-  render() {
-    if (this.state.hasError) <span class="branch-0 cbranch-no" title="branch not covered" >{</span>
-<span class="cstat-no" title="statement not covered" >      return (</span>
-<span class="cstat-no" title="statement not covered" >        &lt;div className="error-boundary"&gt;</span>
-<span class="cstat-no" title="statement not covered" >          &lt;h1&gt;Sorry, something went wrong...&lt;/h1&gt;</span>
-<span class="cstat-no" title="statement not covered" >        &lt;/div&gt;</span>
-      );
-    } else return this.props.children;
-  }
+const initialState={
+  checkedCards: [
+    {id: null}
+  ],
 }
 &nbsp;
-export default ErrorBoundary;
-&nbsp;</pre></td></tr></table></pre>
+export const dataSliceElements = createSlice({
+  name: 'data',
+  initialState,
+  reducers: {
+&nbsp;
+    updateCheckedCards: <span class="fstat-no" title="function not covered" >(state, action) =&gt; {</span>
+<span class="cstat-no" title="statement not covered" >      const arr = state.checkedCards;</span>
+<span class="cstat-no" title="statement not covered" >      let save = true;</span>
+<span class="cstat-no" title="statement not covered" >      for (let i = 0; i &lt; arr.length; i += 1) {</span>
+<span class="cstat-no" title="statement not covered" >        if (arr[i].id === action.payload.id) save = false;</span>
+<span class="cstat-no" title="statement not covered" >      }</span>
+<span class="cstat-no" title="statement not covered" >      if (save) state.checkedCards.push(action.payload);</span>
+<span class="cstat-no" title="statement not covered" >    },</span>
+&nbsp;
+    removeCheckedCards: <span class="fstat-no" title="function not covered" >(state, action) =&gt; {</span>
+<span class="cstat-no" title="statement not covered" >      state.checkedCards = state.checkedCards.filter((v) =&gt; v.id !== action.payload);</span>
+<span class="cstat-no" title="statement not covered" >    },</span>
+&nbsp;
+    clearAll: <span class="fstat-no" title="function not covered" >(state) =&gt; {</span>
+<span class="cstat-no" title="statement not covered" >      state.checkedCards = [{ id: null}];</span>
+<span class="cstat-no" title="statement not covered" >    },</span>
+&nbsp;
+  },
+});
+&nbsp;
+export const { updateCheckedCards, removeCheckedCards, clearAll } = dataSliceElements.actions;
+&nbsp;
+export default dataSliceElements.reducer;</pre></td></tr></table></pre>
 
                 <div class='push'></div><!-- for sticky footer -->
             </div><!-- /wrapper -->

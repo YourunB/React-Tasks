@@ -62,7 +62,7 @@ const PageMain = () => {
     <div className={`page-main ${theme.light ? 'light' : ''}`} data-testid={'page-main'}>
       <header className="page-main__header">
         <Search />
-        <img onClick={() => changeTheme()} className={`theme-img ${theme.light ? '' : 'theme-img_light'}`} src={themeImg} alt='Theme' title='Change theme'/>
+        <img onClick={() => changeTheme()} className={`theme-img ${theme.light ? '' : 'theme-img_light'}`} src={themeImg} alt='Theme' title='Change theme' data-testid={'theme-button'}/>
       </header>
       <main className="page-main__main">
         {cardListCode}
