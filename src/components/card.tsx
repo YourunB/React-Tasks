@@ -15,7 +15,7 @@ const Card = (props: CardProps) => {
     dispatch(updateCheckedCards({
       id: props.id,
       name: props.name,
-      image: props.image || 'none',
+      image: props.image,
       films: props.films || 'none',
       url: location.href,
     }));
@@ -28,7 +28,7 @@ const Card = (props: CardProps) => {
 
   let checked = false;
   dataReduxElements.checkedCards.forEach((el) => {
-    if (el.id === props.id) checked = true
+    if (el.id === props.id) checked = true;
   })
 
   return (
@@ -44,8 +44,7 @@ const Card = (props: CardProps) => {
         {props.films || 'none'}
       </p>
       {
-        checked ? <img className={'star-img star-img_checked'} src={starImg} alt='Star' title='Checked character' onClick={(event) => removeElementFromSlice(event)} /> :
-        <img className={`star-img`} src={starImg} alt='Star' title='Checked character' onClick={(event) => addElementToSlice(event)} />
+      <img className={`star-img ${checked ? 'star-img_checked' : ''}`} src={starImg} alt='Star' title='Checked character' onClick={(event) => checked ? removeElementFromSlice(event) : addElementToSlice(event)} />
       }
     </Link>
   );
