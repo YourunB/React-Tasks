@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1721680933176" clover="3.2.0">
-  <project timestamp="1721680933176" name="All files">
-    <metrics statements="489" coveredstatements="418" conditionals="81" coveredconditionals="66" methods="48" coveredmethods="30" elements="618" coveredelements="514" complexity="0" loc="489" ncloc="489" packages="6" files="19" classes="19"/>
+<coverage generated="1721682549146" clover="3.2.0">
+  <project timestamp="1721682549146" name="All files">
+    <metrics statements="489" coveredstatements="418" conditionals="84" coveredconditionals="71" methods="48" coveredmethods="33" elements="621" coveredelements="522" complexity="0" loc="489" ncloc="489" packages="6" files="19" classes="19"/>
     <package name="src">
       <metrics statements="25" coveredstatements="25" conditionals="2" coveredconditionals="2" methods="2" coveredmethods="2"/>
       <file name="App.tsx" path="C:\Users\Admin\Desktop\React-Tasks\src\App.tsx">
@@ -34,7 +34,7 @@
       </file>
     </package>
     <package name="src.components">
-      <metrics statements="234" coveredstatements="214" conditionals="46" coveredconditionals="41" methods="24" coveredmethods="16"/>
+      <metrics statements="234" coveredstatements="214" conditionals="49" coveredconditionals="46" methods="24" coveredmethods="19"/>
       <file name="card.tsx" path="C:\Users\Admin\Desktop\React-Tasks\src\components\card.tsx">
         <metrics statements="50" coveredstatements="50" conditionals="12" coveredconditionals="12" methods="4" coveredmethods="4"/>
         <line num="1" count="1" type="stmt"/>
@@ -210,31 +210,31 @@
         <line num="37" count="1" type="stmt"/>
       </file>
       <file name="pagination.tsx" path="C:\Users\Admin\Desktop\React-Tasks\src\components\pagination.tsx">
-        <metrics statements="25" coveredstatements="25" conditionals="6" coveredconditionals="4" methods="4" coveredmethods="1"/>
+        <metrics statements="25" coveredstatements="25" conditionals="9" coveredconditionals="9" methods="4" coveredmethods="4"/>
         <line num="1" count="1" type="stmt"/>
         <line num="2" count="1" type="stmt"/>
         <line num="3" count="1" type="stmt"/>
         <line num="6" count="1" type="cond" truecount="1" falsecount="0"/>
-        <line num="7" count="9" type="stmt"/>
-        <line num="8" count="9" type="cond" truecount="1" falsecount="0"/>
-        <line num="10" count="9" type="stmt"/>
-        <line num="12" count="9" type="stmt"/>
-        <line num="13" count="9" type="stmt"/>
-        <line num="14" count="9" type="stmt"/>
-        <line num="15" count="9" type="stmt"/>
-        <line num="16" count="9" type="cond" truecount="1" falsecount="1"/>
-        <line num="17" count="9" type="stmt"/>
-        <line num="18" count="9" type="stmt"/>
-        <line num="20" count="9" type="stmt"/>
-        <line num="21" count="9" type="stmt"/>
-        <line num="22" count="9" type="stmt"/>
-        <line num="23" count="9" type="stmt"/>
-        <line num="24" count="9" type="cond" truecount="1" falsecount="1"/>
-        <line num="25" count="9" type="stmt"/>
-        <line num="26" count="9" type="stmt"/>
-        <line num="28" count="9" type="stmt"/>
-        <line num="29" count="9" type="stmt"/>
-        <line num="31" count="9" type="stmt"/>
+        <line num="7" count="13" type="stmt"/>
+        <line num="8" count="13" type="cond" truecount="1" falsecount="0"/>
+        <line num="10" count="13" type="cond" truecount="1" falsecount="0"/>
+        <line num="12" count="13" type="stmt"/>
+        <line num="13" count="13" type="stmt"/>
+        <line num="14" count="13" type="stmt"/>
+        <line num="15" count="13" type="stmt"/>
+        <line num="16" count="13" type="cond" truecount="2" falsecount="0"/>
+        <line num="17" count="13" type="cond" truecount="1" falsecount="0"/>
+        <line num="18" count="13" type="stmt"/>
+        <line num="20" count="13" type="stmt"/>
+        <line num="21" count="13" type="stmt"/>
+        <line num="22" count="13" type="stmt"/>
+        <line num="23" count="13" type="stmt"/>
+        <line num="24" count="13" type="cond" truecount="2" falsecount="0"/>
+        <line num="25" count="13" type="cond" truecount="1" falsecount="0"/>
+        <line num="26" count="13" type="stmt"/>
+        <line num="28" count="13" type="stmt"/>
+        <line num="29" count="13" type="stmt"/>
+        <line num="31" count="13" type="stmt"/>
         <line num="33" count="1" type="stmt"/>
       </file>
       <file name="search.tsx" path="C:\Users\Admin\Desktop\React-Tasks\src\components\search.tsx">
