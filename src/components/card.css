@@ -57,7 +57,6 @@
   bottom: 5px;
   transition: 0.5s;
   opacity: 0.4;
-  animation: star-pulse 1s infinite;
 }
 
 @media (hover:hover) {
@@ -75,17 +74,4 @@
 
 .star-img_checked {
   opacity: 1;
-  animation: none
-}
-
-@keyframes star-pulse {
-  0% {
-    transform: scale(0.8);
-  }
-  50% {
-    transform: scale(1.2);
-  }
-  100% {
-    transform: scale(0.8);
-  }
 }
