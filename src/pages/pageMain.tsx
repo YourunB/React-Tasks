@@ -55,6 +55,7 @@ const PageMain = () => {
   }
   
   const cardListCode = <CardList key={3002} cardCode={cardCode} />;
+  console.log(cardCode);
 
   const msg = dataReduxElements.checkedCards.length > 1 ? <Msg /> : null;
 
