@@ -72,9 +72,9 @@
 
 @keyframes left-right {
   0% {
-    transform: translateX(340px)
+    transform: translateX(340px);
   }
   100% {
-    transform: translateX(0)
+    transform: translateX(0);
   }
 }

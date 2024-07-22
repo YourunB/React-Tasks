@@ -8,7 +8,7 @@ import { updatePage, updateSearch } from '../redux/dataSlicePage';
 const Search = () => {
   const navigate = useNavigate();
   const serchInputRef = useRef(null);
-  const dataReduxPage = useSelector( (state: RootState) => state.dataPage );
+  const dataReduxPage = useSelector((state: RootState) => state.dataPage);
   const dispatch = useDispatch();
 
   function clearSearch() {

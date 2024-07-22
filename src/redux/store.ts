@@ -9,10 +9,9 @@ export const store = configureStore({
     dataPage: dataReducerPage,
     [api.reducerPath]: api.reducer,
     dataCharacter: dataSliceCharacter,
-    dataElements: dataSliceElements
+    dataElements: dataSliceElements,
   },
-  middleware: (getDefaultMiddleware) =>
-    getDefaultMiddleware().concat(api.middleware),
+  middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(api.middleware),
 });
 
 export type RootState = ReturnType<typeof store.getState>;

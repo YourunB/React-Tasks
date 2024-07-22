@@ -19,9 +19,9 @@ import ThemeContext from '../components/themeContext';
 const PageMain = () => {
   const theme = useContext(ThemeContext);
   const dispatch = useDispatch();
-  const dataReduxPage = useSelector( (state: RootState) => state.dataPage );
-  const dataReduxElements = useSelector( (state: RootState) => state.dataElements );
-  const dataCharacters = useGetCharactersApiQuery({page: dataReduxPage.page, search: dataReduxPage.search});
+  const dataReduxPage = useSelector((state: RootState) => state.dataPage);
+  const dataReduxElements = useSelector((state: RootState) => state.dataElements);
+  const dataCharacters = useGetCharactersApiQuery({ page: dataReduxPage.page, search: dataReduxPage.search });
   const params = useParams();
   const prodPage = params.page;
   const prodSearch = params.search;
@@ -32,7 +32,8 @@ const PageMain = () => {
   }, [prodPage, prodSearch, dispatch]);
 
   useEffect(() => {
-    if (dataCharacters.data && dataCharacters.data.info) dispatch(updateTotalPages(dataCharacters.data.info.totalPages));
+    if (dataCharacters.data && dataCharacters.data.info)
+      dispatch(updateTotalPages(dataCharacters.data.info.totalPages));
   }, [dataCharacters, dispatch]);
 
   function changeTheme() {
@@ -53,7 +54,7 @@ const PageMain = () => {
       />
     ));
   }
-  
+
   const cardListCode = <CardList key={3002} cardCode={cardCode} />;
   console.log(cardCode);
 
@@ -63,7 +64,14 @@ const PageMain = () => {
     <div className={`page-main ${theme.light ? 'light' : ''}`} data-testid={'page-main'}>
       <header className="page-main__header">
         <Search />
-        <img onClick={() => changeTheme()} className={`theme-img ${theme.light ? '' : 'theme-img_light'}`} src={themeImg} alt='Theme' title='Change theme' data-testid={'theme-button'}/>
+        <img
+          onClick={() => changeTheme()}
+          className={`theme-img ${theme.light ? '' : 'theme-img_light'}`}
+          src={themeImg}
+          alt="Theme"
+          title="Change theme"
+          data-testid={'theme-button'}
+        />
       </header>
       <main className="page-main__main">
         {cardListCode}

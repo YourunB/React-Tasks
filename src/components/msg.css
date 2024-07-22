@@ -19,7 +19,7 @@
 }
 
 .msg__btn {
-  display:inline-block;
+  display: inline-block;
   background: rgb(242, 212, 44);
   border: none;
   margin: 0 5px;
@@ -30,7 +30,7 @@
   transition: 0.5s;
 }
 
-@media (hover:hover) {
+@media (hover: hover) {
   .msg__btn:hover {
     cursor: pointer;
     transform: scale(1.1);
@@ -44,9 +44,9 @@
 
 @keyframes left-side {
   0% {
-    transform: translateX(-200px)
+    transform: translateX(-200px);
   }
   100% {
-    transform: translateX(0)
+    transform: translateX(0);
   }
 }

@@ -15,8 +15,7 @@ const renderWithProviders = (ui, { route }) => {
       dataCharacter: dataSliceCharacter.reducer,
       [api.reducerPath]: api.reducer,
     },
-    middleware: (getDefaultMiddleware) =>
-      getDefaultMiddleware().concat(api.middleware),
+    middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(api.middleware),
   });
 
   setupListeners(store.dispatch);
@@ -57,7 +56,6 @@ describe('CardDescription', () => {
     expect(location.pathname === '/');
   });
 
-
   test('closes details on display click', async () => {
     renderWithProviders(<CardDescription />, { route: '/details/10' });
 
@@ -66,5 +64,4 @@ describe('CardDescription', () => {
     fireEvent.click(overflow);
     expect(location.pathname === '/');
   });
-  
 });

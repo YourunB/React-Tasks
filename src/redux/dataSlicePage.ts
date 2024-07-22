@@ -1,17 +1,16 @@
 import { createSlice } from '@reduxjs/toolkit';
 
-const initialState={
+const initialState = {
   page: 1,
   totalPages: 1,
   search: '',
   theme: { light: false },
-}
+};
 
 export const dataSlicePage = createSlice({
   name: 'data',
   initialState,
   reducers: {
-
     updatePage: (state, action) => {
       state.page = action.payload;
     },
@@ -27,7 +26,6 @@ export const dataSlicePage = createSlice({
     updateTheme: (state, action) => {
       state.theme = { light: action.payload };
     },
-
   },
 });
 

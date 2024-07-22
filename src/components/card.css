@@ -59,7 +59,7 @@
   opacity: 0.4;
 }
 
-@media (hover:hover) {
+@media (hover: hover) {
   .star-img:hover {
     transform: scale(1.3);
     cursor: pointer;

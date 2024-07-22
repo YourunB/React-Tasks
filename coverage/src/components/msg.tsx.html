@@ -23,30 +23,30 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">22.72% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>5/22</span>
+                <span class='fraction'>28/28</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>0/0</span>
+                <span class='fraction'>6/6</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>0/1</span>
+                <span class='fraction'>3/3</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">22.72% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>5/22</span>
+                <span class='fraction'>28/28</span>
             </div>
         
             
@@ -61,7 +61,7 @@
             </div>
         </template>
     </div>
-    <div class='status-line low'></div>
+    <div class='status-line high'></div>
     <pre><table class="coverage">
 <tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
 <a name='L2'></a><a href='#L2'>2</a>
@@ -92,33 +92,49 @@
 <a name='L27'></a><a href='#L27'>27</a>
 <a name='L28'></a><a href='#L28'>28</a>
 <a name='L29'></a><a href='#L29'>29</a>
-<a name='L30'></a><a href='#L30'>30</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
+<a name='L30'></a><a href='#L30'>30</a>
+<a name='L31'></a><a href='#L31'>31</a>
+<a name='L32'></a><a href='#L32'>32</a>
+<a name='L33'></a><a href='#L33'>33</a>
+<a name='L34'></a><a href='#L34'>34</a>
+<a name='L35'></a><a href='#L35'>35</a>
+<a name='L36'></a><a href='#L36'>36</a>
+<a name='L37'></a><a href='#L37'>37</a>
+<a name='L38'></a><a href='#L38'>38</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">8x</span>
+<span class="cline-any cline-yes">6x</span>
+<span class="cline-any cline-yes">6x</span>
+<span class="cline-any cline-yes">6x</span>
+<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import './msg.css';
@@ -126,28 +142,36 @@ import { RootState } from '../redux/store';
 import { useSelector, useDispatch } from 'react-redux';
 import { clearAll } from '../redux/dataSliceElements';
 &nbsp;
-const Msg = <span class="fstat-no" title="function not covered" >() =&gt; {</span>
-<span class="cstat-no" title="statement not covered" >  const dispatch = useDispatch();</span>
-<span class="cstat-no" title="statement not covered" >  const dataReduxElements = useSelector( (state: RootState) =&gt; state.dataElements );</span>
+const Msg = () =&gt; {
+  const dispatch = useDispatch();
+  const dataReduxElements = useSelector((state: RootState) =&gt; state.dataElements);
 &nbsp;
-<span class="cstat-no" title="statement not covered" >  const deleteElementsFromSlice = () =&gt; dispatch(clearAll());</span>
+  const deleteElementsFromSlice = () =&gt; dispatch(clearAll());
 &nbsp;
-<span class="cstat-no" title="statement not covered" >  const arr: string[] = [];</span>
-<span class="cstat-no" title="statement not covered" >  dataReduxElements.checkedCards.forEach(obj =&gt; {</span>
-<span class="cstat-no" title="statement not covered" >    if (obj.id) {</span>
-<span class="cstat-no" title="statement not covered" >      const res = Object.values(obj);</span>
-<span class="cstat-no" title="statement not covered" >      arr.push(res.join(', '));</span>
-<span class="cstat-no" title="statement not covered" >    }</span>
-<span class="cstat-no" title="statement not covered" >  })</span>
+  const arr: string[] = [];
+  dataReduxElements.checkedCards.forEach((obj) =&gt; {
+    if (obj.id) {
+      const res = Object.values(obj);
+      arr.push(res.join(', '));
+    }
+  });
 &nbsp;
-<span class="cstat-no" title="statement not covered" >  return (</span>
-<span class="cstat-no" title="statement not covered" >    &lt;div className='msg'&gt;</span>
-<span class="cstat-no" title="statement not covered" >      &lt;p&gt;Total selected: {dataReduxElements.checkedCards.length - 1}&lt;/p&gt;</span>
-<span class="cstat-no" title="statement not covered" >      &lt;button className='msg__btn' onClick={() =&gt; deleteElementsFromSlice()}&gt;Reset&lt;/button&gt;</span>
-<span class="cstat-no" title="statement not covered" >      &lt;a href={URL.createObjectURL(new Blob([`Disney Character:\n\n${arr.join('\n\n')}`], {type: 'text/plain'}))} download={`Disney_characters_${dataReduxElements.checkedCards.length - 1}.txt`} className='msg__btn'&gt;Save&lt;/a&gt;</span>
-<span class="cstat-no" title="statement not covered" >    &lt;/div&gt;</span>
+  return (
+    &lt;div className="msg"&gt;
+      &lt;p&gt;Total selected: {dataReduxElements.checkedCards.length - 1}&lt;/p&gt;
+      &lt;button className="msg__btn" onClick={() =&gt; deleteElementsFromSlice()}&gt;
+        Reset
+      &lt;/button&gt;
+      &lt;a
+        href={URL.createObjectURL(new Blob([`Disney Character:\n\n${arr.join('\n\n')}`], { type: 'text/plain' }))}
+        download={`Disney_characters_${dataReduxElements.checkedCards.length - 1}.txt`}
+        className="msg__btn"
+      &gt;
+        Save
+      &lt;/a&gt;
+    &lt;/div&gt;
   );
-<span class="cstat-no" title="statement not covered" >};</span>
+};
 &nbsp;
 export default Msg;
 &nbsp;</pre></td></tr></table></pre>
@@ -157,7 +181,7 @@ export default Msg;
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2024-07-22T19:08:37.454Z
+                at 2024-07-22T20:42:13.140Z
             </div>
         <script src="../../prettify.js"></script>
         <script>

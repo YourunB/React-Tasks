@@ -5,7 +5,9 @@ import { test, expect } from 'vitest';
 
 const theme = {
   light: false,
-  change: function() { this.light = !this.light },
+  change: function () {
+    this.light = !this.light;
+  },
 };
 
 test('App component', () => {

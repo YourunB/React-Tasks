@@ -1,16 +1,13 @@
 import { createSlice } from '@reduxjs/toolkit';
 
-const initialState={
-  checkedCards: [
-    {id: null}
-  ],
-}
+const initialState = {
+  checkedCards: [{ id: null }],
+};
 
 export const dataSliceElements = createSlice({
   name: 'data',
   initialState,
   reducers: {
-
     updateCheckedCards: (state, action) => {
       const arr = state.checkedCards;
       let save = true;
@@ -25,9 +22,8 @@ export const dataSliceElements = createSlice({
     },
 
     clearAll: (state) => {
-      state.checkedCards = [{ id: null}];
+      state.checkedCards = [{ id: null }];
     },
-
   },
 });
 

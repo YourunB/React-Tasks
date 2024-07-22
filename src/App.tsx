@@ -7,8 +7,10 @@ import ThemeContext from './components/themeContext';
 
 const theme = {
   light: false,
-  change: function() { this.light = !this.light },
-}
+  change: function () {
+    this.light = !this.light;
+  },
+};
 
 const App = () => {
   return (
@@ -22,6 +24,6 @@ const App = () => {
       </Provider>
     </div>
   );
-}
+};
 
 export default App;

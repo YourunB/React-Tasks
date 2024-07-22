@@ -6,11 +6,12 @@ import Card from '../../src/components/card';
 import { updateCheckedCards, removeCheckedCards } from '../../src/redux/dataSliceElements';
 import React from 'react';
 import { CardProps } from '../../src/state/types';
+import '@testing-library/jest-dom';
 
 const mockStore = configureStore([]);
 let initialState = {
   dataElements: {
-    checkedCards: [{id: 0}],
+    checkedCards: [{ id: 0 }],
   },
 };
 
@@ -38,7 +39,10 @@ describe('Card Component', () => {
     renderComponent(props);
     expect(screen.getByTestId('card'));
     expect(screen.getByText(props.name)).toBeInTheDocument();
-    expect(screen.getByAltText(props.name)).toHaveAttribute('src', `${props.image || 'https://github.com/YourunB/Test1/blob/main/images/noimage.jpg?raw=true'}`);
+    expect(screen.getByAltText(props.name)).toHaveAttribute(
+      'src',
+      `${props.image || 'https://github.com/YourunB/Test1/blob/main/images/noimage.jpg?raw=true'}`
+    );
     expect(screen.getByText(`${props.films || 'none'}`)).toBeInTheDocument();
   });
 
@@ -56,19 +60,21 @@ describe('Card Component', () => {
     fireEvent.click(starImg);
 
     const actions = store.getActions();
-    expect(actions).toContainEqual(updateCheckedCards({
-      id: 1,
-      name: 'Test Name',
-      image: `${props.image}`,
-      films: `${props.films || 'none'}`,
-      url: location.href,
-    }));
+    expect(actions).toContainEqual(
+      updateCheckedCards({
+        id: 1,
+        name: 'Test Name',
+        image: `${props.image}`,
+        films: `${props.films || 'none'}`,
+        url: location.href,
+      })
+    );
   });
 
   test('renders with checked class if id is in checkedCards', () => {
     initialState = {
       dataElements: {
-        checkedCards: [{id: 1}],
+        checkedCards: [{ id: 1 }],
       },
     };
     store = mockStore(initialState);
