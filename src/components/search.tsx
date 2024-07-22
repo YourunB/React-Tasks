@@ -1,5 +1,4 @@
 import './search.css';
-import { SearchProps } from '../state/types';
 import { useNavigate } from 'react-router-dom';
 import { useRef } from 'react';
 import { RootState } from '../redux/store';
