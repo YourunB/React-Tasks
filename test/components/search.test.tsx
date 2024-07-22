@@ -63,4 +63,13 @@ describe('Search component', () => {
     expect(btnSearch).toBeInTheDocument();
     fireEvent.click(btnSearch);
   });
+
+  test('should actions button is clicked search', () => {
+    renderComponent();
+    const input = screen.getByPlaceholderText('Search...') as HTMLInputElement;
+    const searchButton = screen.getByText('Search');
+
+    fireEvent.change(input, { target: { value: 'test' } });
+    fireEvent.click(searchButton);
+  });
 });
