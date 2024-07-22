@@ -1,5 +1,3 @@
-import React from 'react';
-
 export interface DisneyObject {
   data: [Character] | Character;
   info: Info;
@@ -34,25 +32,7 @@ export interface PropsChildren {
   children: React.ReactNode;
 }
 
-export interface PaginationProps {
-  key: number;
-  page: number;
-  btnPrevIsDisabled: boolean;
-  btnNextIsDisabled: boolean;
-}
-
 export interface CardListProps {
   key: number;
   cardCode: JSX.Element | null | object;
-}
-
-export interface CardDescriptionProps {
-  key: number;
-  image: string;
-  name: string;
-  films: string;
-  tvShows: string;
-  shortFilms: string;
-  videoGames: string;
-  hideDescription: () => void;
 }
