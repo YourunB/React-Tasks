@@ -46,14 +46,6 @@ export interface CardListProps {
   cardCode: JSX.Element | null | object;
 }
 
-export interface SearchProps {
-  key: number;
-  serchInputRef: React.MutableRefObject<null>;
-  search: string;
-  clearSearch: () => void;
-  changeSearchCharacters: () => void;
-}
-
 export interface CardDescriptionProps {
   key: number;
   image: string;
