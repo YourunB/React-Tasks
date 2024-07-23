@@ -7,10 +7,7 @@ export interface Character {
   _id: number;
   name: string;
   films: string[];
-  tvShows: string[];
-  videoGames: string[];
   imageUrl: string;
-  showDescription: (value: number) => void;
 }
 
 export interface Info {
