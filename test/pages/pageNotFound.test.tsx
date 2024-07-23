@@ -6,7 +6,7 @@ import { describe, test, expect } from 'vitest';
 import ThemeContext from '../../src/components/themeContext';
 
 describe('PageNotFound', () => {
-  it('render light theme', () => {
+  test('render light theme', () => {
     const theme = {
       light: true,
       change: () => {},
@@ -23,7 +23,7 @@ describe('PageNotFound', () => {
     expect(pageNotFoundElement).toHaveClass('page-not-found_light');
   });
 
-  it('render dark theme', () => {
+  test('render dark theme', () => {
     const theme = {
       light: false,
       change: () => {},
@@ -40,7 +40,7 @@ describe('PageNotFound', () => {
     expect(pageNotFoundElement).not.toHaveClass('page-not-found_light');
   });
 
-  it('render content', () => {
+  test('render content', () => {
     const theme = {
       light: true,
       change: () => {},
