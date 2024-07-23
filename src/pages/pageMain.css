@@ -1,3 +1,7 @@
+:root {
+  --primary-gray: rgb(69, 69, 69);
+}
+
 .controls {
   display: flex;
   gap: 20px;
@@ -12,7 +16,7 @@
   background-position: left bottom;
   background-attachment: fixed;
   background-size: 30vw;
-  color: rgb(69, 69, 69);
+  color: var(--primary-gray);
   font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 }
 
@@ -61,8 +65,8 @@
 }
 
 .light button {
-  border-color: rgb(69, 69, 69);
-  color: rgb(69, 69, 69);
+  border-color: var(--primary-gray);
+  color: var(--primary-gray);
 }
 
 .light .card-char {
@@ -76,15 +80,15 @@
 }
 
 .light .search__input {
-  border-color: rgb(69, 69, 69);
+  border-color: var(--primary-gray);
 }
 
 .light .search__btn,
 .light .search__btn-clear {
-  background: rgb(69, 69, 69);
+  background: var(--primary-gray);
   color: white;
 }
 
 .light .search__input {
-  color: rgb(69, 69, 69);
+  color: var(--primary-gray);
 }
