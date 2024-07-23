@@ -18,6 +18,7 @@
   background-size: 30vw;
   color: var(--primary-gray);
   font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  min-height: 100vh;
 }
 
 .page-main__header {
