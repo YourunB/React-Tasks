@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1721718317077" clover="3.2.0">
-  <project timestamp="1721718317078" name="All files">
-    <metrics statements="489" coveredstatements="447" conditionals="93" coveredconditionals="81" methods="48" coveredmethods="40" elements="630" coveredelements="568" complexity="0" loc="489" ncloc="489" packages="6" files="19" classes="19"/>
+<coverage generated="1721721348801" clover="3.2.0">
+  <project timestamp="1721721348801" name="All files">
+    <metrics statements="489" coveredstatements="459" conditionals="96" coveredconditionals="84" methods="48" coveredmethods="41" elements="633" coveredelements="584" complexity="0" loc="489" ncloc="489" packages="6" files="19" classes="19"/>
     <package name="src">
       <metrics statements="25" coveredstatements="25" conditionals="2" coveredconditionals="2" methods="2" coveredmethods="2"/>
       <file name="App.tsx" path="C:\Users\Admin\Desktop\React-Tasks\src\App.tsx">
@@ -343,7 +343,7 @@
       </file>
     </package>
     <package name="src.pages">
-      <metrics statements="94" coveredstatements="71" conditionals="23" coveredconditionals="14" methods="4" coveredmethods="3"/>
+      <metrics statements="94" coveredstatements="83" conditionals="26" coveredconditionals="17" methods="4" coveredmethods="4"/>
       <file name="pageMain.tsx" path="C:\Users\Admin\Desktop\React-Tasks\src\pages\pageMain.tsx">
         <metrics statements="76" coveredstatements="65" conditionals="23" coveredconditionals="14" methods="3" coveredmethods="3"/>
         <line num="1" count="1" type="stmt"/>
@@ -424,24 +424,24 @@
         <line num="88" count="1" type="stmt"/>
       </file>
       <file name="pageNotFound.tsx" path="C:\Users\Admin\Desktop\React-Tasks\src\pages\pageNotFound.tsx">
-        <metrics statements="18" coveredstatements="6" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="0"/>
+        <metrics statements="18" coveredstatements="18" conditionals="3" coveredconditionals="3" methods="1" coveredmethods="1"/>
         <line num="1" count="1" type="stmt"/>
         <line num="2" count="1" type="stmt"/>
         <line num="3" count="1" type="stmt"/>
         <line num="4" count="1" type="stmt"/>
-        <line num="6" count="1" type="stmt"/>
-        <line num="7" count="0" type="stmt"/>
-        <line num="9" count="0" type="stmt"/>
-        <line num="10" count="0" type="stmt"/>
-        <line num="11" count="0" type="stmt"/>
-        <line num="12" count="0" type="stmt"/>
-        <line num="13" count="0" type="stmt"/>
-        <line num="14" count="0" type="stmt"/>
-        <line num="15" count="0" type="stmt"/>
-        <line num="17" count="0" type="stmt"/>
-        <line num="18" count="0" type="stmt"/>
-        <line num="19" count="0" type="stmt"/>
-        <line num="21" count="0" type="stmt"/>
+        <line num="6" count="1" type="cond" truecount="1" falsecount="0"/>
+        <line num="7" count="3" type="stmt"/>
+        <line num="9" count="3" type="stmt"/>
+        <line num="10" count="3" type="cond" truecount="2" falsecount="0"/>
+        <line num="11" count="3" type="stmt"/>
+        <line num="12" count="3" type="stmt"/>
+        <line num="13" count="3" type="stmt"/>
+        <line num="14" count="3" type="stmt"/>
+        <line num="15" count="3" type="stmt"/>
+        <line num="17" count="3" type="stmt"/>
+        <line num="18" count="3" type="stmt"/>
+        <line num="19" count="3" type="stmt"/>
+        <line num="21" count="3" type="stmt"/>
         <line num="23" count="1" type="stmt"/>
       </file>
     </package>
