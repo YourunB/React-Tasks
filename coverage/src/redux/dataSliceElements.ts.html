@@ -23,30 +23,30 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">57.69% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>15/26</span>
+                <span class='fraction'>26/26</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>0/0</span>
+                <span class='fraction'>6/6</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>0/3</span>
+                <span class='fraction'>3/3</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">57.69% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>15/26</span>
+                <span class='fraction'>26/26</span>
             </div>
         
             
@@ -61,7 +61,7 @@
             </div>
         </template>
     </div>
-    <div class='status-line medium'></div>
+    <div class='status-line high'></div>
     <pre><table class="coverage">
 <tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
 <a name='L2'></a><a href='#L2'>2</a>
@@ -106,21 +106,21 @@
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -130,29 +130,29 @@
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import { createSlice } from '@reduxjs/toolkit';
 &nbsp;
 const initialState = {
-  checkedCards: [{ id: null }],
+  checkedCards: [{ id: null }] as { id: number | null }[],
 };
 &nbsp;
 export const dataSliceElements = createSlice({
   name: 'data',
   initialState,
   reducers: {
-    updateCheckedCards: <span class="fstat-no" title="function not covered" >(state, action) =&gt; {</span>
-<span class="cstat-no" title="statement not covered" >      const arr = state.checkedCards;</span>
-<span class="cstat-no" title="statement not covered" >      let save = true;</span>
-<span class="cstat-no" title="statement not covered" >      for (let i = 0; i &lt; arr.length; i += 1) {</span>
-<span class="cstat-no" title="statement not covered" >        if (arr[i].id === action.payload.id) save = false;</span>
-<span class="cstat-no" title="statement not covered" >      }</span>
-<span class="cstat-no" title="statement not covered" >      if (save) state.checkedCards.push(action.payload);</span>
-<span class="cstat-no" title="statement not covered" >    },</span>
+    updateCheckedCards: (state, action) =&gt; {
+      const arr = state.checkedCards;
+      let save = true;
+      for (let i = 0; i &lt; arr.length; i += 1) {
+        if (arr[i].id === action.payload.id) save = false;
+      }
+      if (save) state.checkedCards.push(action.payload);
+    },
 &nbsp;
-    removeCheckedCards: <span class="fstat-no" title="function not covered" >(state, action) =&gt; {</span>
-<span class="cstat-no" title="statement not covered" >      state.checkedCards = state.checkedCards.filter((v) =&gt; v.id !== action.payload);</span>
-<span class="cstat-no" title="statement not covered" >    },</span>
+    removeCheckedCards: (state, action) =&gt; {
+      state.checkedCards = state.checkedCards.filter((v) =&gt; v.id !== action.payload);
+    },
 &nbsp;
-    clearAll: <span class="fstat-no" title="function not covered" >(state) =&gt; {</span>
-<span class="cstat-no" title="statement not covered" >      state.checkedCards = [{ id: null }];</span>
-<span class="cstat-no" title="statement not covered" >    },</span>
+    clearAll: (state) =&gt; {
+      state.checkedCards = [{ id: null }];
+    },
   },
 });
 &nbsp;
@@ -166,7 +166,7 @@ export default dataSliceElements.reducer;
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2024-07-23T09:42:46.952Z
+                at 2024-07-23T10:03:52.626Z
             </div>
         <script src="../../prettify.js"></script>
         <script>

@@ -1,7 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
-  checkedCards: [{ id: null }],
+  checkedCards: [{ id: null }] as { id: number | null }[],
 };
 
 export const dataSliceElements = createSlice({
