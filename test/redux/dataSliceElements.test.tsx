@@ -17,9 +17,12 @@ describe('dataSliceElements reducer', () => {
   });
 
   test('updateCheckedCards', () => {
-    const actual = dataSliceElements({
-      checkedCards: [{ id: 1 }],
-    }, updateCheckedCards({ id: 1 }));
+    const actual = dataSliceElements(
+      {
+        checkedCards: [{ id: 1 }],
+      },
+      updateCheckedCards({ id: 1 })
+    );
     expect(actual.checkedCards).toEqual([{ id: 1 }]);
   });
 

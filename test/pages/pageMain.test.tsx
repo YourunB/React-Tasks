@@ -61,20 +61,21 @@ describe('PageMain', () => {
   });
 
   let cardCode: JSX.Element | null | object = null;
-  const renderCard = () => render(
-    <Provider store={store}>
-      <BrowserRouter>
-        <>{cardCode}</>
-      </BrowserRouter>
-    </Provider>
-  );
+  const renderCard = () =>
+    render(
+      <Provider store={store}>
+        <BrowserRouter>
+          <>{cardCode}</>
+        </BrowserRouter>
+      </Provider>
+    );
 
   test('render two card', () => {
     const dataCharacters = {
       data: {
         data: [
-          { _id: 1, imageUrl: 'url1', name: 'Character 1', films: ['Film 1']},
-          { _id: 2, imageUrl: 'url2', name: 'Character 2', films: ['Film 2']},
+          { _id: 1, imageUrl: 'url1', name: 'Character 1', films: ['Film 1'] },
+          { _id: 2, imageUrl: 'url2', name: 'Character 2', films: ['Film 2'] },
         ],
       },
     };
