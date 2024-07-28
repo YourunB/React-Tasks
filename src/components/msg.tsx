@@ -13,7 +13,7 @@ const Msg = () => {
   dataReduxElements.checkedCards.forEach((obj) => {
     if (obj.id) {
       const res = Object.values(obj);
-      arr.push(res.join(', '));
+      arr.push(res.join(';'));
     }
   });
 
@@ -24,8 +24,10 @@ const Msg = () => {
         Reset
       </button>
       <a
-        href={URL.createObjectURL(new Blob([`Disney Character:\n\n${arr.join('\n\n')}`], { type: 'text/plain' }))}
-        download={`Disney_characters_${dataReduxElements.checkedCards.length - 1}.txt`}
+        href={URL.createObjectURL(
+          new Blob([`Disney Character\nId:;Name:;Image:;Films:;Url:;\n${arr.join('\n')}`], { type: 'text/plain' })
+        )}
+        download={`Disney_characters_${dataReduxElements.checkedCards.length - 1}.csv`}
         className="msg__btn"
       >
         Save
