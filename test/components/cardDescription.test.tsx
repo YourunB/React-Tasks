@@ -10,7 +10,7 @@ import { setupListeners } from '@reduxjs/toolkit/query';
 import { MemoryRouter, Routes, Route } from 'react-router-dom';
 import { describe, test, expect } from 'vitest';
 
-const renderWithProviders = (ui: ReactNode, { route }) => {
+const renderWithProviders = (ui: ReactNode, route: string) => {
   const store = configureStore({
     reducer: {
       dataCharacter: dataSliceCharacter.reducer,
@@ -34,7 +34,7 @@ const renderWithProviders = (ui: ReactNode, { route }) => {
 
 describe('CardDescription', () => {
   test('renders correctly with data', async () => {
-    renderWithProviders(<CardDescription />, { route: '/details/10' });
+    renderWithProviders(<CardDescription />, '/details/10');
 
     expect(await screen.findByTestId('card-details')).toBeInTheDocument();
     expect(await screen.findByText('627')).toBeInTheDocument();
@@ -49,7 +49,7 @@ describe('CardDescription', () => {
   });
 
   test('closes details on button click', async () => {
-    renderWithProviders(<CardDescription />, { route: '/details/10' });
+    renderWithProviders(<CardDescription />, '/details/10');
 
     const btn = await screen.findByText('X');
     expect(btn).toBeInTheDocument();
@@ -58,7 +58,7 @@ describe('CardDescription', () => {
   });
 
   test('closes details on display click', async () => {
-    renderWithProviders(<CardDescription />, { route: '/details/10' });
+    renderWithProviders(<CardDescription />, '/details/10');
 
     const overflow = await screen.findByTestId('card-details');
     expect(overflow).toBeInTheDocument();
