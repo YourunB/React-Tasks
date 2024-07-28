@@ -1,5 +1,6 @@
 .loading {
   position: fixed;
+  z-index: 300;
   left: 0;
   top: 0;
   width: 100vw;
@@ -7,6 +8,8 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  user-select: none;
+  pointer-events: none;
 }
 
 .loading__img {

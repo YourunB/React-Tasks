@@ -1,24 +1,50 @@
 import './cardDescription.css';
-import { CardDescriptionProps } from '../state/types';
+import { useDispatch, useSelector } from 'react-redux';
+import { useGetDetailsApiQuery } from '../redux/api/api';
+import { RootState } from '../redux/store';
+import { useParams, useNavigate } from 'react-router-dom';
+import { updateId } from '../redux/dataSliceCharacter';
+import { useEffect } from 'react';
+import Loading from './loading';
 
-const CardDescription = (props: CardDescriptionProps) => {
+const CardDescription = (): JSX.Element | null => {
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const dataReduxDetails = useSelector((state: RootState) => state.dataCharacter);
+  const dataDetails = useGetDetailsApiQuery(dataReduxDetails.id);
+
+  const params = useParams();
+  const prodId = params.id;
+
+  useEffect(() => {
+    if (prodId && Number(prodId)) dispatch(updateId(prodId));
+  }, [prodId, dispatch]);
+
+  if (!dataDetails.data || (!('data' in dataDetails.data) && !('name' in dataDetails.data.data))) return null;
+  const data = { ...dataDetails.data.data };
+
   return (
-    <div className="card-description">
-      <div className="controls">
-        <button onClick={() => props.hideDescription()} className="controls__btn" data-testid={'card-details'}>
-          X
-        </button>
+    <div className="overlay" onClick={() => navigate('/')} data-testid={'card-details'}>
+      <div className="card-description" onClick={(event) => event.stopPropagation()}>
+        <div className="controls">
+          <button className="controls__btn" data-testid={'card-details-btn'} onClick={() => navigate('/')}>
+            X
+          </button>
+        </div>
+        <img
+          className="card-description__img"
+          src={
+            dataDetails.data.data.imageUrl || 'https://github.com/YourunB/Test1/blob/main/images/noimage.jpg?raw=true'
+          }
+          alt="Character"
+        ></img>
+        <h3 className="card-description__name">{data.name}</h3>
+        <p className="card-description__description">Films: {data.films.join(', ')}</p>
+        <p className="card-description__description">TV Shows: {data.tvShows.join(', ')}</p>
+        <p className="card-description__description">Short Films: {data.shortFilms.join(', ')}</p>
+        <p className="card-description__description">Video Games: {data.videoGames.join(', ')}</p>
       </div>
-      <img
-        className="card-description__img"
-        src={props.image || 'https://github.com/YourunB/Test1/blob/main/images/noimage.jpg?raw=true'}
-        alt="Character"
-      ></img>
-      <h3 className="card-description__name">{props.name}</h3>
-      <p className="card-description__description">Films: {props.films || 'none'}</p>
-      <p className="card-description__description">TV Shows: {props.tvShows || 'none'}</p>
-      <p className="card-description__description">Short Films: {props.shortFilms || 'none'}</p>
-      <p className="card-description__description">Video Games: {props.videoGames || 'none'}</p>
+      {dataDetails.isLoading || dataDetails.isFetching ? <Loading /> : null}
     </div>
   );
 };

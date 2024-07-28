@@ -1,54 +1,54 @@
-import { render, screen, fireEvent } from '@testing-library/react';
-import { describe, test, expect, vi } from 'vitest';
-import Pagination from '../../src/components/pagination';
-import { PaginationProps } from '../../src/state/types';
-import React from 'react';
 import '@testing-library/jest-dom';
+import { render, screen, fireEvent } from '@testing-library/react';
+import { Provider } from 'react-redux';
+import { BrowserRouter } from 'react-router-dom';
+import configureStore from 'redux-mock-store';
+import React from 'react';
+import { vi, test, describe, expect } from 'vitest';
+import Pagination from '../../src/components/pagination';
 
-describe('Pagination Component', () => {
-  const props: PaginationProps = {
-    key: 3001,
-    page: 1,
-    obj: { info: { previousPage: null, nextPage: null } },
-    changePage: vi.fn(),
+beforeAll(() => {
+  global.URL.createObjectURL = vi.fn();
+});
+
+const mockStore = configureStore([]);
+const initialState = {
+  dataPage: {
+    page: 2,
+    totalPages: 5,
+    search: '',
+    theme: { light: false },
+  },
+};
+
+describe('Pagination component', () => {
+  const store = mockStore(initialState);
+  const renderComponent = () => {
+    return render(
+      <Provider store={store}>
+        <BrowserRouter>
+          <Pagination />
+        </BrowserRouter>
+      </Provider>
+    );
   };
 
-  test('renders current page number', () => {
-    render(<Pagination {...props} />);
-    expect(screen.getByText('1')).toBeInTheDocument();
+  test('renders correctly', () => {
+    renderComponent();
+    expect(screen.getByText('2')).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: /</ })).toBeEnabled();
+    expect(screen.getByRole('button', { name: />/ })).toBeEnabled();
   });
 
-  test('disables previous button when there is no previous page', () => {
-    render(<Pagination {...props} />);
-    expect(screen.getByRole('button', { name: /</i })).toBeDisabled();
-  });
+  test('renders', () => {
+    renderComponent();
 
-  test('enables next button when there is a next page', () => {
-    render(<Pagination {...props} />);
-    expect(screen.getByRole('button', { name: />/i })).toBeDisabled();
-  });
+    const btnPrev = screen.getByText('<');
+    expect(btnPrev).toBeInTheDocument();
+    fireEvent.click(btnPrev);
 
-  const propsChange = {
-    key: 3001,
-    obj: {
-      info: {
-        previousPage: 'somePage',
-        nextPage: 'somePage',
-      },
-    },
-    page: 1,
-    changePage: vi.fn(),
-  };
-
-  test('calls changePage with -1 when previous button is clicked', () => {
-    render(<Pagination {...propsChange} />);
-    fireEvent.click(screen.getByRole('button', { name: /</i }));
-    expect(propsChange.changePage).toHaveBeenCalledWith(-1);
-  });
-
-  test('calls changePage with +1 when next button is clicked', () => {
-    render(<Pagination {...propsChange} />);
-    fireEvent.click(screen.getByRole('button', { name: />/i }));
-    expect(propsChange.changePage).toHaveBeenCalledWith(1);
+    const btnNext = screen.getByText('>');
+    expect(btnNext).toBeInTheDocument();
+    fireEvent.click(btnNext);
   });
 });

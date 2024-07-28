@@ -1,44 +1,75 @@
-import { render, screen, fireEvent } from '@testing-library/react';
-import { describe, test, vi } from 'vitest';
-import { SearchProps } from '../../src/state/types';
-import Search from '../../src/components/search';
-import React from 'react';
 import '@testing-library/jest-dom';
+import { render, screen, fireEvent } from '@testing-library/react';
+import { Provider } from 'react-redux';
+import { BrowserRouter } from 'react-router-dom';
+import configureStore from 'redux-mock-store';
+import React from 'react';
+import { vi, test, describe, expect } from 'vitest';
+import Search from '../../src/components/search';
 
-describe('Search Component', () => {
-  const mockClearSearch = vi.fn();
-  const mockChangeSearchCharacters = vi.fn();
-  const mockSearchInputRef = { current: null };
+beforeAll(() => {
+  global.URL.createObjectURL = vi.fn();
+});
 
-  const props: SearchProps = {
-    key: 3003,
-    clearSearch: mockClearSearch,
-    changeSearchCharacters: mockChangeSearchCharacters,
-    serchInputRef: mockSearchInputRef,
-    search: 'test',
+const mockStore = configureStore([]);
+const initialState = {
+  dataPage: {
+    page: 1,
+    totalPages: 3,
+    search: 'cat',
+    theme: { light: false },
+  },
+};
+
+describe('Search component', () => {
+  const store = mockStore(initialState);
+  const renderComponent = () => {
+    return render(
+      <Provider store={store}>
+        <BrowserRouter>
+          <Search />
+        </BrowserRouter>
+      </Provider>
+    );
   };
 
-  test('renders correctly', () => {
-    render(<Search {...props} />);
+  test('should render search input and buttons', () => {
+    renderComponent();
     expect(screen.getByPlaceholderText('Search...')).toBeInTheDocument();
     expect(screen.getByText('X')).toBeInTheDocument();
     expect(screen.getByText('Search')).toBeInTheDocument();
   });
 
-  test('sets default value of the input field', () => {
-    render(<Search {...props} />);
-    expect(screen.getByPlaceholderText('Search...')).toHaveValue('test');
+  test('should clear search input when clear button is clicked', () => {
+    renderComponent();
+    const input = screen.getByPlaceholderText('Search...') as HTMLInputElement;
+    const clearButton = screen.getByText('X');
+
+    fireEvent.change(input, { target: { value: 'test' } });
+    expect(input.value).toBe('test');
+
+    fireEvent.click(clearButton);
+    expect(input.value).toBe('');
   });
 
-  test('calls clearSearch when clear button is clicked', () => {
-    render(<Search {...props} />);
-    fireEvent.click(screen.getByRole('button', { name: /X/i }));
-    expect(mockClearSearch).toHaveBeenCalled();
+  test('should dispatch actions when click btns', () => {
+    renderComponent();
+
+    const btnClose = screen.getByText('X');
+    expect(btnClose).toBeInTheDocument();
+    fireEvent.click(btnClose);
+
+    const btnSearch = screen.getByText('Search');
+    expect(btnSearch).toBeInTheDocument();
+    fireEvent.click(btnSearch);
   });
 
-  test('calls changeSearchCharacters when search button is clicked', () => {
-    render(<Search {...props} />);
-    fireEvent.click(screen.getByRole('button', { name: /Search/i }));
-    expect(mockChangeSearchCharacters).toHaveBeenCalled();
+  test('should actions button is clicked search', () => {
+    renderComponent();
+    const input = screen.getByPlaceholderText('Search...') as HTMLInputElement;
+    const searchButton = screen.getByText('Search');
+
+    fireEvent.change(input, { target: { value: 'test' } });
+    fireEvent.click(searchButton);
   });
 });

@@ -11,6 +11,8 @@
   box-shadow: -4px -4px 4px 4px rgba(0, 0, 0, 0.1);
   border-top-left-radius: 3px;
   border-bottom-left-radius: 3px;
+  transform: translateX(340px);
+  animation: left-right 1s forwards;
 }
 
 .card-description__img {
@@ -48,6 +50,14 @@
   transition: 0.7s;
 }
 
+.overlay {
+  position: fixed;
+  width: 100%;
+  min-height: 100vh;
+  left: 0;
+  top: 0;
+}
+
 @media (hover: hover) {
   .controls__btn:hover {
     cursor: pointer;
@@ -58,4 +68,13 @@
 .controls__btn:active {
   transition: 0.2s;
   transform: scale(0.8);
+}
+
+@keyframes left-right {
+  0% {
+    transform: translateX(340px);
+  }
+  100% {
+    transform: translateX(0);
+  }
 }

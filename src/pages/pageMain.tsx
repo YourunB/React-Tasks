@@ -1,219 +1,85 @@
-import { useState, useRef, useEffect, useCallback } from 'react';
 import './pageMain.css';
-import { getCharactersPageApi, searchCharactersApi, getOneCharacterApi } from '../modules/api';
-import Card from '../components/card';
-import Loading from '../components/loading';
 import Footer from '../components/footer';
-import Pagination from '../components/pagination';
-import CardList from '../components/cardList';
 import Search from '../components/search';
-import CardDescription from '../components/cardDescription';
-import useSaveSearch from '../hooks/useSaveSearch';
+import Card from '../components/card';
+import CardList from '../components/cardList';
+import { useEffect, useContext } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { RootState } from '../redux/store';
+import { updatePage, updateTotalPages, updateSearch, updateTheme } from '../redux/dataSlicePage';
+import { useGetCharactersApiQuery } from '../redux/api/api';
+import { Character } from '../state/types';
+import Pagination from '../components/pagination';
+import Loading from '../components/loading';
+import { Outlet, useParams } from 'react-router-dom';
+import themeImg from '../assets/images/svg/theme.svg';
+import Msg from '../components/msg';
+import ThemeContext from '../components/themeContext';
 
 const PageMain = () => {
-  function getUrlSearchPart(part: string) {
-    return new URLSearchParams(location.search).get(part);
-  }
-
-  const [load, setLoad] = useState(true);
-  const [updateCards, setUpdateCards] = useState(true);
-  const [searchLS, setSearchLS] = useSaveSearch();
-  const [page, setPage] = useState(
-    Number(getUrlSearchPart('page')) && Number(getUrlSearchPart('page')) >= 1 ? Number(getUrlSearchPart('page')) : 1
-  );
-  const [search, setSearch] = useState(searchLS || getUrlSearchPart('search') || '');
-  const [details, setDetails] = useState(getUrlSearchPart('details') || '');
-  const [obj, setObj] = useState({});
-  const [newPath, setNewPath] = useState(true);
-  const [objDescription, setObjDescription] = useState({
-    data: {
-      imageUrl: '',
-      name: '',
-      sourceUrl: '',
-      films: [''],
-      tvShows: [''],
-      shortFilms: [''],
-      videoGames: [''],
-    },
-  });
-
-  const serchInputRef = useRef(null);
-
-  const updateUrlWithoutReload = useCallback(() => {
-    history.pushState(
-      null,
-      '',
-      `?page=${page}${search ? `&search=${search}` : ''}${details ? `&details=${details}` : ''}`
-    );
-  }, [page, search, details]);
-
-  const createCards = useCallback(async () => {
-    async function createPageCards() {
-      const newObj = await getCharactersPageApi(page, 10);
-      if (newObj) {
-        setObj(newObj);
-        setUpdateCards(false);
-        setLoad(false);
-      }
-    }
-
-    async function createSearchCards() {
-      const newObj = await searchCharactersApi(search, page, 10);
-      if (newObj) {
-        setObj(newObj);
-        setUpdateCards(false);
-        setLoad(false);
-      }
-    }
-
-    if (updateCards && load && search === '') createPageCards();
-    if (updateCards && load && search !== '') createSearchCards();
-
-    if (details) {
-      const data = await getOneCharacterApi(Number(details));
-      if (data) setObjDescription(data);
-      setUpdateCards(false);
-      setLoad(false);
-    }
-
-    if (
-      newPath &&
-      location.search !== `?page=${page}${search ? `&search=${search}` : ''}${details ? `&search=${details}` : ''}`
-    )
-      updateUrlWithoutReload();
-  }, [load, search, newPath, page, details, updateCards, updateUrlWithoutReload]);
+  const theme = useContext(ThemeContext);
+  const dispatch = useDispatch();
+  const dataReduxPage = useSelector((state: RootState) => state.dataPage);
+  const dataReduxElements = useSelector((state: RootState) => state.dataElements);
+  const dataCharacters = useGetCharactersApiQuery({ page: dataReduxPage.page, search: dataReduxPage.search });
+  const params = useParams();
+  const prodPage = params.page;
+  const prodSearch = params.search;
 
   useEffect(() => {
-    createCards();
-  }, [load, createCards]);
-
-  function changeSearchCharacters() {
-    if (serchInputRef.current) {
-      const input = serchInputRef.current as HTMLInputElement;
-      const value = input.value.trim();
-      if (value !== '') {
-        setLoad(true);
-        setNewPath(true);
-        setSearch(value);
-        setPage(1);
-        setSearchLS(value);
-        setUpdateCards(true);
-      }
-    }
-  }
-
-  function clearSearch() {
-    const input = serchInputRef.current as HTMLInputElement | null;
-    if (input) input.value = '';
-    if (localStorage.searchHistory && input) {
-      localStorage.removeItem('searchHistory');
-      setLoad(true);
-      setNewPath(true);
-      setPage(1);
-      setSearch('');
-      setUpdateCards(true);
-    }
-  }
-
-  function createError() {
-    setObj({ data: { name: 'for error' } });
-  }
-
-  function changePage(value: number) {
-    const changePageNumber = () => {
-      setLoad(true);
-      setUpdateCards(true);
-      setPage(page + value);
-    };
-
-    if ('info' in obj && typeof obj.info === 'object' && obj.info) {
-      if (value < 0 && 'previousPage' in obj.info && obj.info.previousPage) changePageNumber();
-      if (value > 0 && 'nextPage' in obj.info && obj.info.nextPage) changePageNumber();
-    }
-  }
-
-  async function showDescription(id: number) {
-    const data = await getOneCharacterApi(id);
-    if (data) setObjDescription(data);
-    setLoad(true);
-    setNewPath(true);
-    setDetails(String(id));
-  }
-
-  function hideDescription() {
-    setNewPath(true);
-    setDetails('');
-  }
+    if (prodPage && Number(prodPage)) dispatch(updatePage(prodPage));
+    if (prodSearch) dispatch(updateSearch(prodSearch));
+  }, [prodPage, prodSearch, dispatch]);
 
   useEffect(() => {
-    window.onpopstate = () => {
-      setNewPath(false);
-      setPage(Number(getUrlSearchPart('page') || 1));
-      setSearch(getUrlSearchPart('search') || '');
-      setDetails(getUrlSearchPart('details') || '');
-      setUpdateCards(true);
-      setLoad(true);
-    };
-  }, []);
+    if (dataCharacters.data && dataCharacters.data.info)
+      dispatch(updateTotalPages(dataCharacters.data.info.totalPages));
+  }, [dataCharacters, dispatch]);
+
+  function changeTheme() {
+    theme.change();
+    dispatch(updateTheme(theme.light));
+  }
 
   let cardCode: JSX.Element | null | object = null;
-  if ('data' in obj) {
-    const data = Array.isArray(obj.data) ? obj.data : [obj.data];
-
-    cardCode = data.map((v) => (
+  if (dataCharacters.data) {
+    const data = Array.isArray(dataCharacters.data.data) ? dataCharacters.data.data : [dataCharacters.data.data];
+    cardCode = data.map((character: Character) => (
       <Card
-        key={v._id}
-        id={v._id}
-        image={v.imageUrl}
-        name={v.name}
-        films={v.films.join(', ')}
-        showDescription={showDescription}
+        key={character._id}
+        id={character._id}
+        image={character.imageUrl}
+        name={character.name}
+        films={character.films.join(', ')}
       />
     ));
   }
 
-  const paginationCode = <Pagination key={3001} page={page} obj={obj} changePage={changePage} />;
+  const cardListCode = <CardList key={3002} cardCode={cardCode} />;
 
-  const loading = <Loading />;
-
-  const cardListCode = <CardList key={3002} cardCode={cardCode} createError={createError} />;
-
-  const searchCode = (
-    <Search
-      key={3003}
-      serchInputRef={serchInputRef}
-      search={search}
-      clearSearch={clearSearch}
-      changeSearchCharacters={changeSearchCharacters}
-    />
-  );
-
-  const cardDescriptionCode = (
-    <CardDescription
-      key={3004}
-      image={objDescription.data.imageUrl}
-      name={objDescription.data.name}
-      films={objDescription.data.films.join(', ')}
-      tvShows={objDescription.data.tvShows.join(', ')}
-      shortFilms={objDescription.data.shortFilms.join(', ')}
-      videoGames={objDescription.data.videoGames.join(', ')}
-      hideDescription={hideDescription}
-    />
-  );
+  const msg = dataReduxElements.checkedCards.length > 1 ? <Msg /> : null;
 
   return (
-    <div className="page-main" data-testid={'page-main'}>
-      <div className="main-panel" onClick={() => hideDescription()}>
-        <header className="page-main__header">{searchCode}</header>
-
+    <div className={`page-main ${theme.light ? 'light' : ''}`} data-testid={'page-main'}>
+      <header className="page-main__header">
+        <Search />
+        <img
+          onClick={() => changeTheme()}
+          className={`theme-img ${theme.light ? '' : 'theme-img_light'}`}
+          src={themeImg}
+          alt="Theme"
+          title="Change theme"
+          data-testid={'theme-button'}
+        />
+      </header>
+      <main className="page-main__main">
         {cardListCode}
-        {paginationCode}
-        <Footer />
-
-        {load ? loading : null}
-      </div>
-
-      {details ? cardDescriptionCode : null}
+        <Pagination />
+        <Outlet />
+        {dataCharacters.isLoading || dataCharacters.isFetching ? <Loading /> : null}
+        {msg}
+      </main>
+      <Footer />
     </div>
   );
 };

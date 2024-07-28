@@ -1,22 +1,9 @@
-html {
-  background-color: black;
-  background-image: url('./assets/images/disney-characters.png');
-  background-repeat: no-repeat;
-  background-position: left bottom;
-  background-attachment: fixed;
-  background-size: 30vw;
-  color: rgb(69, 69, 69);
-  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-}
-
 body {
-  max-width: 1440px;
-  width: 100%;
-  padding: 10px;
-  margin: auto;
   overflow-x: hidden;
+  padding: 0;
+  margin: 0;
 }
 
 ::selection {
-  background: #ffdee9;
+  background: #b17589;
 }

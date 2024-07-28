@@ -1,66 +1,68 @@
-import { render, screen, fireEvent } from '@testing-library/react';
-import { vi, expect } from 'vitest';
 import '@testing-library/jest-dom';
-import React from 'react';
+import React, { ReactNode } from 'react';
+import { render, screen, fireEvent } from '@testing-library/react';
+import { Provider } from 'react-redux';
 import CardDescription from '../../src/components/cardDescription';
-import { CardDescriptionProps } from '../../src/state/types';
+import { dataSliceCharacter } from '../../src/redux/dataSliceCharacter';
+import { api } from '../../src/redux/api/api';
+import { configureStore } from '@reduxjs/toolkit';
+import { setupListeners } from '@reduxjs/toolkit/query';
+import { MemoryRouter, Routes, Route } from 'react-router-dom';
+import { describe, test, expect } from 'vitest';
 
-describe('check CardDescription', () => {
-  const mockProps: CardDescriptionProps = {
-    key: 20,
-    hideDescription: vi.fn(),
-    image: 'https://static.wikia.nocookie.net/disney/images/f/fa/Normal_EoA_S3_E4_0217.jpg',
-    name: 'Queen Abigail',
-    films: '',
-    tvShows: 'Elena of Avalor',
-    shortFilms: '',
-    videoGames: '',
-  };
-
-  test('renders CardDescription with props', () => {
-    render(<CardDescription {...mockProps} />);
-
-    expect(screen.getByAltText('Character')).toHaveAttribute('src', mockProps.image);
-    expect(screen.getByText(mockProps.name)).toBeInTheDocument();
-    expect(screen.getByText(`Films: ${mockProps.films || 'none'}`)).toBeInTheDocument();
-    expect(screen.getByText(`TV Shows: ${mockProps.tvShows || 'none'}`)).toBeInTheDocument();
-    expect(screen.getByText(`Short Films: ${mockProps.shortFilms || 'none'}`)).toBeInTheDocument();
-    expect(screen.getByText(`Video Games: ${mockProps.videoGames || 'none'}`)).toBeInTheDocument();
+const renderWithProviders = (ui: ReactNode, route: string) => {
+  const store = configureStore({
+    reducer: {
+      dataCharacter: dataSliceCharacter.reducer,
+      [api.reducerPath]: api.reducer,
+    },
+    middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(api.middleware),
   });
 
-  test('calls hideDescription on button click', () => {
-    render(<CardDescription {...mockProps} />);
+  setupListeners(store.dispatch);
 
-    fireEvent.click(screen.getByText('X'));
-    expect(mockProps.hideDescription).toHaveBeenCalled();
-  });
+  return render(
+    <Provider store={store}>
+      <MemoryRouter initialEntries={[route]}>
+        <Routes>
+          <Route path="/details/:id" element={ui} />
+        </Routes>
+      </MemoryRouter>
+    </Provider>
+  );
+};
 
-  test('renders default image when no image is provided', () => {
-    const propsWithoutImage = { ...mockProps, image: '' };
-    render(<CardDescription {...propsWithoutImage} />);
+describe('CardDescription', () => {
+  test('renders correctly with data', async () => {
+    renderWithProviders(<CardDescription />, '/details/10');
 
-    expect(screen.getByAltText('Character')).toHaveAttribute(
+    expect(await screen.findByTestId('card-details')).toBeInTheDocument();
+    expect(await screen.findByText('627')).toBeInTheDocument();
+    expect(await screen.findByText(`Films:`)).toBeInTheDocument();
+    expect(await screen.findByText(`TV Shows: Lilo & Stitch: The Series, Stitch!`)).toBeInTheDocument();
+    expect(await screen.findByText('Short Films:')).toBeInTheDocument();
+    expect(await screen.findByText('Video Games: Disney Tsum Tsum (game)')).toBeInTheDocument();
+    expect(await screen.findByAltText('Character')).toHaveAttribute(
       'src',
-      'https://github.com/YourunB/Test1/blob/main/images/noimage.jpg?raw=true'
+      'https://static.wikia.nocookie.net/disney/images/8/80/Profile_-_627.png'
     );
   });
 
-  test('displays default values when props are missing', () => {
-    const lossProps: CardDescriptionProps = {
-      key: 20,
-      hideDescription: vi.fn(),
-      image: '',
-      name: '',
-      films: '',
-      tvShows: '',
-      shortFilms: '',
-      videoGames: '',
-    };
+  test('closes details on button click', async () => {
+    renderWithProviders(<CardDescription />, '/details/10');
 
-    const { getByText } = render(<CardDescription {...lossProps} />);
-    expect(getByText('Films: none')).toBeInTheDocument();
-    expect(getByText('TV Shows: none')).toBeInTheDocument();
-    expect(getByText('Short Films: none')).toBeInTheDocument();
-    expect(getByText('Video Games: none')).toBeInTheDocument();
+    const btn = await screen.findByText('X');
+    expect(btn).toBeInTheDocument();
+    fireEvent.click(btn);
+    expect(location.pathname === '/');
+  });
+
+  test('closes details on display click', async () => {
+    renderWithProviders(<CardDescription />, '/details/10');
+
+    const overflow = await screen.findByTestId('card-details');
+    expect(overflow).toBeInTheDocument();
+    fireEvent.click(overflow);
+    expect(location.pathname === '/');
   });
 });

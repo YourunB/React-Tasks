@@ -3,36 +3,58 @@ import React from 'react';
 import '@testing-library/jest-dom';
 import PageNotFound from '../../src/pages/pageNotFound';
 import { describe, test, expect } from 'vitest';
+import ThemeContext from '../../src/components/themeContext';
 
-describe('PageNotFound Component', () => {
-  test('renders without crashing', () => {
-    render(<PageNotFound />);
+describe('PageNotFound', () => {
+  test('render light theme', () => {
+    const theme = {
+      light: true,
+      change: () => {},
+    };
+
+    render(
+      <ThemeContext.Provider value={theme}>
+        <PageNotFound />
+      </ThemeContext.Provider>
+    );
+
     const pageNotFoundElement = screen.getByTestId('page-not-found');
     expect(pageNotFoundElement).toBeInTheDocument();
+    expect(pageNotFoundElement).toHaveClass('page-not-found_light');
   });
 
-  test('correct title', () => {
-    render(<PageNotFound />);
-    const titleElement = screen.getByText('404');
-    expect(titleElement).toBeInTheDocument();
+  test('render dark theme', () => {
+    const theme = {
+      light: false,
+      change: () => {},
+    };
+
+    render(
+      <ThemeContext.Provider value={theme}>
+        <PageNotFound />
+      </ThemeContext.Provider>
+    );
+
+    const pageNotFoundElement = screen.getByTestId('page-not-found');
+    expect(pageNotFoundElement).toBeInTheDocument();
+    expect(pageNotFoundElement).not.toHaveClass('page-not-found_light');
   });
 
-  test('correct description', () => {
-    render(<PageNotFound />);
-    const descriptionElement = screen.getByText('This Page Not Found');
-    expect(descriptionElement).toBeInTheDocument();
-  });
+  test('render content', () => {
+    const theme = {
+      light: true,
+      change: () => {},
+    };
 
-  test('home link', () => {
-    render(<PageNotFound />);
-    const linkElement = screen.getByText('HOME');
-    expect(linkElement).toBeInTheDocument();
-    expect(linkElement).toHaveAttribute('href', './');
-  });
+    render(
+      <ThemeContext.Provider value={theme}>
+        <PageNotFound />
+      </ThemeContext.Provider>
+    );
 
-  test('image with correct alt text', () => {
-    render(<PageNotFound />);
-    const imgElement = screen.getByAltText('Earth');
-    expect(imgElement).toBeInTheDocument();
+    expect(screen.getByAltText('Earth')).toBeInTheDocument();
+    expect(screen.getByText('404')).toBeInTheDocument();
+    expect(screen.getByText('This Page Not Found')).toBeInTheDocument();
+    expect(screen.getByText('HOME')).toBeInTheDocument();
   });
 });

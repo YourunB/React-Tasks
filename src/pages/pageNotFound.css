@@ -1,8 +1,9 @@
 .page-not-found {
-  min-height: calc(100vh - 20px);
+  min-height: 100vh;
   display: flex;
   align-items: center;
   justify-content: center;
+  background: black;
   gap: 20px;
 }
 
@@ -10,8 +11,6 @@
   max-width: 400px;
   width: 100%;
   padding: 20px;
-  backdrop-filter: blur(10px);
-  border-radius: 4px;
   overflow: hidden;
 }
 
@@ -38,6 +37,14 @@
   padding: 8px;
   border-radius: 3px;
   transition: 0.7s;
+}
+
+.page-not-found_light {
+  background: white;
+}
+
+.page-not-found_light .error-box__description {
+  color: rgb(49, 49, 49);
 }
 
 @media (hover: hover) {

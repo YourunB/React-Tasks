@@ -1,50 +1,98 @@
-import { vi, expect, test } from 'vitest';
 import { render, screen, fireEvent } from '@testing-library/react';
+import { Provider } from 'react-redux';
+import { BrowserRouter as Router } from 'react-router-dom';
+import configureStore from 'redux-mock-store';
 import Card from '../../src/components/card';
-import '@testing-library/jest-dom';
+import { updateCheckedCards, removeCheckedCards } from '../../src/redux/dataSliceElements';
 import React from 'react';
+import { CardProps } from '../../src/state/types';
+import '@testing-library/jest-dom';
 
-describe('check Card', () => {
-  const props = {
-    key: 20,
-    id: 20,
-    name: 'Elena of Avalor',
-    image: 'https://static.wikia.nocookie.net/disney/images/f/fa/Normal_EoA_S3_E4_0217.jpg',
-    films: '',
-    showDescription: vi.fn(),
+const mockStore = configureStore([]);
+let initialState = {
+  dataElements: {
+    checkedCards: [{ id: 0 }],
+  },
+};
+
+describe('Card Component', () => {
+  let store = mockStore(initialState);
+  const renderComponent = (props: CardProps) => {
+    return render(
+      <Provider store={store}>
+        <Router>
+          <Card {...props} />
+        </Router>
+      </Provider>
+    );
   };
 
-  test('renders Card component with props', () => {
-    render(<Card {...props} />);
-    const imgElement = screen.getByAltText('Elena of Avalor');
-    const nameElement = screen.getByText('Elena of Avalor');
-    const filmsElement = screen.getByText(`${props.films || 'none'}`);
-    expect(imgElement).toHaveAttribute(
+  const props = {
+    key: 1,
+    id: 1,
+    name: 'Test Name',
+    image: '',
+    films: '',
+  };
+
+  test('renders Card component with none props', () => {
+    renderComponent(props);
+    expect(screen.getByTestId('card'));
+    expect(screen.getByText(props.name)).toBeInTheDocument();
+    expect(screen.getByAltText(props.name)).toHaveAttribute(
       'src',
-      'https://static.wikia.nocookie.net/disney/images/f/fa/Normal_EoA_S3_E4_0217.jpg'
+      `${props.image || 'https://github.com/YourunB/Test1/blob/main/images/noimage.jpg?raw=true'}`
     );
-    expect(imgElement).toBeInTheDocument();
-    expect(nameElement).toBeInTheDocument();
-    expect(filmsElement).toBeInTheDocument();
+    expect(screen.getByText(`${props.films || 'none'}`)).toBeInTheDocument();
   });
 
-  test('calls showDescription when clicked', () => {
-    const { container } = render(<Card {...props} />);
-    const cardElement = container.querySelector('.card-char') as HTMLElement;
-    fireEvent.click(cardElement);
-    expect(props.showDescription).toHaveBeenCalledWith(20);
-  });
-
-  test('displays default values when props are missing', () => {
+  test('dispatches updateCheckedCards action on star click', () => {
     const props = {
-      key: 20,
-      id: 20,
-      name: '',
-      image: '',
+      key: 1,
+      id: 1,
+      name: 'Test Name',
+      image: 'image.jpg',
       films: '',
-      showDescription: vi.fn(),
     };
-    const { getByText } = render(<Card {...props} />);
-    expect(getByText('none')).toBeInTheDocument();
+    renderComponent(props);
+
+    const starImg = screen.getByAltText('Star');
+    fireEvent.click(starImg);
+
+    const actions = store.getActions();
+    expect(actions).toContainEqual(
+      updateCheckedCards({
+        id: 1,
+        name: 'Test Name',
+        image: `${props.image}`,
+        films: `${props.films || 'none'}`,
+        url: location.href,
+      })
+    );
+  });
+
+  test('renders with checked class if id is in checkedCards', () => {
+    initialState = {
+      dataElements: {
+        checkedCards: [{ id: 1 }],
+      },
+    };
+    store = mockStore(initialState);
+
+    renderComponent(props);
+
+    const imgElement = screen.getByAltText('Star');
+    expect(imgElement).toHaveClass('star-img_checked');
+  });
+
+  test('dispatches removeCheckedCards action on checked star click', () => {
+    renderComponent(props);
+
+    const checkedStarImg = screen.getByAltText('Star');
+    expect(checkedStarImg).toHaveClass('star-img_checked');
+    fireEvent.click(checkedStarImg);
+
+    const actions = store.getActions();
+    expect(actions).toContainEqual(removeCheckedCards(1));
   });
 });

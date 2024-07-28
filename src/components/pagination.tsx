@@ -1,27 +1,29 @@
 import './pagination.css';
-import { PaginationProps } from '../state/types';
+import { useNavigate } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+import { RootState } from '../redux/store';
 
-const Pagination = (props: PaginationProps) => {
-  let disableBtnPrev = true;
-  let disableBtnNext = true;
-  if (
-    'info' in props.obj &&
-    typeof props.obj.info === 'object' &&
-    props.obj.info &&
-    'previousPage' in props.obj.info &&
-    'nextPage' in props.obj.info
-  ) {
-    if (props.obj.info.previousPage) disableBtnPrev = false;
-    if (props.obj.info.nextPage) disableBtnNext = false;
-  }
+const Pagination = () => {
+  const navigate = useNavigate();
+  const dataReduxPage = useSelector((state: RootState) => state.dataPage);
+
+  const changePage = (value: number) => navigate(`/${Number(dataReduxPage.page) + value}/${dataReduxPage.search}`);
 
   return (
     <div className="pagination">
-      <button className="pagination__btn" onClick={() => props.changePage(-1)} disabled={disableBtnPrev}>
+      <button
+        className="pagination__btn"
+        disabled={dataReduxPage.page > 1 ? false : true}
+        onClick={() => changePage(-1)}
+      >
         &#60;
       </button>
-      <span className="pagination__count">{props.page}</span>
-      <button className="pagination__btn" onClick={() => props.changePage(+1)} disabled={disableBtnNext}>
+      <span className="pagination__count">{dataReduxPage.page}</span>
+      <button
+        className="pagination__btn"
+        disabled={dataReduxPage.page < dataReduxPage.totalPages ? false : true}
+        onClick={() => changePage(1)}
+      >
         &#62;
       </button>
     </div>
