@@ -1,7 +1,7 @@
 import '@testing-library/jest-dom';
+import React, { ReactNode } from 'react';
 import { render, screen, fireEvent } from '@testing-library/react';
 import { Provider } from 'react-redux';
-import React from 'react';
 import CardDescription from '../../src/components/cardDescription';
 import { dataSliceCharacter } from '../../src/redux/dataSliceCharacter';
 import { api } from '../../src/redux/api/api';
@@ -10,7 +10,7 @@ import { setupListeners } from '@reduxjs/toolkit/query';
 import { MemoryRouter, Routes, Route } from 'react-router-dom';
 import { describe, test, expect } from 'vitest';
 
-const renderWithProviders = (ui, { route }) => {
+const renderWithProviders = (ui: ReactNode, { route }) => {
   const store = configureStore({
     reducer: {
       dataCharacter: dataSliceCharacter.reducer,

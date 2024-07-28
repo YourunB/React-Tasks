@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1722169074494" clover="3.2.0">
-  <project timestamp="1722169074495" name="All files">
-    <metrics statements="488" coveredstatements="477" conditionals="107" coveredconditionals="95" methods="48" coveredmethods="48" elements="643" coveredelements="620" complexity="0" loc="488" ncloc="488" packages="6" files="19" classes="19"/>
+<coverage generated="1722176280633" clover="3.2.0">
+  <project timestamp="1722176280633" name="All files">
+    <metrics statements="490" coveredstatements="479" conditionals="107" coveredconditionals="95" methods="48" coveredmethods="48" elements="645" coveredelements="622" complexity="0" loc="490" ncloc="490" packages="6" files="19" classes="19"/>
     <package name="src">
       <metrics statements="25" coveredstatements="25" conditionals="2" coveredconditionals="2" methods="2" coveredmethods="2"/>
       <file name="App.tsx" path="C:\Users\Admin\Desktop\React-Tasks\src\App.tsx">
@@ -34,7 +34,7 @@
       </file>
     </package>
     <package name="src.components">
-      <metrics statements="234" coveredstatements="234" conditionals="56" coveredconditionals="53" methods="24" coveredmethods="24"/>
+      <metrics statements="236" coveredstatements="236" conditionals="56" coveredconditionals="53" methods="24" coveredmethods="24"/>
       <file name="card.tsx" path="C:\Users\Admin\Desktop\React-Tasks\src\components\card.tsx">
         <metrics statements="50" coveredstatements="50" conditionals="13" coveredconditionals="13" methods="4" coveredmethods="4"/>
         <line num="1" count="1" type="stmt"/>
@@ -179,7 +179,7 @@
         <line num="12" count="1" type="stmt"/>
       </file>
       <file name="msg.tsx" path="C:\Users\Admin\Desktop\React-Tasks\src\components\msg.tsx">
-        <metrics statements="28" coveredstatements="28" conditionals="6" coveredconditionals="6" methods="3" coveredmethods="3"/>
+        <metrics statements="30" coveredstatements="30" conditionals="6" coveredconditionals="6" methods="3" coveredmethods="3"/>
         <line num="1" count="1" type="stmt"/>
         <line num="3" count="1" type="stmt"/>
         <line num="4" count="1" type="stmt"/>
@@ -204,10 +204,12 @@
         <line num="28" count="2" type="stmt"/>
         <line num="29" count="2" type="stmt"/>
         <line num="30" count="2" type="stmt"/>
+        <line num="31" count="2" type="stmt"/>
         <line num="32" count="2" type="stmt"/>
-        <line num="33" count="2" type="stmt"/>
+        <line num="34" count="2" type="stmt"/>
         <line num="35" count="2" type="stmt"/>
-        <line num="37" count="1" type="stmt"/>
+        <line num="37" count="2" type="stmt"/>
+        <line num="39" count="1" type="stmt"/>
       </file>
       <file name="pagination.tsx" path="C:\Users\Admin\Desktop\React-Tasks\src\components\pagination.tsx">
         <metrics statements="25" coveredstatements="25" conditionals="9" coveredconditionals="9" methods="4" coveredmethods="4"/>
