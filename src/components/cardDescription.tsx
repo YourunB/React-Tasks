@@ -24,7 +24,7 @@ const CardDescription = (): JSX.Element | null => {
   const data = { ...dataDetails.data.data };
 
   return (
-    <div className="overflow" onClick={() => navigate('/')} data-testid={'card-details'}>
+    <div className="overlay" onClick={() => navigate('/')} data-testid={'card-details'}>
       <div className="card-description" onClick={(event) => event.stopPropagation()}>
         <div className="controls">
           <button className="controls__btn" data-testid={'card-details-btn'} onClick={() => navigate('/')}>
@@ -43,8 +43,8 @@ const CardDescription = (): JSX.Element | null => {
         <p className="card-description__description">TV Shows: {data.tvShows.join(', ')}</p>
         <p className="card-description__description">Short Films: {data.shortFilms.join(', ')}</p>
         <p className="card-description__description">Video Games: {data.videoGames.join(', ')}</p>
-        {dataDetails.isLoading || dataDetails.isFetching ? <Loading /> : null}
       </div>
+      {dataDetails.isLoading || dataDetails.isFetching ? <Loading /> : null}
     </div>
   );
 };

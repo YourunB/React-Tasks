@@ -50,7 +50,7 @@
   transition: 0.7s;
 }
 
-.overflow {
+.overlay {
   position: fixed;
   width: 100%;
   min-height: 100vh;
