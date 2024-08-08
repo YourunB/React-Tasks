@@ -8,7 +8,7 @@ const PageNotFound = () => {
   const theme = useContext(ThemeContext);
 
   return (
-    <div className={`page-not-found ${theme.light ? 'page-not-found_light' : ''}`} data-testid={'page-not-found'}>
+    <div className={`${s['page-not-found']} ${theme.light ? s['page-not-found_light'] : ''}`} data-testid={s['page-not-found']}>
       <div className={s['error-box']}>
         <Image className={s["error-box__img"]} src={earthImg} alt="Earth" />
         <h2 className={s["error-box__title"]}>404</h2>
