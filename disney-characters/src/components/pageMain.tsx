@@ -1,4 +1,4 @@
-import './pageMain.module.css';
+import s from './pageMain.module.css';
 import Footer from '../components/footer';
 import Search from '../components/search';
 import Card from '../components/card';
@@ -61,19 +61,19 @@ const PageMain = () => {
   const msg = dataReduxElements.checkedCards.length > 1 ? <Msg /> : null;
 
   return (
-    <div className={`page-main ${theme.light ? 'light' : ''}`} data-testid={'page-main'}>
-      <header className="page-main__header">
+    <div className={`${s['page-main']} ${theme.light ? s['light'] : ''}`} data-testid={'page-main'}>
+      <header className={s["page-main__header"]}>
         <Search />
         <Image
           onClick={() => changeTheme()}
-          className={`theme-img ${theme.light ? '' : 'theme-img_light'}`}
+          className={`${s['theme-img']} ${theme.light ? '' : s['theme-img_light']}`}
           src={themeImg}
           alt="Theme"
           title="Change theme"
           data-testid={'theme-button'}
         />
       </header>
-      <main className="page-main__main">
+      <main className={s["page-main__main"]}>
         {cardListCode}
         <Pagination />
  
