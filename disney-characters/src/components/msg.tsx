@@ -1,4 +1,4 @@
-import './msg.module.css';
+import s from './msg.module.css';
 import { RootState } from '../redux/store';
 import { useSelector, useDispatch } from 'react-redux';
 import { clearAll } from '../redux/dataSliceElements';
@@ -18,9 +18,9 @@ const Msg = () => {
   });
 
   return (
-    <div className="msg">
+    <div className={s["msg"]}>
       <p>Total selected: {dataReduxElements.checkedCards.length - 1}</p>
-      <button className="msg__btn" onClick={() => deleteElementsFromSlice()}>
+      <button className={s["msg__btn"]} onClick={() => deleteElementsFromSlice()}>
         Reset
       </button>
       <a
@@ -28,7 +28,7 @@ const Msg = () => {
           new Blob([`Disney Character\nId:;Name:;Image:;Films:;Url:;\n${arr.join('\n')}`], { type: 'text/plain' })
         )}
         download={`Disney_characters_${dataReduxElements.checkedCards.length - 1}.csv`}
-        className="msg__btn"
+        className={s["msg__btn"]}
       >
         Save
       </a>

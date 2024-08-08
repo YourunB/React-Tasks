@@ -1,4 +1,4 @@
-import './search.module.css';
+import s from './search.module.css';
 //import { useNavigate } from 'react-router-dom';
 import { useRef } from 'react';
 import { RootState } from '../redux/store';
@@ -34,17 +34,17 @@ const Search = () => {
   }
 
   return (
-    <div className="search" data-testid={'search'}>
-      <button onClick={() => clearSearch()} className="search__btn-clear">
+    <div className={s["search"]} data-testid={'search'}>
+      <button onClick={() => clearSearch()} className={s["search__btn-clear"]}>
         X
       </button>
       <input
         ref={serchInputRef}
-        className="search__input"
+        className={s["search__input"]}
         placeholder="Search..."
         defaultValue={dataReduxPage.search}
       />
-      <button onClick={() => changeSearchCharacters()} className="search__btn">
+      <button onClick={() => changeSearchCharacters()} className={s["search__btn"]}>
         Search
       </button>
     </div>
