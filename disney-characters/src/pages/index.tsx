@@ -1,6 +1,6 @@
 import Head from "next/head";
 import s from "@/styles/Home.module.css";
-import PageNotFound from "@/components/pageNotFound";
+import PageMain from "@/components/pageMain";
 
 export default function Home() {
   return (
@@ -12,7 +12,7 @@ export default function Home() {
         <link rel="icon" href="/favicon.svg" />
       </Head>
       <main>
-        <PageNotFound />
+        <PageMain />
       </main>
     </>
   );

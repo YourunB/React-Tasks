@@ -1,4 +1,4 @@
-import './loading.css';
+import './loading.module.css';
 import loadingImg from '../assets/images/loading.gif';
 
 const Loading = () => {

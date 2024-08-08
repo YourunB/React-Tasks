@@ -1,3 +1,7 @@
+:root {
+  --primary-gray: rgb(69, 69, 69);
+}
+
 html {
   scroll-behavior: smooth;
   box-sizing: border-box;

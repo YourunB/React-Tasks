@@ -1,13 +1,15 @@
-import './pagination.css';
-import { useNavigate } from 'react-router-dom';
+import './pagination.module.css';
+//import { useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { RootState } from '../redux/store';
 
 const Pagination = () => {
-  const navigate = useNavigate();
+  //const navigate = useNavigate();
   const dataReduxPage = useSelector((state: RootState) => state.dataPage);
 
-  const changePage = (value: number) => navigate(`/${Number(dataReduxPage.page) + value}/${dataReduxPage.search}`);
+  const changePage = (value: number) => [
+    //navigate(`/${Number(dataReduxPage.page) + value}/${dataReduxPage.search}`)
+  ];
 
   return (
     <div className="pagination">

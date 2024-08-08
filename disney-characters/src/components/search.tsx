@@ -1,12 +1,12 @@
-import './search.css';
-import { useNavigate } from 'react-router-dom';
+import './search.module.css';
+//import { useNavigate } from 'react-router-dom';
 import { useRef } from 'react';
 import { RootState } from '../redux/store';
 import { useSelector, useDispatch } from 'react-redux';
 import { updatePage, updateSearch } from '../redux/dataSlicePage';
 
 const Search = () => {
-  const navigate = useNavigate();
+  //const navigate = useNavigate();
   const serchInputRef = useRef(null);
   const dataReduxPage = useSelector((state: RootState) => state.dataPage);
   const dispatch = useDispatch();
@@ -17,7 +17,7 @@ const Search = () => {
     if (dataReduxPage.search) {
       dispatch(updatePage(1));
       dispatch(updateSearch(''));
-      navigate(`/${1}/${''}`);
+      //navigate(`/${1}/${''}`);
     }
   }
 
@@ -28,7 +28,7 @@ const Search = () => {
       if (value !== '') {
         dispatch(updatePage(1));
         dispatch(updateSearch(value));
-        navigate(`/${1}/${value}`);
+        //navigate(`/${1}/${value}`);
       }
     }
   }

@@ -1,7 +1,3 @@
-:root {
-  --primary-gray: rgb(69, 69, 69);
-}
-
 .controls {
   display: flex;
   gap: 20px;

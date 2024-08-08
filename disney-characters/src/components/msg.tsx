@@ -1,4 +1,4 @@
-import './msg.css';
+import './msg.module.css';
 import { RootState } from '../redux/store';
 import { useSelector, useDispatch } from 'react-redux';
 import { clearAll } from '../redux/dataSliceElements';

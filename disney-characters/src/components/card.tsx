@@ -1,6 +1,7 @@
-import './card.css';
+'use client'
+import './card.module.css';
 import { CardProps } from '../state/types';
-import { Link } from 'react-router-dom';
+import Link from '../../node_modules/next/link';
 import starImg from '../assets/images/svg/star.svg';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../redux/store';
@@ -34,7 +35,7 @@ const Card = (props: CardProps) => {
   });
 
   return (
-    <Link to={`/details/${props.id}`} className="card-char" data-testid={'card'}>
+    <Link href={`/details/${props.id}`} className="card-char" data-testid={'card'}>
       <img
         className="card-char__img"
         src={props.image || 'https://github.com/YourunB/Test1/blob/main/images/noimage.jpg?raw=true'}
