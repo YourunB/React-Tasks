@@ -12,7 +12,8 @@ import { Character } from '../state/types';
 import Pagination from '../components/pagination';
 import Loading from '../components/loading';
 //import { Outlet, useParams } from 'react-router-dom';
-import themeImg from '../assets/images/svg/theme.svg';
+import themeImg from '../../public/theme.svg';
+import Image from 'next/image';
 import Msg from '../components/msg';
 import ThemeContext from '../components/themeContext';
 
@@ -63,7 +64,7 @@ const PageMain = () => {
     <div className={`page-main ${theme.light ? 'light' : ''}`} data-testid={'page-main'}>
       <header className="page-main__header">
         <Search />
-        <img
+        <Image
           onClick={() => changeTheme()}
           className={`theme-img ${theme.light ? '' : 'theme-img_light'}`}
           src={themeImg}
