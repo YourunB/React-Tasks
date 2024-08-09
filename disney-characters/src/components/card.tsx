@@ -13,7 +13,7 @@ const Card = (props: CardProps) => {
   const dataReduxPage = useSelector((state: RootState) => state.dataPage);
 
   function addElementToSlice(event: React.MouseEvent<HTMLImageElement, MouseEvent>) {
-    event.preventDefault();
+    event.stopPropagation();
     dispatch(
       updateCheckedCards({
         id: props.id,
@@ -26,7 +26,7 @@ const Card = (props: CardProps) => {
   }
 
   function removeElementFromSlice(event: React.MouseEvent<HTMLImageElement, MouseEvent>) {
-    event.preventDefault();
+    event.stopPropagation();
     dispatch(removeCheckedCards(props.id));
   }
 
@@ -35,8 +35,13 @@ const Card = (props: CardProps) => {
     if (el.id === props.id) checked = true;
   });
 
+  const openDetails = (event: React.MouseEvent<HTMLImageElement, MouseEvent>) => {
+    event.preventDefault();
+    router.push(`?page=${dataReduxPage.page ? dataReduxPage.page : 1}${dataReduxPage.search ? `&search=${dataReduxPage.search}` : ''}&details=${props.id}`);
+  }
+
   return (
-    <div className={s["card-char"]} data-testid={'card'} onClick={() => router.push(`?page=${dataReduxPage.page ? dataReduxPage.page : 1}${dataReduxPage.search ? `&search=${dataReduxPage.search}` : ''}&details=${props.id}`)}>
+    <div className={s["card-char"]} data-testid={'card'} onClick={(event) => openDetails(event)}>
       <img
         className={s["card-char__img"]}
         src={props.image || 'https://github.com/YourunB/Test1/blob/main/images/noimage.jpg?raw=true'}

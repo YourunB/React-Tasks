@@ -25,14 +25,14 @@ const CardDescription = (): JSX.Element | null => {
 
   const closeDetails = () => {
     router.push(`?page=${dataReduxPage.page ? dataReduxPage.page : 1}${dataReduxPage.search ? `&search=${dataReduxPage.search}` : ''}`)
-    //dispatch(updateId(0));
+    dispatch(updateId(0));
   }
 
   return (
     <div className={s["overlay"]} data-testid={'card-details'} onClick={closeDetails}>
       <div className={s["card-description"]} onClick={(event) => event.stopPropagation()}>
         <div className={s["controls"]}>
-          <button className={s["controls__btn"]} data-testid={'card-details-btn'}>
+          <button className={s["controls__btn"]} data-testid={'card-details-btn'} onClick={closeDetails}>
             X
           </button>
         </div>
