@@ -9,7 +9,7 @@ const Pagination = () => {
 
   const changePage = (value: number) => {
     const newPage = Number(dataReduxPage.page) + value;
-    router.push(`/${newPage}/${dataReduxPage.search}`);
+    router.push(`?page=${newPage}${dataReduxPage.search ? `&${dataReduxPage.search}` : ''}`);
   };
 
   return (

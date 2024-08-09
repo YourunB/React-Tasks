@@ -7,11 +7,11 @@
 
 .page-main {
   background-color: black;
-  background-image: url('../assets/images/disney-characters.png');
+  background-image: url('../../public/rick-morty.png');
   background-repeat: no-repeat;
   background-position: left bottom;
   background-attachment: fixed;
-  background-size: 30vw;
+  background-size: 50vh;
   color: var(--primary-gray);
   font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
   min-height: 100vh;

@@ -16,6 +16,7 @@ import themeImg from '../../public/theme.svg';
 import Image from 'next/image';
 import Msg from '../components/msg';
 import ThemeContext from '../components/themeContext';
+import { useRouter } from 'next/router';
 
 const PageMain = () => {
   const theme = useContext(ThemeContext);
@@ -23,14 +24,17 @@ const PageMain = () => {
   const dataReduxPage = useSelector((state: RootState) => state.dataPage);
   const dataReduxElements = useSelector((state: RootState) => state.dataElements);
   const dataCharacters = useGetCharactersApiQuery({ page: dataReduxPage.page, search: dataReduxPage.search });
+  
+  const router = useRouter();
+  const prodPage = router.query.page;
+
   //const params = useParams();
-  //const prodPage = params.page;
   //const prodSearch = params.search;
 
-  /*useEffect(() => {
+  useEffect(() => {
     if (prodPage && Number(prodPage)) dispatch(updatePage(prodPage));
-    if (prodSearch) dispatch(updateSearch(prodSearch));
-  }, [prodPage, prodSearch, dispatch]);*/
+    //if (prodSearch) dispatch(updateSearch(prodSearch));
+  }, [prodPage, dispatch]);
 
   useEffect(() => {
     if (dataCharacters.data && dataCharacters.data.info)
