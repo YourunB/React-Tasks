@@ -1,13 +1,13 @@
 import '@testing-library/jest-dom';
 import React, { ReactNode } from 'react';
-import { render, screen, fireEvent } from '@testing-library/react';
+import { render } from '@testing-library/react';
 import { Provider } from 'react-redux';
 import CardDescription from '../../src/components/cardDescription';
 import { dataSliceCharacter } from '../../src/redux/dataSliceCharacter';
 import { api } from '../../src/redux/api/api';
 import { configureStore } from '@reduxjs/toolkit';
 import { setupListeners } from '@reduxjs/toolkit/query';
-import { describe, test, expect, beforeAll, vi } from 'vitest';
+import { describe, test, beforeAll, vi } from 'vitest';
 
 beforeAll(() => {
   vi.mock("next/router", () => require("next-router-mock"));

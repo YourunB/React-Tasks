@@ -17,7 +17,7 @@ import Image from 'next/image';
 import Msg from '../components/msg';
 import ThemeContext from '../components/themeContext';
 import { useRouter } from 'next/router';
-import { updateId } from '@/redux/dataSliceCharacter';
+//import { updateId } from '@/redux/dataSliceCharacter';
 
 const PageMain = () => {
   const theme = useContext(ThemeContext);
@@ -77,12 +77,14 @@ const PageMain = () => {
           alt="Theme"
           title="Change theme"
           data-testid={'theme-button'}
+          width={30}
+          height={30}
         />
       </header>
       <main className={s['page-main__main']}>
         {cardListCode}
         <Pagination />
-        {prodDetails > 0 ? <CardDescription /> : null}
+        {prodDetails && Number(prodDetails) > 0 ? <CardDescription /> : null}
         {dataCharacters.isLoading || dataCharacters.isFetching ? <Loading /> : null}
         {msg}
       </main>

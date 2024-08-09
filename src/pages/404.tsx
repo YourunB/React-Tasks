@@ -1,6 +1,5 @@
 import Head from 'next/head';
 import s from '../../src/styles/pageNotFound.module.css'
-import earthImg from '../../public/earth.svg';
 import Link from '../../node_modules/next/link';
 
 export default function PageNotFound() {
@@ -14,7 +13,7 @@ export default function PageNotFound() {
       </Head>
       <main className={`${s['page-not-found']}`} data-testid='page-not-found'>
         <div className={s['error-box']}>
-          <img className={s['error-box__img']} src={earthImg} alt="Earth" />
+          <img className={s['error-box__img']} src='/earth.svg' alt="Earth" />
           <h2 className={s['error-box__title']}>404</h2>
           <p className={s['error-box__description']}>This Page Not Found</p>
           <Link className={s['error-box__link']} href="/">
