@@ -6,8 +6,11 @@ import { updateId } from '../redux/dataSliceCharacter';
 import { useEffect } from 'react';
 import Loading from './loading';
 import { useRouter } from 'next/router';
+import ThemeContext from '../components/themeContext';
+import { useContext } from 'react';
 
 const CardDescription = (): JSX.Element | null => {
+  const theme = useContext(ThemeContext);
   const dispatch = useDispatch();
   const dataReduxDetails = useSelector((state: RootState) => state.dataCharacter);
   const dataDetails = useGetDetailsApiQuery(dataReduxDetails.id);
@@ -30,7 +33,7 @@ const CardDescription = (): JSX.Element | null => {
 
   return (
     <div className={s["overlay"]} data-testid={'card-details'} onClick={closeDetails}>
-      <div className={s["card-description"]} onClick={(event) => event.stopPropagation()}>
+      <div className={`${s["card-description"]} ${theme.light ? s['light'] : ''}`} onClick={(event) => event.stopPropagation()}>
         <div className={s["controls"]}>
           <button className={s["controls__btn"]} data-testid={'card-details-btn'} onClick={closeDetails}>
             X

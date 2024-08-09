@@ -4,8 +4,11 @@ import { useRef } from 'react';
 import { RootState } from '../redux/store';
 import { useSelector, useDispatch } from 'react-redux';
 import { updatePage, updateSearch } from '../redux/dataSlicePage';
+import ThemeContext from '../components/themeContext';
+import { useContext } from 'react';
 
 const Search = () => {
+  const theme = useContext(ThemeContext);
   const router = useRouter();
   const serchInputRef = useRef(null);
   const dataReduxPage = useSelector((state: RootState) => state.dataPage);
@@ -34,7 +37,7 @@ const Search = () => {
   }
 
   return (
-    <div className={s["search"]} data-testid={'search'}>
+    <div className={`${s["search"]} ${theme.light ? s['light'] : ''}`} data-testid={'search'}>
       <button onClick={() => clearSearch()} className={s["search__btn-clear"]}>
         X
       </button>

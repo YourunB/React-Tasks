@@ -78,3 +78,8 @@
   opacity: 1;
   filter: invert(0);
 }
+
+.light {
+  background: rgb(252, 254, 207);
+  border-color: rgb(252, 254, 207);
+}

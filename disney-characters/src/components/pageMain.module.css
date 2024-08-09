@@ -67,21 +67,6 @@
   color: var(--primary-gray);
 }
 
-.light .card-description,
 .light .msg {
   background: rgb(252, 254, 207);
-}
-
-.light .search__input {
-  border-color: var(--primary-gray);
-}
-
-.light .search__btn,
-.light .search__btn-clear {
-  background: var(--primary-gray);
-  color: white;
-}
-
-.light .search__input {
-  color: var(--primary-gray);
 }

@@ -78,3 +78,7 @@
     transform: translateX(0);
   }
 }
+
+.light {
+  background: rgb(252, 254, 207);
+}

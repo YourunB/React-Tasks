@@ -53,3 +53,17 @@
   transition: 0.2s;
   transform: scale(0.9);
 }
+
+.light .search__input {
+  border-color: var(--primary-gray);
+}
+
+.light .search__btn,
+.light .search__btn-clear {
+  background: var(--primary-gray);
+  color: white;
+}
+
+.light .search__input {
+  color: var(--primary-gray);
+}

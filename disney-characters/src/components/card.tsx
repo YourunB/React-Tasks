@@ -5,8 +5,11 @@ import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../redux/store';
 import { updateCheckedCards, removeCheckedCards } from '../redux/dataSliceElements';
 import { useRouter } from 'next/router';
+import ThemeContext from '../components/themeContext';
+import { useContext } from 'react';
 
 const Card = (props: CardProps) => {
+  const theme = useContext(ThemeContext);
   const dispatch = useDispatch();
   const router = useRouter();
   const dataReduxElements = useSelector((state: RootState) => state.dataElements);
@@ -41,7 +44,7 @@ const Card = (props: CardProps) => {
   }
 
   return (
-    <div className={s["card-char"]} data-testid={'card'} onClick={(event) => openDetails(event)}>
+    <div className={`${s["card-char"]} ${theme.light ? s['light'] : ''}`} data-testid={'card'} onClick={(event) => openDetails(event)}>
       <img
         className={s["card-char__img"]}
         src={props.image || 'https://github.com/YourunB/Test1/blob/main/images/noimage.jpg?raw=true'}
