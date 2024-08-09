@@ -8,8 +8,6 @@ import { store } from '../../src/redux/store';
 import ThemeContext from '../../src/components/themeContext';
 import Card from '../../src/components/card';
 import { Character } from '../../src/state/types';
-import { updateId } from '@/redux/dataSliceCharacter';
-import Image from 'next/image';
 
 beforeAll(() => {
   vi.mock("next/router", () => require("next-router-mock"));
