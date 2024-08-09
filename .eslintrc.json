@@ -14,10 +14,11 @@
   "plugins": ["react-refresh", "react", "react-compiler"],
   "rules": {
     "react-refresh/only-export-components": ["error", { "allowConstantExport": true }],
-    "@typescript-eslint/no-explicit-any": "error",
-    "react-compiler/react-compiler": "error",
     "@typescript-eslint/no-unused-vars": "off",
-    "@next/next/no-img-element": "off"
+    "@next/next/no-img-element": "off",
+    "@typescript-eslint/no-explicit-any": "error",
+    "@typescript-eslint/no-require-imports": "off",
+    "react-compiler/react-compiler": "error"
   },
   "settings": {
     "react": {
