@@ -1,5 +1,5 @@
 .msg {
-  background: white;
+  background: rgb(171, 220, 228);
   position: fixed;
   z-index: 100;
   left: 10px;
@@ -20,7 +20,7 @@
 
 .msg__btn {
   display: inline-block;
-  background: rgb(242, 212, 44);
+  background: white;
   border: none;
   margin: 0 5px;
   width: 60px;
@@ -28,6 +28,10 @@
   border-radius: 3px;
   color: rgb(69, 69, 69);
   transition: 0.5s;
+}
+
+a.msg__btn {
+  background: rgb(255, 225, 0);
 }
 
 @media (hover: hover) {
