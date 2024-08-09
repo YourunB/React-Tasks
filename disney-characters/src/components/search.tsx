@@ -17,7 +17,7 @@ const Search = () => {
     if (dataReduxPage.search) {
       dispatch(updatePage(1));
       dispatch(updateSearch(''));
-      router.push(`/`);
+      router.push(`?page=1`);
     }
   }
 
@@ -28,7 +28,7 @@ const Search = () => {
       if (value !== '') {
         dispatch(updatePage(1));
         dispatch(updateSearch(value));
-        router.push(`#${value}`);
+        router.push(`?page=1&search=${value}`);
       }
     }
   }
