@@ -1,26 +1,29 @@
-import './pagination.css';
-import { useNavigate } from 'react-router-dom';
+import s from './pagination.module.css';
+import { useRouter } from 'next/router';
 import { useSelector } from 'react-redux';
 import { RootState } from '../redux/store';
 
 const Pagination = () => {
-  const navigate = useNavigate();
+  const router = useRouter();
   const dataReduxPage = useSelector((state: RootState) => state.dataPage);
 
-  const changePage = (value: number) => navigate(`/${Number(dataReduxPage.page) + value}/${dataReduxPage.search}`);
+  const changePage = (value: number) => {
+    const newPage = Number(dataReduxPage.page) + value;
+    router.push(`?page=${newPage}${dataReduxPage.search ? `&search=${dataReduxPage.search}` : ''}`);
+  };
 
   return (
-    <div className="pagination">
+    <div className={s["pagination"]}>
       <button
-        className="pagination__btn"
+        className={s["pagination__btn"]}
         disabled={dataReduxPage.page > 1 ? false : true}
         onClick={() => changePage(-1)}
       >
         &#60;
       </button>
-      <span className="pagination__count">{dataReduxPage.page}</span>
+      <span className={s["pagination__count"]}>{dataReduxPage.page}</span>
       <button
-        className="pagination__btn"
+        className={s["pagination__btn"]}
         disabled={dataReduxPage.page < dataReduxPage.totalPages ? false : true}
         onClick={() => changePage(1)}
       >

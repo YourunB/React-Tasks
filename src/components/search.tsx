@@ -1,12 +1,15 @@
-import './search.css';
-import { useNavigate } from 'react-router-dom';
+import s from './search.module.css';
+import { useRouter } from 'next/router';
 import { useRef } from 'react';
 import { RootState } from '../redux/store';
 import { useSelector, useDispatch } from 'react-redux';
 import { updatePage, updateSearch } from '../redux/dataSlicePage';
+import ThemeContext from '../components/themeContext';
+import { useContext } from 'react';
 
 const Search = () => {
-  const navigate = useNavigate();
+  const theme = useContext(ThemeContext);
+  const router = useRouter();
   const serchInputRef = useRef(null);
   const dataReduxPage = useSelector((state: RootState) => state.dataPage);
   const dispatch = useDispatch();
@@ -17,7 +20,7 @@ const Search = () => {
     if (dataReduxPage.search) {
       dispatch(updatePage(1));
       dispatch(updateSearch(''));
-      navigate(`/${1}/${''}`);
+      router.push(`?page=1`);
     }
   }
 
@@ -28,23 +31,23 @@ const Search = () => {
       if (value !== '') {
         dispatch(updatePage(1));
         dispatch(updateSearch(value));
-        navigate(`/${1}/${value}`);
+        router.push(`?page=1&search=${value}`);
       }
     }
   }
 
   return (
-    <div className="search" data-testid={'search'}>
-      <button onClick={() => clearSearch()} className="search__btn-clear">
+    <div className={`${s["search"]} ${theme.light ? s['light'] : ''}`} data-testid={'search'}>
+      <button onClick={() => clearSearch()} className={s["search__btn-clear"]}>
         X
       </button>
       <input
         ref={serchInputRef}
-        className="search__input"
+        className={s["search__input"]}
         placeholder="Search..."
         defaultValue={dataReduxPage.search}
       />
-      <button onClick={() => changeSearchCharacters()} className="search__btn">
+      <button onClick={() => changeSearchCharacters()} className={s["search__btn"]}>
         Search
       </button>
     </div>

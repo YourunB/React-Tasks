@@ -1,30 +1,35 @@
-import './card.css';
+'use client'
+import s from './card.module.css';
 import { CardProps } from '../state/types';
-import { Link } from 'react-router-dom';
-import starImg from '../assets/images/svg/star.svg';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../redux/store';
 import { updateCheckedCards, removeCheckedCards } from '../redux/dataSliceElements';
+import { useRouter } from 'next/router';
+import ThemeContext from '../components/themeContext';
+import { useContext } from 'react';
 
 const Card = (props: CardProps) => {
+  const theme = useContext(ThemeContext);
   const dispatch = useDispatch();
+  const router = useRouter();
   const dataReduxElements = useSelector((state: RootState) => state.dataElements);
+  const dataReduxPage = useSelector((state: RootState) => state.dataPage);
 
   function addElementToSlice(event: React.MouseEvent<HTMLImageElement, MouseEvent>) {
-    event.preventDefault();
+    event.stopPropagation();
     dispatch(
       updateCheckedCards({
         id: props.id,
         name: props.name,
         image: props.image,
-        films: props.films || 'none',
+        species: props.species,
         url: location.href,
       })
     );
   }
 
   function removeElementFromSlice(event: React.MouseEvent<HTMLImageElement, MouseEvent>) {
-    event.preventDefault();
+    event.stopPropagation();
     dispatch(removeCheckedCards(props.id));
   }
 
@@ -33,28 +38,33 @@ const Card = (props: CardProps) => {
     if (el.id === props.id) checked = true;
   });
 
+  const openDetails = (event: React.MouseEvent<HTMLImageElement, MouseEvent>) => {
+    event.preventDefault();
+    router.push(`?page=${dataReduxPage.page ? dataReduxPage.page : 1}${dataReduxPage.search ? `&search=${dataReduxPage.search}` : ''}&details=${props.id}`);
+  }
+
   return (
-    <Link to={`/details/${props.id}`} className="card-char" data-testid={'card'}>
+    <div className={`${s["card-char"]} ${theme.light ? s['light'] : ''}`} data-testid={'card'} onClick={(event) => openDetails(event)}>
       <img
-        className="card-char__img"
-        src={props.image || 'https://github.com/YourunB/Test1/blob/main/images/noimage.jpg?raw=true'}
+        className={s["card-char__img"]}
+        src={props.image || '/noimage.jpg'}
         alt={props.name}
       />
-      <h4 className="card-char__title">{props.name}</h4>
-      <p className="card-char__description">
-        <span>Films: </span>
-        {props.films || 'none'}
+      <h4 className={s["card-char__title"]}>{props.name}</h4>
+      <p className={s["card-char__description"]}>
+        <span>Species: </span>
+        {props.species || 'none'}
       </p>
       {
         <img
-          className={`star-img ${checked ? 'star-img_checked' : ''}`}
-          src={starImg}
+          className={`${s['star-img']} ${checked ? s['star-img_checked'] : ''}`}
+          src='/star.svg'
           alt="Star"
           title="Checked character"
           onClick={(event) => (checked ? removeElementFromSlice(event) : addElementToSlice(event))}
         />
       }
-    </Link>
+    </div>
   );
 };
 
