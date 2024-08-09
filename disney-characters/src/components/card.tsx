@@ -1,14 +1,16 @@
 'use client'
 import s from './card.module.css';
 import { CardProps } from '../state/types';
-import Link from '../../node_modules/next/link';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../redux/store';
 import { updateCheckedCards, removeCheckedCards } from '../redux/dataSliceElements';
+import { useRouter } from 'next/router';
 
 const Card = (props: CardProps) => {
   const dispatch = useDispatch();
+  const router = useRouter();
   const dataReduxElements = useSelector((state: RootState) => state.dataElements);
+  const dataReduxPage = useSelector((state: RootState) => state.dataPage);
 
   function addElementToSlice(event: React.MouseEvent<HTMLImageElement, MouseEvent>) {
     event.preventDefault();
@@ -34,7 +36,7 @@ const Card = (props: CardProps) => {
   });
 
   return (
-    <Link href={`/details/${props.id}`} className={s["card-char"]} data-testid={'card'}>
+    <div className={s["card-char"]} data-testid={'card'} onClick={() => router.push(`?page=${dataReduxPage.page ? dataReduxPage.page : 1}${dataReduxPage.search ? `&search=${dataReduxPage.search}` : ''}&details=${props.id}`)}>
       <img
         className={s["card-char__img"]}
         src={props.image || 'https://github.com/YourunB/Test1/blob/main/images/noimage.jpg?raw=true'}
@@ -54,7 +56,7 @@ const Card = (props: CardProps) => {
           onClick={(event) => (checked ? removeElementFromSlice(event) : addElementToSlice(event))}
         />
       }
-    </Link>
+    </div>
   );
 };
 

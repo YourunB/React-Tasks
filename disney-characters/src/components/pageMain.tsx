@@ -11,12 +11,13 @@ import { useGetCharactersApiQuery } from '../redux/api/api';
 import { Character } from '../state/types';
 import Pagination from '../components/pagination';
 import Loading from '../components/loading';
-//import { Outlet, useParams } from 'react-router-dom';
+import CardDescription from './cardDescription';
 import themeImg from '../../public/theme.svg';
 import Image from 'next/image';
 import Msg from '../components/msg';
 import ThemeContext from '../components/themeContext';
 import { useRouter } from 'next/router';
+import { updateId } from '@/redux/dataSliceCharacter';
 
 const PageMain = () => {
   const theme = useContext(ThemeContext);
@@ -27,18 +28,18 @@ const PageMain = () => {
   
   const router = useRouter();
   const prodPage = router.query.page;
-
-  //const params = useParams();
-  //const prodSearch = params.search;
-
+  const prodSearch = router.query.search;
+  const prodDetails = router.query.details;
+  
   useEffect(() => {
     if (prodPage && Number(prodPage)) dispatch(updatePage(prodPage));
-    //if (prodSearch) dispatch(updateSearch(prodSearch));
-  }, [prodPage, dispatch]);
+    if (prodSearch) dispatch(updateSearch(prodSearch));
+    if (prodDetails && Number(prodDetails)) dispatch(updateId(prodDetails));
+  }, [prodPage, prodSearch, prodDetails, dispatch]);
 
   useEffect(() => {
     if (dataCharacters.data && dataCharacters.data.info)
-      dispatch(updateTotalPages(dataCharacters.data.info.count));
+      dispatch(updateTotalPages(dataCharacters.data.info.pages));
   }, [dataCharacters, dispatch]);
 
   function changeTheme() {
@@ -80,7 +81,7 @@ const PageMain = () => {
       <main className={s["page-main__main"]}>
         {cardListCode}
         <Pagination />
- 
+        {prodDetails > 0 ? <CardDescription /> : null}
         {dataCharacters.isLoading || dataCharacters.isFetching ? <Loading /> : null}
         {msg}
       </main>
