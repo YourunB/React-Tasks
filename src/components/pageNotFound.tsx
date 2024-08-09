@@ -9,12 +9,15 @@ const PageNotFound = () => {
   const theme = useContext(ThemeContext);
 
   return (
-    <div className={`${s['page-not-found']} ${theme.light ? s['page-not-found_light'] : ''}`} data-testid={s['page-not-found']}>
+    <div
+      className={`${s['page-not-found']} ${theme.light ? s['page-not-found_light'] : ''}`}
+      data-testid={s['page-not-found']}
+    >
       <div className={s['error-box']}>
-        <Image className={s["error-box__img"]} src={earthImg} alt="Earth" />
-        <h2 className={s["error-box__title"]}>404</h2>
-        <p className={s["error-box__description"]}>This Page Not Found</p>
-        <Link className={s["error-box__link"]} href="/">
+        <Image className={s['error-box__img']} src={earthImg} alt="Earth" />
+        <h2 className={s['error-box__title']}>404</h2>
+        <p className={s['error-box__description']}>This Page Not Found</p>
+        <Link className={s['error-box__link']} href="/">
           HOME
         </Link>
       </div>

@@ -1,5 +1,5 @@
-import Head from "next/head";
-import PageNotFound from "@/components/pageNotFound";
+import Head from 'next/head';
+import PageNotFound from '@/components/pageNotFound';
 
 export default function NotFound() {
   return (

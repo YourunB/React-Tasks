@@ -25,12 +25,12 @@ const PageMain = () => {
   const dataReduxPage = useSelector((state: RootState) => state.dataPage);
   const dataReduxElements = useSelector((state: RootState) => state.dataElements);
   const dataCharacters = useGetCharactersApiQuery({ page: dataReduxPage.page, search: dataReduxPage.search });
-  
+
   const router = useRouter();
   const prodPage = router.query.page;
   const prodSearch = router.query.search;
   const prodDetails = router.query.details;
-  
+
   useEffect(() => {
     if (prodPage && Number(prodPage)) dispatch(updatePage(prodPage));
     if (prodSearch) dispatch(updateSearch(prodSearch));
@@ -38,8 +38,7 @@ const PageMain = () => {
   }, [prodPage, prodSearch, prodDetails, dispatch]);
 
   useEffect(() => {
-    if (dataCharacters.data && dataCharacters.data.info)
-      dispatch(updateTotalPages(dataCharacters.data.info.pages));
+    if (dataCharacters.data && dataCharacters.data.info) dispatch(updateTotalPages(dataCharacters.data.info.pages));
   }, [dataCharacters, dispatch]);
 
   function changeTheme() {
@@ -49,7 +48,9 @@ const PageMain = () => {
 
   let cardCode: JSX.Element | null | object = null;
   if (dataCharacters.data) {
-    const data = Array.isArray(dataCharacters.data.results) ? dataCharacters.data.results : [dataCharacters.data.results];
+    const data = Array.isArray(dataCharacters.data.results)
+      ? dataCharacters.data.results
+      : [dataCharacters.data.results];
     cardCode = data.map((character: Character) => (
       <Card
         key={character.id}
@@ -67,7 +68,7 @@ const PageMain = () => {
 
   return (
     <div className={`${s['page-main']} ${theme.light ? s['light'] : ''}`} data-testid={'page-main'}>
-      <header className={s["page-main__header"]}>
+      <header className={s['page-main__header']}>
         <Search />
         <Image
           onClick={() => changeTheme()}
@@ -78,7 +79,7 @@ const PageMain = () => {
           data-testid={'theme-button'}
         />
       </header>
-      <main className={s["page-main__main"]}>
+      <main className={s['page-main__main']}>
         {cardListCode}
         <Pagination />
         {prodDetails > 0 ? <CardDescription /> : null}

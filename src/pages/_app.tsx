@@ -1,8 +1,8 @@
-import "@/styles/globals.css";
-import type { AppProps } from "next/app";
+import '@/styles/globals.css';
+import type { AppProps } from 'next/app';
 import { Provider } from 'react-redux';
-import { store } from "@/redux/store";
-import ThemeContext from "@/components/themeContext";
+import { store } from '@/redux/store';
+import ThemeContext from '@/components/themeContext';
 
 const theme = {
   light: false,
@@ -18,5 +18,5 @@ export default function App({ Component, pageProps }: AppProps) {
         <Component {...pageProps} />
       </ThemeContext.Provider>
     </Provider>
-  )
+  );
 }

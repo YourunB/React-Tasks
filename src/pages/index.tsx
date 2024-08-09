@@ -1,6 +1,6 @@
-import Head from "next/head";
-import s from "@/styles/Home.module.css";
-import PageMain from "@/components/pageMain";
+import Head from 'next/head';
+import s from '@/styles/Home.module.css';
+import PageMain from '@/components/pageMain';
 
 export default function Home() {
   return (

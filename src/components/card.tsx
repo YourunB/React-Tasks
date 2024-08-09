@@ -1,4 +1,4 @@
-'use client'
+'use client';
 import s from './card.module.css';
 import { CardProps } from '../state/types';
 import { useDispatch, useSelector } from 'react-redux';
@@ -40,25 +40,27 @@ const Card = (props: CardProps) => {
 
   const openDetails = (event: React.MouseEvent<HTMLImageElement, MouseEvent>) => {
     event.preventDefault();
-    router.push(`?page=${dataReduxPage.page ? dataReduxPage.page : 1}${dataReduxPage.search ? `&search=${dataReduxPage.search}` : ''}&details=${props.id}`);
-  }
+    router.push(
+      `?page=${dataReduxPage.page ? dataReduxPage.page : 1}${dataReduxPage.search ? `&search=${dataReduxPage.search}` : ''}&details=${props.id}`
+    );
+  };
 
   return (
-    <div className={`${s["card-char"]} ${theme.light ? s['light'] : ''}`} data-testid={'card'} onClick={(event) => openDetails(event)}>
-      <img
-        className={s["card-char__img"]}
-        src={props.image || '/noimage.jpg'}
-        alt={props.name}
-      />
-      <h4 className={s["card-char__title"]}>{props.name}</h4>
-      <p className={s["card-char__description"]}>
+    <div
+      className={`${s['card-char']} ${theme.light ? s['light'] : ''}`}
+      data-testid={'card'}
+      onClick={(event) => openDetails(event)}
+    >
+      <img className={s['card-char__img']} src={props.image || '/noimage.jpg'} alt={props.name} />
+      <h4 className={s['card-char__title']}>{props.name}</h4>
+      <p className={s['card-char__description']}>
         <span>Species: </span>
         {props.species || 'none'}
       </p>
       {
         <img
           className={`${s['star-img']} ${checked ? s['star-img_checked'] : ''}`}
-          src='/star.svg'
+          src="/star.svg"
           alt="Star"
           title="Checked character"
           onClick={(event) => (checked ? removeElementFromSlice(event) : addElementToSlice(event))}

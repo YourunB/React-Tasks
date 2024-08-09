@@ -4,8 +4,8 @@ import Image from 'next/image';
 
 const Loading = () => {
   return (
-    <div className={s["loading"]} data-testid={'loading'}>
-      <Image className={s["loading__img"]} src={loadingImg} alt="Loading" />
+    <div className={s['loading']} data-testid={'loading'}>
+      <Image className={s['loading__img']} src={loadingImg} alt="Loading" />
     </div>
   );
 };

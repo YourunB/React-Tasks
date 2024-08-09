@@ -27,31 +27,34 @@ const CardDescription = (): JSX.Element | null => {
   const data = { ...dataDetails.data };
 
   const closeDetails = () => {
-    router.push(`?page=${dataReduxPage.page ? dataReduxPage.page : 1}${dataReduxPage.search ? `&search=${dataReduxPage.search}` : ''}`)
+    router.push(
+      `?page=${dataReduxPage.page ? dataReduxPage.page : 1}${dataReduxPage.search ? `&search=${dataReduxPage.search}` : ''}`
+    );
     dispatch(updateId(0));
-  }
+  };
 
   return (
-    <div className={s["overlay"]} data-testid={'card-details'} onClick={closeDetails}>
-      <div className={`${s["card-description"]} ${theme.light ? s['light'] : ''}`} onClick={(event) => event.stopPropagation()}>
-        <div className={s["controls"]}>
-          <button className={s["controls__btn"]} data-testid={'card-details-btn'} onClick={closeDetails}>
+    <div className={s['overlay']} data-testid={'card-details'} onClick={closeDetails}>
+      <div
+        className={`${s['card-description']} ${theme.light ? s['light'] : ''}`}
+        onClick={(event) => event.stopPropagation()}
+      >
+        <div className={s['controls']}>
+          <button className={s['controls__btn']} data-testid={'card-details-btn'} onClick={closeDetails}>
             X
           </button>
         </div>
         <img
-          className={s["card-description__img"]}
-          src={
-            dataDetails.data.image || 'https://github.com/YourunB/Test1/blob/main/images/noimage.jpg?raw=true'
-          }
+          className={s['card-description__img']}
+          src={dataDetails.data.image || 'https://github.com/YourunB/Test1/blob/main/images/noimage.jpg?raw=true'}
           alt="Character"
         ></img>
-        <h3 className={s["card-description__name"]}>{data.name}</h3>
-        <p className={s["card-description__description"]}>Species: {data.species}</p>
-        <p className={s["card-description__description"]}>Status: {data.status}</p>
-        <p className={s["card-description__description"]}>Gender: {data.gender}</p>
-        <p className={s["card-description__description"]}>Location: {data.location.name}</p>
-        <p className={s["card-description__description"]}>Origin: {data.origin.name}</p>
+        <h3 className={s['card-description__name']}>{data.name}</h3>
+        <p className={s['card-description__description']}>Species: {data.species}</p>
+        <p className={s['card-description__description']}>Status: {data.status}</p>
+        <p className={s['card-description__description']}>Gender: {data.gender}</p>
+        <p className={s['card-description__description']}>Location: {data.location.name}</p>
+        <p className={s['card-description__description']}>Origin: {data.origin.name}</p>
       </div>
       {dataDetails.isLoading || dataDetails.isFetching ? <Loading /> : null}
     </div>

@@ -37,17 +37,17 @@ const Search = () => {
   }
 
   return (
-    <div className={`${s["search"]} ${theme.light ? s['light'] : ''}`} data-testid={'search'}>
-      <button onClick={() => clearSearch()} className={s["search__btn-clear"]}>
+    <div className={`${s['search']} ${theme.light ? s['light'] : ''}`} data-testid={'search'}>
+      <button onClick={() => clearSearch()} className={s['search__btn-clear']}>
         X
       </button>
       <input
         ref={serchInputRef}
-        className={s["search__input"]}
+        className={s['search__input']}
         placeholder="Search..."
         defaultValue={dataReduxPage.search}
       />
-      <button onClick={() => changeSearchCharacters()} className={s["search__btn"]}>
+      <button onClick={() => changeSearchCharacters()} className={s['search__btn']}>
         Search
       </button>
     </div>
