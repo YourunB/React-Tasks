@@ -2,7 +2,6 @@
 import s from './card.module.css';
 import { CardProps } from '../state/types';
 import Link from '../../node_modules/next/link';
-import starImg from '../assets/images/svg/star.svg';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../redux/store';
 import { updateCheckedCards, removeCheckedCards } from '../redux/dataSliceElements';
@@ -49,7 +48,7 @@ const Card = (props: CardProps) => {
       {
         <img
           className={`${s['star-img']} ${checked ? s['star-img_checked'] : ''}`}
-          src={starImg}
+          src='/star.svg'
           alt="Star"
           title="Checked character"
           onClick={(event) => (checked ? removeElementFromSlice(event) : addElementToSlice(event))}
