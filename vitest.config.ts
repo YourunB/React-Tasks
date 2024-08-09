@@ -13,4 +13,4 @@ export default defineConfig({
       exclude: ['src/**/excluded-folder/**', 'src/main.tsx'],
     },
   },
-})
+});

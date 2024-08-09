@@ -49,7 +49,7 @@ const Card = (props: CardProps) => {
     <div
       className={`${s['card-char']} ${theme.light ? s['light'] : ''}`}
       data-testid={'card'}
-      onClick={(event) => openDetails(event)}
+      onClick={(event: React.MouseEvent<HTMLImageElement, MouseEvent>) => openDetails(event)}
     >
       <img className={s['card-char__img']} src={props.image || '/noimage.jpg'} alt={props.name} />
       <h4 className={s['card-char__title']}>{props.name}</h4>
@@ -63,7 +63,9 @@ const Card = (props: CardProps) => {
           src="/star.svg"
           alt="Star"
           title="Checked character"
-          onClick={(event) => (checked ? removeElementFromSlice(event) : addElementToSlice(event))}
+          onClick={(event: React.MouseEvent<HTMLImageElement, MouseEvent>) =>
+            checked ? removeElementFromSlice(event) : addElementToSlice(event)
+          }
         />
       }
     </div>
