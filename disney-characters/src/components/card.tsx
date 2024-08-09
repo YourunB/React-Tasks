@@ -18,7 +18,7 @@ const Card = (props: CardProps) => {
         id: props.id,
         name: props.name,
         image: props.image,
-        films: props.films || 'none',
+        species: props.species || 'none',
         url: location.href,
       })
     );
@@ -43,7 +43,7 @@ const Card = (props: CardProps) => {
       />
       <h4 className={s["card-char__title"]}>{props.name}</h4>
       <p className={s["card-char__description"]}>
-        <span>Films: </span>
+        <span>Species: </span>
         {props.films || 'none'}
       </p>
       {

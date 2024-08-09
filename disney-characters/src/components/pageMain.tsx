@@ -44,14 +44,15 @@ const PageMain = () => {
 
   let cardCode: JSX.Element | null | object = null;
   if (dataCharacters.data) {
-    const data = Array.isArray(dataCharacters.data.data) ? dataCharacters.data.data : [dataCharacters.data.data];
+    const data = Array.isArray(dataCharacters.data.results) ? dataCharacters.data.results : [dataCharacters.data.results];
+    console.log(data)
     cardCode = data.map((character: Character) => (
       <Card
-        key={character._id}
-        id={character._id}
-        image={character.imageUrl}
+        key={character.id}
+        id={character.id}
+        image={character.image}
         name={character.name}
-        films={character.films.join(', ')}
+        species={character.species}
       />
     ));
   }
