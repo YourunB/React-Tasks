@@ -17,7 +17,7 @@ const Card = (props: CardProps) => {
         id: props.id,
         name: props.name,
         image: props.image,
-        species: props.species || 'none',
+        species: props.species,
         url: location.href,
       })
     );

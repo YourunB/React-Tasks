@@ -67,11 +67,6 @@
   color: var(--primary-gray);
 }
 
-.light .card-char {
-  background: rgb(254, 207, 230);
-  border-color: rgb(254, 207, 230);
-}
-
 .light .card-description,
 .light .msg {
   background: rgb(252, 254, 207);
