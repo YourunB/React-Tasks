@@ -1,7 +1,7 @@
 import Head from "next/head";
 import PageNotFound from "@/components/pageNotFound";
 
-export default function Home() {
+export default function NotFound() {
   return (
     <>
       <Head>
