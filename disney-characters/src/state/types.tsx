@@ -4,10 +4,10 @@ export interface DisneyObject {
 }
 
 export interface Character {
-  _id: number;
+  id: number;
   name: string;
-  films: string[];
-  imageUrl: string;
+  species: string;
+  image: string;
 }
 
 export interface Info {
@@ -22,7 +22,7 @@ export interface CardProps {
   id: number;
   image: string;
   name: string;
-  films: string;
+  species: string;
 }
 
 export interface PropsChildren {
