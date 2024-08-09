@@ -34,7 +34,7 @@ const PageMain = () => {
 
   useEffect(() => {
     if (dataCharacters.data && dataCharacters.data.info)
-      dispatch(updateTotalPages(dataCharacters.data.info.totalPages));
+      dispatch(updateTotalPages(dataCharacters.data.info.count));
   }, [dataCharacters, dispatch]);
 
   function changeTheme() {
@@ -45,7 +45,6 @@ const PageMain = () => {
   let cardCode: JSX.Element | null | object = null;
   if (dataCharacters.data) {
     const data = Array.isArray(dataCharacters.data.results) ? dataCharacters.data.results : [dataCharacters.data.results];
-    console.log(data)
     cardCode = data.map((character: Character) => (
       <Card
         key={character.id}
