@@ -10,8 +10,8 @@ const PageNotFound = () => {
 
   return (
     <div
-      className={`${s['page-not-found']} ${theme.light ? s['page-not-found_light'] : ''}`}
-      data-testid={s['page-not-found']}
+      className={`${s['page-not-found']}`}
+      data-testid='page-not-found'
     >
       <div className={s['error-box']}>
         <Image className={s['error-box__img']} src={earthImg} alt="Earth" />
