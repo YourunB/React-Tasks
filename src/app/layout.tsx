@@ -1,9 +1,4 @@
-import type { Metadata } from 'next'
- 
-export const metadata: Metadata = {
-  title: 'Rick and Morty',
-  description: 'Rick and Morty characters',
-}
+import { metadata } from "./metadata.ts"
 
 export default function RootLayout({
   children,
