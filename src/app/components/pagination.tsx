@@ -8,7 +8,6 @@ const Pagination = () => {
 
   const changePage = (value: number) => {
     const newPage = Number(dataReduxPage.page) + value;
-    history.pushState(null, `page${dataReduxPage.page}`, location.href);
     location.search = `page=${newPage}${dataReduxPage.search ? `&search=${dataReduxPage.search}` : ''}${dataReduxCharacter.id ? `&details=${dataReduxCharacter.id}` : ''}`
   };
 
