@@ -18,7 +18,6 @@ import Image from 'next/image';
 import Msg from './components/msg';
 import ThemeContext from './components/themeContext';
 import { useSearchParams } from 'next/navigation';
-import { updateId } from './redux/dataSliceCharacter';
 
 const PageMain = () => {
   const theme = useContext(ThemeContext);
