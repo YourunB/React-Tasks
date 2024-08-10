@@ -1,5 +1,5 @@
 import Head from 'next/head';
-import s from './styles/not-found.module.css'
+import s from './not-found.module.css'
 import Link from 'next/link';
 import Image from 'next/image';
 

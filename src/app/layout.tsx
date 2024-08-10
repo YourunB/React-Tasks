@@ -2,6 +2,7 @@
 import { Provider } from 'react-redux';
 import { store } from '../app/redux/store';
 import ThemeContext from '../app/components/themeContext';
+import "./globals.css";
 
 const theme = {
   light: false,
