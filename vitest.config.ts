@@ -13,6 +13,9 @@ export default defineConfig({
         'src/**/*.ts',
         'src/**/*.tsx'
       ],
+      exclude: [
+        'src/app/state/**'
+      ],
     },
   },
 });
