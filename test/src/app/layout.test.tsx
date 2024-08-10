@@ -1,7 +1,6 @@
 import { render } from '@testing-library/react';
 import { Provider } from 'react-redux';
 import ThemeContext from '../../../src/app/components/themeContext';
-import Head from '../../../src/app/components/head';
 import { store } from '../../../src/app/redux/store';
 import RootLayout from '../../../src/app/layout';
 import { describe, test, expect } from 'vitest';
@@ -35,7 +34,7 @@ describe('RootLayout component', () => {
   });
 
   test('provides the correct theme context', () => {
-    const { getByText } = render(
+    render(
       <Provider store={store}>
         <ThemeContext.Provider value={theme}>
           <RootLayout>
