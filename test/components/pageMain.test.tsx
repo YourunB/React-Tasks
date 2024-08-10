@@ -8,6 +8,7 @@ import { store } from '../../src/redux/store';
 import ThemeContext from '../../src/components/themeContext';
 import Card from '../../src/components/card';
 import { Character } from '../../src/state/types';
+import { updateId } from '../../src/redux/dataSliceCharacter';
 
 beforeAll(() => {
   vi.mock("next/router", () => require("next-router-mock"));
@@ -61,7 +62,7 @@ describe('PageMain', () => {
   const renderCard = () =>
     render(
       <Provider store={store}>
-          <>{cardCode}</>
+        <>{cardCode}</>
       </Provider>
     );
 

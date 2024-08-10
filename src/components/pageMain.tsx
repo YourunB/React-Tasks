@@ -17,7 +17,6 @@ import Image from 'next/image';
 import Msg from '../components/msg';
 import ThemeContext from '../components/themeContext';
 import { useRouter } from 'next/router';
-//import { updateId } from '@/redux/dataSliceCharacter';
 
 const PageMain = () => {
   const theme = useContext(ThemeContext);
@@ -34,8 +33,7 @@ const PageMain = () => {
   useEffect(() => {
     if (prodPage && Number(prodPage)) dispatch(updatePage(prodPage));
     if (prodSearch) dispatch(updateSearch(prodSearch));
-    if (prodDetails && Number(prodDetails)) dispatch(updateId(prodDetails));
-  }, [prodPage, prodSearch, prodDetails, dispatch]);
+  }, [prodPage, prodSearch, dispatch]);
 
   useEffect(() => {
     if (dataCharacters.data && dataCharacters.data.info) dispatch(updateTotalPages(dataCharacters.data.info.pages));
