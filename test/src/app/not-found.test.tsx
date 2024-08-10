@@ -1,5 +1,5 @@
 import { render } from '@testing-library/react';
-import PageNotFound from '../../src/pages/404';
+import PageNotFound from '../../../src/app/not-found';
 import { describe, test, expect } from 'vitest';
 
 describe('PageNotFound', () => {

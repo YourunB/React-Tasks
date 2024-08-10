@@ -13,11 +13,6 @@ export default defineConfig({
         'src/**/*.ts',
         'src/**/*.tsx'
       ],
-      exclude: [
-        'src/pages/index.tsx',
-        'src/pages/_app.tsx',
-        'src/state/types.tsx'
-      ],
     },
   },
 });
