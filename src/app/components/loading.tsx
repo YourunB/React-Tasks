@@ -1,4 +1,3 @@
-'use client';
 import s from './loading.module.css';
 import loadingImg from '../../../public/loading.gif';
 import Image from 'next/image';

@@ -1,4 +1,3 @@
-'use client';
 import s from './search.module.css';
 import { useSearchParams } from 'next/navigation';
 import { useRef } from 'react';

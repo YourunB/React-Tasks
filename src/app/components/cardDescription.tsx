@@ -1,4 +1,3 @@
-'use client';
 import s from './cardDescription.module.css';
 import { useDispatch, useSelector } from 'react-redux';
 import { useGetDetailsApiQuery } from '../redux/api/api';

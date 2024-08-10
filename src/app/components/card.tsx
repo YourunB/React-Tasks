@@ -1,4 +1,3 @@
-'use client';
 import s from './card.module.css';
 import { CardProps } from '../state/types';
 import { useDispatch, useSelector } from 'react-redux';

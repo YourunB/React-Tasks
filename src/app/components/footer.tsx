@@ -1,4 +1,3 @@
-'use client';
 import s from './footer.module.css';
 
 const Footer = () => {

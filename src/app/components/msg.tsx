@@ -1,4 +1,3 @@
-'use client';
 import s from './msg.module.css';
 import { RootState } from '../redux/store';
 import { useSelector, useDispatch } from 'react-redux';
