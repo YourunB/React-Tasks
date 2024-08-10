@@ -1,6 +1,6 @@
 import Head from 'next/head';
-import s from '../../src/styles/pageNotFound.module.css'
-import Link from '../../node_modules/next/link';
+import s from './styles/not-found.module.css'
+import Link from 'next/link';
 
 export default function PageNotFound() {
   return (
