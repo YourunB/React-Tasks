@@ -1,5 +1,7 @@
+'use client';
 import s from './search.module.css';
-import { useRouter } from 'next/router';
+//import { useRouter } from 'next/router';
+import { useSearchParams } from 'next/navigation';
 import { useRef } from 'react';
 import { RootState } from '../redux/store';
 import { useSelector, useDispatch } from 'react-redux';
@@ -9,10 +11,18 @@ import { useContext } from 'react';
 
 const Search = () => {
   const theme = useContext(ThemeContext);
-  const router = useRouter();
+  const searchParams = useSearchParams();
+  const getSearchParams = {
+    page: searchParams.get('page'),
+    search: searchParams.get('search'),
+    details: searchParams.get('details'),
+  }
+  //const router = useRouter();
   const serchInputRef = useRef(null);
   const dataReduxPage = useSelector((state: RootState) => state.dataPage);
   const dispatch = useDispatch();
+
+  console.log(getSearchParams)
 
   function clearSearch() {
     const input = serchInputRef.current as HTMLInputElement | null;
@@ -20,7 +30,7 @@ const Search = () => {
     if (dataReduxPage.search) {
       dispatch(updatePage(1));
       dispatch(updateSearch(''));
-      router.push(`?page=1`);
+      //router.push(`?page=1`);
     }
   }
 
@@ -31,7 +41,7 @@ const Search = () => {
       if (value !== '') {
         dispatch(updatePage(1));
         dispatch(updateSearch(value));
-        router.push(`?page=1&search=${value}`);
+        //router.push(`?page=1&search=${value}`);
       }
     }
   }

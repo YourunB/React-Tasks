@@ -4,14 +4,14 @@ import { CardProps } from '../state/types';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../redux/store';
 import { updateCheckedCards, removeCheckedCards } from '../redux/dataSliceElements';
-import { useRouter } from 'next/router';
+//import { useRouter } from 'next/router';
 import ThemeContext from '../components/themeContext';
 import { useContext } from 'react';
 
 const Card = (props: CardProps) => {
   const theme = useContext(ThemeContext);
   const dispatch = useDispatch();
-  const router = useRouter();
+  //const router = useRouter();
   const dataReduxElements = useSelector((state: RootState) => state.dataElements);
   const dataReduxPage = useSelector((state: RootState) => state.dataPage);
 
@@ -40,9 +40,9 @@ const Card = (props: CardProps) => {
 
   const openDetails = (event: React.MouseEvent<HTMLImageElement, MouseEvent>) => {
     event.preventDefault();
-    router.push(
-      `?page=${dataReduxPage.page ? dataReduxPage.page : 1}${dataReduxPage.search ? `&search=${dataReduxPage.search}` : ''}&details=${props.id}`
-    );
+    //router.push(
+    //  `?page=${dataReduxPage.page ? dataReduxPage.page : 1}${dataReduxPage.search ? `&search=${dataReduxPage.search}` : ''}&details=${props.id}`
+    //);
   };
 
   return (

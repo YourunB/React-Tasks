@@ -1,4 +1,14 @@
-import { metadata } from "./metadata.ts"
+'use client'
+import { Provider } from 'react-redux';
+import { store } from '../app/redux/store';
+import ThemeContext from '../app/components/themeContext';
+
+const theme = {
+  light: false,
+  change: function () {
+    this.light = !this.light;
+  },
+};
 
 export default function RootLayout({
   children,
@@ -6,8 +16,12 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en">
-      <body>{children}</body>
-    </html>
+    <Provider store={store}>
+      <ThemeContext.Provider value={theme}>
+        <html lang="en">
+          <body>{children}</body>
+        </html>
+      </ThemeContext.Provider>
+    </Provider>
   )
 }

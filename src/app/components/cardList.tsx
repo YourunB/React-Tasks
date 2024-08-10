@@ -1,3 +1,4 @@
+'use client';
 import s from './cardList.module.css';
 import { CardListProps } from '../state/types';
 

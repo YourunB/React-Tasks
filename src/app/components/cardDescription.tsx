@@ -1,3 +1,4 @@
+'use client';
 import s from './cardDescription.module.css';
 import { useDispatch, useSelector } from 'react-redux';
 import { useGetDetailsApiQuery } from '../redux/api/api';
@@ -5,7 +6,7 @@ import { RootState } from '../redux/store';
 import { updateId } from '../redux/dataSliceCharacter';
 import { useEffect } from 'react';
 import Loading from './loading';
-import { useRouter } from 'next/router';
+//import { useRouter } from 'next/router';
 import ThemeContext from '../components/themeContext';
 import { useContext } from 'react';
 
@@ -16,20 +17,20 @@ const CardDescription = (): JSX.Element | null => {
   const dataDetails = useGetDetailsApiQuery(dataReduxDetails.id);
   const dataReduxPage = useSelector((state: RootState) => state.dataPage);
 
-  const router = useRouter();
-  const prodId = router.query.details;
+  //const router = useRouter();
+  //const prodId = router.query.details;
 
-  useEffect(() => {
-    if (prodId && Number(prodId)) dispatch(updateId(prodId));
-  }, [prodId, dispatch]);
+  //useEffect(() => {
+  //  if (prodId && Number(prodId)) dispatch(updateId(prodId));
+  //}, [prodId, dispatch]);
 
   if (!dataDetails.data || (!('data' in dataDetails) && !('name' in dataDetails.data))) return null;
   const data = { ...dataDetails.data };
 
   const closeDetails = () => {
-    router.push(
-      `?page=${dataReduxPage.page ? dataReduxPage.page : 1}${dataReduxPage.search ? `&search=${dataReduxPage.search}` : ''}`
-    );
+    //router.push(
+    //  `?page=${dataReduxPage.page ? dataReduxPage.page : 1}${dataReduxPage.search ? `&search=${dataReduxPage.search}` : ''}`
+    //);
     dispatch(updateId(0));
   };
 

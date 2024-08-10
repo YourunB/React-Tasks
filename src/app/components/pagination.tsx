@@ -1,15 +1,16 @@
+'use client';
 import s from './pagination.module.css';
-import { useRouter } from 'next/router';
+//import { useRouter } from 'next/router';
 import { useSelector } from 'react-redux';
 import { RootState } from '../redux/store';
 
 const Pagination = () => {
-  const router = useRouter();
+  //const router = useRouter();
   const dataReduxPage = useSelector((state: RootState) => state.dataPage);
 
   const changePage = (value: number) => {
     const newPage = Number(dataReduxPage.page) + value;
-    router.push(`?page=${newPage}${dataReduxPage.search ? `&search=${dataReduxPage.search}` : ''}`);
+    //router.push(`?page=${newPage}${dataReduxPage.search ? `&search=${dataReduxPage.search}` : ''}`);
   };
 
   return (
