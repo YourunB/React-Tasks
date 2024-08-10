@@ -17,7 +17,7 @@ import themeImg from '../../public/theme.svg';
 import Image from 'next/image';
 import Msg from './components/msg';
 import ThemeContext from './components/themeContext';
-//import { useRouter } from 'next/router';
+import { useSearchParams } from 'next/navigation';
 
 const PageMain = () => {
   const theme = useContext(ThemeContext);
@@ -26,15 +26,17 @@ const PageMain = () => {
   const dataReduxElements = useSelector((state: RootState) => state.dataElements);
   const dataCharacters = useGetCharactersApiQuery({ page: dataReduxPage.page, search: dataReduxPage.search });
 
-  //const router = useRouter();
-  //const prodPage = router.query.page;
-  //const prodSearch = router.query.search;
-  //const prodDetails = router.query.details;
+  const searchParams = useSearchParams();
+  const getSearchParams = {
+    page: searchParams.get('page'),
+    search: searchParams.get('search'),
+    details: searchParams.get('details'),
+  }
 
-  //useEffect(() => {
-  //  if (prodPage && Number(prodPage)) dispatch(updatePage(prodPage));
-  //  if (prodSearch) dispatch(updateSearch(prodSearch));
-  //}, [prodPage, prodSearch, dispatch]);
+  useEffect(() => {
+    if (getSearchParams.page && Number(getSearchParams.page)) dispatch(updatePage(getSearchParams.page));
+    if (getSearchParams.search) dispatch(updateSearch(getSearchParams.search));
+  }, [getSearchParams.page, getSearchParams.search, dispatch]);
 
   useEffect(() => {
     if (dataCharacters.data && dataCharacters.data.info) dispatch(updateTotalPages(dataCharacters.data.info.pages));
@@ -83,7 +85,7 @@ const PageMain = () => {
       <main className={s['page-main__main']}>
         {cardListCode}
         <Pagination />
-       
+        {getSearchParams.details ? <CardDescription /> : null}
         {dataCharacters.isLoading || dataCharacters.isFetching ? <Loading /> : null}
         {msg}
       </main>
