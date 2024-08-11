@@ -3,7 +3,6 @@ import { Provider } from 'react-redux';
 import configureStore from 'redux-mock-store';
 import Card from '../../app/components/card';
 import { updateCheckedCards, removeCheckedCards } from '../../app/redux/dataSliceElements';
-import React from 'react';
 import { CardProps } from '../../app/state/types';
 import '@testing-library/jest-dom';
 import { describe, test, expect, vi, beforeAll } from 'vitest';
