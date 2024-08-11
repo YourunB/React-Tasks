@@ -1,8 +1,8 @@
 import s from './pagination.module.css';
 import { useSelector } from 'react-redux';
 import { RootState } from '../redux/store';
-import { useNavigate } from "@remix-run/react";
-import { useSearchParams } from "@remix-run/react";
+import { useNavigate } from '@remix-run/react';
+import { useSearchParams } from '@remix-run/react';
 
 const Pagination = () => {
   const dataReduxPage = useSelector((state: RootState) => state.dataPage);
@@ -10,12 +10,14 @@ const Pagination = () => {
 
   const [searchParams, setSearchParams] = useSearchParams();
   const getSearchParams = {
-    details: searchParams.get("details"),
-  }
+    details: searchParams.get('details'),
+  };
 
   const changePage = (value: number) => {
     const newPage = Number(dataReduxPage.page) + value;
-    navigate(`/?page=${newPage}${dataReduxPage.search ? `&search=${dataReduxPage.search}` : ''}${getSearchParams.details ? `&details=${getSearchParams.details}` : ''}`);
+    navigate(
+      `/?page=${newPage}${dataReduxPage.search ? `&search=${dataReduxPage.search}` : ''}${getSearchParams.details ? `&details=${getSearchParams.details}` : ''}`
+    );
   };
 
   return (

@@ -1,5 +1,5 @@
 import s from './search.module.css';
-import { useNavigate } from "@remix-run/react";
+import { useNavigate } from '@remix-run/react';
 import { useRef } from 'react';
 import { RootState } from '../redux/store';
 import { useSelector, useDispatch } from 'react-redux';

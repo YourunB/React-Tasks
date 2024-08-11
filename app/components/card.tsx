@@ -5,7 +5,7 @@ import { RootState } from '../redux/store';
 import { updateCheckedCards, removeCheckedCards } from '../redux/dataSliceElements';
 import ThemeContext from '../components/themeContext';
 import { useContext } from 'react';
-import { useNavigate } from "@remix-run/react";
+import { useNavigate } from '@remix-run/react';
 
 const Card = (props: CardProps) => {
   const theme = useContext(ThemeContext);
@@ -39,7 +39,9 @@ const Card = (props: CardProps) => {
 
   const openDetails = (event: React.MouseEvent<HTMLImageElement, MouseEvent>) => {
     event.preventDefault();
-    navigate(`/?page=${dataReduxPage.page ? dataReduxPage.page : 1}${dataReduxPage.search ? `&search=${dataReduxPage.search}` : ''}&details=${props.id}`);
+    navigate(
+      `/?page=${dataReduxPage.page ? dataReduxPage.page : 1}${dataReduxPage.search ? `&search=${dataReduxPage.search}` : ''}&details=${props.id}`
+    );
   };
 
   return (

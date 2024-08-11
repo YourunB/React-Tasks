@@ -1,4 +1,4 @@
-import type { MetaFunction } from "@remix-run/node";
+import type { MetaFunction } from '@remix-run/node';
 import s from '../styles/_index.module.css';
 import Footer from '../components/footer';
 import Search from '../components/search';
@@ -16,14 +16,11 @@ import CardDescription from '../components/cardDescription';
 import themeImg from '/theme.svg';
 import Msg from '../components/msg';
 import ThemeContext from '../components/themeContext';
-import { useSearchParams } from "@remix-run/react";
-import { updateId } from "~/redux/dataSliceCharacter";
+import { useSearchParams } from '@remix-run/react';
+import { updateId } from '~/redux/dataSliceCharacter';
 
 export const meta: MetaFunction = () => {
-  return [
-    { title: "Rick and Morty" },
-    { name: "description", content: "Rick and Morty characters" },
-  ];
+  return [{ title: 'Rick and Morty' }, { name: 'description', content: 'Rick and Morty characters' }];
 };
 
 export default function Index() {
@@ -35,10 +32,10 @@ export default function Index() {
 
   const [searchParams, setSearchParams] = useSearchParams();
   const getSearchParams = {
-    page: searchParams.get("page"),
-    search: searchParams.get("search"),
-    details: searchParams.get("details"),
-  }
+    page: searchParams.get('page'),
+    search: searchParams.get('search'),
+    details: searchParams.get('details'),
+  };
 
   useEffect(() => {
     if (getSearchParams.page && Number(getSearchParams.page)) dispatch(updatePage(getSearchParams.page));

@@ -7,8 +7,8 @@ import { useEffect } from 'react';
 import Loading from './loading';
 import ThemeContext from '../components/themeContext';
 import { useContext } from 'react';
-import { useSearchParams } from "@remix-run/react";
-import { useNavigate } from "@remix-run/react";
+import { useSearchParams } from '@remix-run/react';
+import { useNavigate } from '@remix-run/react';
 
 const CardDescription = (): JSX.Element | null => {
   const theme = useContext(ThemeContext);
@@ -27,7 +27,9 @@ const CardDescription = (): JSX.Element | null => {
   const data = { ...dataDetails.data };
 
   const closeDetails = () => {
-    navigate(`/?page=${dataReduxPage.page ? dataReduxPage.page : 1}${dataReduxPage.search ? `&search=${dataReduxPage.search}` : ''}`);
+    navigate(
+      `/?page=${dataReduxPage.page ? dataReduxPage.page : 1}${dataReduxPage.search ? `&search=${dataReduxPage.search}` : ''}`
+    );
   };
 
   return (

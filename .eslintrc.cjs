@@ -1,74 +1,36 @@
 /** @type {import('eslint').Linter.Config} */
 module.exports = {
   root: true,
-  parserOptions: {
-    ecmaVersion: "latest",
-    sourceType: "module",
-    ecmaFeatures: {
-      jsx: true,
-    },
-  },
+
   env: {
     browser: true,
-    commonjs: true,
-    es6: true,
+    es2020: true,
   },
-  ignorePatterns: ["!**/.server", "!**/.client"],
 
-  extends: ["eslint:recommended"],
-
-  overrides: [
-    {
-      files: ["**/*.{js,jsx,ts,tsx}"],
-      plugins: ["react", "jsx-a11y"],
-      extends: [
-        "plugin:react/recommended",
-        "plugin:react/jsx-runtime",
-        "plugin:react-hooks/recommended",
-        "plugin:jsx-a11y/recommended",
-      ],
-      settings: {
-        react: {
-          version: "detect",
-        },
-        formComponents: ["Form"],
-        linkComponents: [
-          { name: "Link", linkAttribute: "to" },
-          { name: "NavLink", linkAttribute: "to" },
-        ],
-        "import/resolver": {
-          typescript: {},
-        },
-      },
-    },
-
-    {
-      files: ["**/*.{ts,tsx}"],
-      plugins: ["@typescript-eslint", "import"],
-      parser: "@typescript-eslint/parser",
-      settings: {
-        "import/internal-regex": "^~/",
-        "import/resolver": {
-          node: {
-            extensions: [".ts", ".tsx"],
-          },
-          typescript: {
-            alwaysTryTypes: true,
-          },
-        },
-      },
-      extends: [
-        "plugin:@typescript-eslint/recommended",
-        "plugin:import/recommended",
-        "plugin:import/typescript",
-      ],
-    },
-
-    {
-      files: [".eslintrc.cjs"],
-      env: {
-        node: true,
-      },
-    },
+  extends: [
+    'eslint:recommended',
+    'plugin:@typescript-eslint/recommended',
+    'plugin:react-hooks/recommended',
+    'plugin:react/recommended',
+    'plugin:react/jsx-runtime',
   ],
+
+  ignorePatterns: ['dist', '.eslintrc.cjs'],
+
+  parser: '@typescript-eslint/parser',
+
+  plugins: ['react', 'react-compiler'],
+
+  rules: {
+    '@typescript-eslint/no-unused-vars': 'off',
+    '@typescript-eslint/no-explicit-any': 'error',
+    '@typescript-eslint/no-require-imports': 'off',
+    'react-compiler/react-compiler': 'error',
+  },
+
+  settings: {
+    react: {
+      version: 'detect',
+    },
+  },
 };
