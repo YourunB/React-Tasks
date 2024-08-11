@@ -4,7 +4,7 @@ import dataSliceCharacter, { updateDetails, updateId } from '../../src/redux/dat
 
 describe('dataSliceCharacter reducer', () => {
   const initialState = {
-    id: 0,
+    id: 1,
     details: {},
   };
 

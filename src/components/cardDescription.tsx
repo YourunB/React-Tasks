@@ -30,7 +30,6 @@ const CardDescription = (): JSX.Element | null => {
     router.push(
       `?page=${dataReduxPage.page ? dataReduxPage.page : 1}${dataReduxPage.search ? `&search=${dataReduxPage.search}` : ''}`
     );
-    dispatch(updateId(0));
   };
 
   return (
