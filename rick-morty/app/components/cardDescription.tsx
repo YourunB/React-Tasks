@@ -27,7 +27,6 @@ const CardDescription = (): JSX.Element | null => {
   const data = { ...dataDetails.data };
 
   const closeDetails = () => {
-    dispatch(updateId(0));
     navigate(`/?page=${dataReduxPage.page ? dataReduxPage.page : 1}${dataReduxPage.search ? `&search=${dataReduxPage.search}` : ''}`);
   };
 

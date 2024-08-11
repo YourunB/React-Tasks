@@ -5,7 +5,6 @@ import { RootState } from '../redux/store';
 import { updateCheckedCards, removeCheckedCards } from '../redux/dataSliceElements';
 import ThemeContext from '../components/themeContext';
 import { useContext } from 'react';
-import { updateId } from '../redux/dataSliceCharacter';
 import { useNavigate } from "@remix-run/react";
 
 const Card = (props: CardProps) => {
@@ -40,7 +39,6 @@ const Card = (props: CardProps) => {
 
   const openDetails = (event: React.MouseEvent<HTMLImageElement, MouseEvent>) => {
     event.preventDefault();
-    dispatch(updateId(props.id));
     navigate(`/?page=${dataReduxPage.page ? dataReduxPage.page : 1}${dataReduxPage.search ? `&search=${dataReduxPage.search}` : ''}&details=${props.id}`);
   };
 

@@ -17,6 +17,7 @@ import themeImg from '../../public/theme.svg';
 import Msg from '../components/msg';
 import ThemeContext from '../components/themeContext';
 import { useSearchParams } from "@remix-run/react";
+import { updateId } from "~/redux/dataSliceCharacter";
 
 export const meta: MetaFunction = () => {
   return [
@@ -42,7 +43,8 @@ export default function Index() {
   useEffect(() => {
     if (getSearchParams.page && Number(getSearchParams.page)) dispatch(updatePage(getSearchParams.page));
     if (getSearchParams.search) dispatch(updateSearch(getSearchParams.search));
-  }, [getSearchParams.page, getSearchParams.search, dispatch]);
+    if (getSearchParams.details && Number(getSearchParams.details)) dispatch(updateId(getSearchParams.details));
+  }, [getSearchParams.page, getSearchParams.search, getSearchParams.details, dispatch]);
 
   useEffect(() => {
     if (dataCharacters.data && dataCharacters.data.info) dispatch(updateTotalPages(dataCharacters.data.info.pages));
