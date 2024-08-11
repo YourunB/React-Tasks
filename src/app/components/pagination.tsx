@@ -13,14 +13,14 @@ const Pagination = () => {
         className={s['pagination__btn']}
         disabled={dataReduxPage.page > 1 ? false : true}
       >
-        <Link className={s.link} href={`/?page=${Number(dataReduxPage.page) - 1}${dataReduxPage.search ? `&search=${dataReduxPage.search}` : ''}${dataReduxCharacter.id ? `&details=${dataReduxCharacter.id}` : ''}`}>&#60;</Link>
+        <Link className={s.link} href={`/?page=${Number(dataReduxPage.page) - 1}${dataReduxPage.search ? `&search=${dataReduxPage.search}` : ''}`}>&#60;</Link>
       </button>
       <span className={s['pagination__count']}>{dataReduxPage.page}</span>
       <button
         className={s['pagination__btn']}
         disabled={dataReduxPage.page < dataReduxPage.totalPages ? false : true}
       >
-        <Link className={s.link} href={`/?page=${Number(dataReduxPage.page) + 1}${dataReduxPage.search ? `&search=${dataReduxPage.search}` : ''}${dataReduxCharacter.id ? `&details=${dataReduxCharacter.id}` : ''}`}>&#62;</Link>
+        <Link className={s.link} href={`/?page=${Number(dataReduxPage.page) + 1}${dataReduxPage.search ? `&search=${dataReduxPage.search}` : ''}`}>&#62;</Link>
       </button>
     </div>
   );

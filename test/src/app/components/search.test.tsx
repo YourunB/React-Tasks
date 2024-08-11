@@ -7,14 +7,6 @@ import { vi, test, describe, expect, beforeAll } from 'vitest';
 import Search from '../../../../src/app/components/search';
 
 beforeAll(() => {
-  vi.mock('next/navigation', () => ({
-    useSearchParams: vi.fn(() => ({
-      get: vi.fn().mockReturnValue('test-value'),
-    })),
-  }));
-});
-
-beforeAll(() => {
   global.URL.createObjectURL = vi.fn();
 });
 
