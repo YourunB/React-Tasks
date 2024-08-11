@@ -19,7 +19,7 @@ describe('Layout component', () => {
     const actual = await importOriginal();
     return {
       ...actual,
-      RemixBrowser: ({ children }) => <div>{children}</div>,
+      RemixBrowser: ({ children }: { children: ReactNode }) => <div>{children}</div>,
       Meta: () => <meta />,
       Links: () => <link />,
       ScrollRestoration: () => <div />,
