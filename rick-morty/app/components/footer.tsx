@@ -1,18 +1,19 @@
 import s from './footer.module.css';
+import { Link } from '@remix-run/react';
 
 const Footer = () => {
   return (
     <footer className={s['footer']}>
       <span>&copy; 2024</span>
-      <a
+      <Link
         className={s['footer__link']}
-        href="https://github.com/YourunB"
+        to="https://github.com/YourunB"
         target="_blank"
         rel="noreferrer"
         data-testid={'footer'}
       >
         Yury Butskevich
-      </a>
+      </Link>
     </footer>
   );
 };
