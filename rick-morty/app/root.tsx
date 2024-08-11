@@ -4,12 +4,14 @@ import {
   Outlet,
   Scripts,
   ScrollRestoration,
+  isRouteErrorResponse,
+  useRouteError,
 } from "@remix-run/react";
 import "./styles/index.css";
 import { store } from "./redux/store";
 import { Provider } from 'react-redux';
 import ThemeContext from './components/themeContext';
-import ErrorBoundary from "./modules/errorBoundary";
+import PageNotFound from "./pages/pageNotFound";
 
 const theme = {
   light: false,
@@ -20,7 +22,6 @@ const theme = {
 
 export function Layout({ children }: { children: React.ReactNode }) {
   return (
-    <ErrorBoundary>
       <Provider store={store}>
         <ThemeContext.Provider value={theme}>
           <html lang="en">
@@ -39,8 +40,17 @@ export function Layout({ children }: { children: React.ReactNode }) {
           </html>
         </ThemeContext.Provider>
       </Provider>
-    </ErrorBoundary>
   );
+}
+
+export function ErrorBoundary() {
+  const error = useRouteError();
+
+  if (isRouteErrorResponse(error)) {
+    return <PageNotFound />;
+  } else {
+    return <ErrorBoundary />;
+  }
 }
 
 export default function App() {

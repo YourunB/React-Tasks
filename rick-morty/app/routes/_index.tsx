@@ -13,7 +13,7 @@ import { Character } from '../state/types';
 import Pagination from '../components/pagination';
 import Loading from '../components/loading';
 import CardDescription from '../components/cardDescription';
-import themeImg from '../../public/theme.svg';
+import themeImg from '/theme.svg';
 import Msg from '../components/msg';
 import ThemeContext from '../components/themeContext';
 import { useSearchParams } from "@remix-run/react";
