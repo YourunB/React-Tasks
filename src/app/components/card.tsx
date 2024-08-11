@@ -12,23 +12,22 @@ const Card = (props: CardProps) => {
   const dispatch = useDispatch();
   const dataReduxElements = useSelector((state: RootState) => state.dataElements);
   const dataReduxPage = useSelector((state: RootState) => state.dataPage);
-
-  function addElementToSlice(event: React.MouseEvent<HTMLImageElement, MouseEvent>) {
+  
+  function toogleElement(event: React.MouseEvent<HTMLImageElement, MouseEvent>) {
     event.stopPropagation();
-    dispatch(
-      updateCheckedCards({
-        id: props.id,
-        name: props.name,
-        image: props.image,
-        species: props.species,
-        url: location.href,
-      })
-    );
-  }
-
-  function removeElementFromSlice(event: React.MouseEvent<HTMLImageElement, MouseEvent>) {
-    event.stopPropagation();
-    dispatch(removeCheckedCards(props.id));
+    event.preventDefault();
+    if (checked) dispatch(removeCheckedCards(props.id));
+    else {
+      dispatch(
+        updateCheckedCards({
+          id: props.id,
+          name: props.name,
+          image: props.image,
+          species: props.species,
+          url: location.href,
+        })
+      );
+    }
   }
 
   let checked = false;
@@ -37,7 +36,7 @@ const Card = (props: CardProps) => {
   });
 
   return (
-    <Link href={`/?page=${dataReduxPage.page}${dataReduxPage.search ? `&search=${dataReduxPage.search}` : ''}&details=${props.id}`}
+    <Link href={`/?page=${dataReduxPage.page ? dataReduxPage.page : 1}${dataReduxPage.search ? `&search=${dataReduxPage.search}` : ''}&details=${props.id}`}
       className={`${s['card-char']} ${theme.light ? s['light'] : ''}`}
       data-testid={'card'}
     >
@@ -53,12 +52,7 @@ const Card = (props: CardProps) => {
           src="/star.svg"
           alt="Star"
           title="Checked character"
-          onClick={(event: React.MouseEvent<HTMLImageElement, MouseEvent>) =>
-            {
-              event.preventDefault();
-              checked ? removeElementFromSlice(event) : addElementToSlice(event)
-            }
-          }
+          onClick={(event: React.MouseEvent<HTMLImageElement, MouseEvent>) => toogleElement(event)}
         />
       }
     </Link>
