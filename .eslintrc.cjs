@@ -1,6 +1,12 @@
+/** @type {import('eslint').Linter.Config} */
 module.exports = {
   root: true,
-  env: { browser: true, es2020: true },
+
+  env: {
+    browser: true,
+    es2020: true,
+  },
+
   extends: [
     'eslint:recommended',
     'plugin:@typescript-eslint/recommended',
@@ -8,15 +14,20 @@ module.exports = {
     'plugin:react/recommended',
     'plugin:react/jsx-runtime',
   ],
+
   ignorePatterns: ['dist', '.eslintrc.cjs'],
+
   parser: '@typescript-eslint/parser',
-  plugins: ['react-refresh', 'react', 'react-compiler'],
+
+  plugins: ['react', 'react-compiler'],
+
   rules: {
-    'react-refresh/only-export-components': ['error', { allowConstantExport: true }],
-    '@typescript-eslint/no-explicit-any': 'error',
-    'react-compiler/react-compiler': 'error',
     '@typescript-eslint/no-unused-vars': 'off',
+    '@typescript-eslint/no-explicit-any': 'error',
+    '@typescript-eslint/no-require-imports': 'off',
+    'react-compiler/react-compiler': 'error',
   },
+
   settings: {
     react: {
       version: 'detect',

@@ -1,11 +1,15 @@
 import '@testing-library/jest-dom';
 import { render, screen, fireEvent } from '@testing-library/react';
 import { Provider } from 'react-redux';
-import { BrowserRouter } from 'react-router-dom';
 import configureStore from 'redux-mock-store';
-import React from 'react';
-import { vi, test, describe, expect } from 'vitest';
-import Search from '../../src/components/search';
+import { vi, test, describe, expect, beforeAll } from 'vitest';
+import Search from '../../app/components/search';
+
+beforeAll(() => {
+  vi.mock('@remix-run/react', () => ({
+    useNavigate: vi.fn(() => vi.fn()),
+  }));
+});
 
 beforeAll(() => {
   global.URL.createObjectURL = vi.fn();
@@ -26,9 +30,7 @@ describe('Search component', () => {
   const renderComponent = () => {
     return render(
       <Provider store={store}>
-        <BrowserRouter>
-          <Search />
-        </BrowserRouter>
+        <Search />
       </Provider>
     );
   };

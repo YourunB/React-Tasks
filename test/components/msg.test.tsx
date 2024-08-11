@@ -1,10 +1,8 @@
 import '@testing-library/jest-dom';
 import { render, screen, fireEvent } from '@testing-library/react';
 import { Provider } from 'react-redux';
-import { BrowserRouter as Router } from 'react-router-dom';
 import configureStore from 'redux-mock-store';
-import React from 'react';
-import Msg from '../../src/components/msg';
+import Msg from '../../app/components/msg';
 import { vi, test, describe, expect } from 'vitest';
 
 beforeAll(() => {
@@ -28,9 +26,7 @@ describe('Msg Component', () => {
   const renderComponent = () => {
     return render(
       <Provider store={store}>
-        <Router>
-          <Msg />
-        </Router>
+        <Msg />
       </Provider>
     );
   };

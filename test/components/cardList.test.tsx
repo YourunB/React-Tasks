@@ -1,8 +1,7 @@
 import { describe, test, expect } from 'vitest';
 import { render } from '@testing-library/react';
-import CardList from '../../src/components/cardList';
-import { CardListProps } from '../../src/state/types';
-import React from 'react';
+import CardList from '../../app/components/cardList';
+import { CardListProps } from '../../app/state/types';
 import '@testing-library/jest-dom';
 
 describe('CardList Component', () => {

@@ -1,11 +1,20 @@
 import '@testing-library/jest-dom';
 import { render, screen, fireEvent } from '@testing-library/react';
 import { Provider } from 'react-redux';
-import { BrowserRouter } from 'react-router-dom';
 import configureStore from 'redux-mock-store';
-import React from 'react';
-import { vi, test, describe, expect } from 'vitest';
-import Pagination from '../../src/components/pagination';
+import { vi, test, describe, expect, beforeAll } from 'vitest';
+import Pagination from '../../app/components/pagination';
+
+beforeAll(() => {
+  vi.mock('@remix-run/react', async (importOriginal) => {
+    const actual = await importOriginal();
+    return {
+      ...actual,
+      useNavigate: vi.fn(() => vi.fn()),
+      useSearchParams: vi.fn(() => [new URLSearchParams(), vi.fn()]),
+    };
+  });
+});
 
 beforeAll(() => {
   global.URL.createObjectURL = vi.fn();
@@ -26,9 +35,7 @@ describe('Pagination component', () => {
   const renderComponent = () => {
     return render(
       <Provider store={store}>
-        <BrowserRouter>
-          <Pagination />
-        </BrowserRouter>
+        <Pagination />
       </Provider>
     );
   };

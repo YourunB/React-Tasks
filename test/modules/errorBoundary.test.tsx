@@ -1,7 +1,7 @@
 import { render, screen } from '@testing-library/react';
-import ErrorBoundary from '../../src/modules/errorBoundary';
-import React from 'react';
+import ErrorBoundary from '../../app/modules/errorBoundary';
 import '@testing-library/jest-dom';
+import { describe, test, expect } from 'vitest';
 
 const ProblemChild = () => {
   throw new Error('Error thrown from problem child');

@@ -1,6 +1,6 @@
 import '@testing-library/jest-dom';
 import { describe, test, expect } from 'vitest';
-import dataSlicePage, { updatePage, updateTotalPages, updateSearch, updateTheme } from '../../src/redux/dataSlicePage';
+import dataSlicePage, { updatePage, updateTotalPages, updateSearch, updateTheme } from '../../app/redux/dataSlicePage';
 
 describe('dataSlicePage reducer', () => {
   const initialState = {

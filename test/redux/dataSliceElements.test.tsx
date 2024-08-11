@@ -1,6 +1,6 @@
 import '@testing-library/jest-dom';
 import { describe, test, expect } from 'vitest';
-import dataSliceElements, { updateCheckedCards, removeCheckedCards, clearAll } from '../../src/redux/dataSliceElements';
+import dataSliceElements, { updateCheckedCards, removeCheckedCards, clearAll } from '../../app/redux/dataSliceElements';
 
 describe('dataSliceElements reducer', () => {
   const initialState = {

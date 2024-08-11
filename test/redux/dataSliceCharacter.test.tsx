@@ -1,10 +1,10 @@
 import '@testing-library/jest-dom';
 import { describe, test, expect } from 'vitest';
-import dataSliceCharacter, { updateDetails, updateId } from '../../src/redux/dataSliceCharacter';
+import dataSliceCharacter, { updateDetails, updateId } from '../../app/redux/dataSliceCharacter';
 
 describe('dataSliceCharacter reducer', () => {
   const initialState = {
-    id: 10,
+    id: 1,
     details: {},
   };
 

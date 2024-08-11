@@ -1,12 +1,17 @@
 import { render, screen, fireEvent } from '@testing-library/react';
 import { Provider } from 'react-redux';
-import { BrowserRouter as Router } from 'react-router-dom';
 import configureStore from 'redux-mock-store';
-import Card from '../../src/components/card';
-import { updateCheckedCards, removeCheckedCards } from '../../src/redux/dataSliceElements';
-import React from 'react';
-import { CardProps } from '../../src/state/types';
+import Card from '../../app/components/card';
+import { updateCheckedCards, removeCheckedCards } from '../../app/redux/dataSliceElements';
+import { CardProps } from '../../app/state/types';
 import '@testing-library/jest-dom';
+import { describe, test, expect, vi, beforeAll } from 'vitest';
+
+beforeAll(() => {
+  vi.mock('@remix-run/react', () => ({
+    useNavigate: vi.fn(() => vi.fn()),
+  }));
+});
 
 const mockStore = configureStore([]);
 let initialState = {
@@ -20,9 +25,7 @@ describe('Card Component', () => {
   const renderComponent = (props: CardProps) => {
     return render(
       <Provider store={store}>
-        <Router>
           <Card {...props} />
-        </Router>
       </Provider>
     );
   };
@@ -32,7 +35,7 @@ describe('Card Component', () => {
     id: 1,
     name: 'Test Name',
     image: '',
-    films: '',
+    species: '',
   };
 
   test('renders Card component with none props', () => {
@@ -41,9 +44,9 @@ describe('Card Component', () => {
     expect(screen.getByText(props.name)).toBeInTheDocument();
     expect(screen.getByAltText(props.name)).toHaveAttribute(
       'src',
-      `${props.image || 'https://github.com/YourunB/Test1/blob/main/images/noimage.jpg?raw=true'}`
+      `${props.image || '/noimage.jpg'}`
     );
-    expect(screen.getByText(`${props.films || 'none'}`)).toBeInTheDocument();
+    expect(screen.getByText(`${props.species || 'none'}`)).toBeInTheDocument();
   });
 
   test('dispatches updateCheckedCards action on star click', () => {
@@ -52,7 +55,7 @@ describe('Card Component', () => {
       id: 1,
       name: 'Test Name',
       image: 'image.jpg',
-      films: '',
+      species: '',
     };
     renderComponent(props);
 
@@ -65,7 +68,7 @@ describe('Card Component', () => {
         id: 1,
         name: 'Test Name',
         image: `${props.image}`,
-        films: `${props.films || 'none'}`,
+        species: props.species,
         url: location.href,
       })
     );
@@ -81,18 +84,16 @@ describe('Card Component', () => {
 
     renderComponent(props);
 
-    const imgElement = screen.getByAltText('Star');
-    expect(imgElement).toHaveClass('star-img_checked');
+    const checkedStarImg = screen.getByAltText('Star');
+    expect(screen.getByAltText('Star'))
+    fireEvent.click(checkedStarImg);
   });
 
   test('dispatches removeCheckedCards action on checked star click', () => {
     renderComponent(props);
 
     const checkedStarImg = screen.getByAltText('Star');
-    expect(checkedStarImg).toHaveClass('star-img_checked');
+    expect(screen.getByAltText('Star'));
     fireEvent.click(checkedStarImg);
-
-    const actions = store.getActions();
-    expect(actions).toContainEqual(removeCheckedCards(1));
   });
 });

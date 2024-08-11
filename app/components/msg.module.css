@@ -1,0 +1,56 @@
+.msg {
+  background: rgb(171, 220, 228);
+  position: fixed;
+  z-index: 100;
+  left: 10px;
+  top: 50px;
+  padding: 10px;
+  border-radius: 3px;
+  width: 180px;
+  overflow: auto;
+  text-align: center;
+  transform: translateX(-200px);
+  animation: left-side 1s forwards;
+}
+
+.msg p {
+  margin: 0 0 5px 0;
+  font-weight: 700;
+}
+
+.msg__btn {
+  display: inline-block;
+  background: white;
+  border: none;
+  margin: 0 5px;
+  width: 60px;
+  height: 20px;
+  border-radius: 3px;
+  color: rgb(69, 69, 69);
+  transition: 0.5s;
+}
+
+a.msg__btn {
+  background: rgb(255, 225, 0);
+}
+
+@media (hover: hover) {
+  .msg__btn:hover {
+    cursor: pointer;
+    transform: scale(1.1);
+  }
+}
+
+.msg__btn:active {
+  transition: 0.2s;
+  transform: scale(0.8);
+}
+
+@keyframes left-side {
+  0% {
+    transform: translateX(-200px);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
