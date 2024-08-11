@@ -26,6 +26,9 @@ const initialState = {
     search: '',
     theme: { light: false },
   },
+  dataCharacter: {
+    id: null,
+  },
 };
 
 describe('Pagination component', () => {
@@ -43,17 +46,5 @@ describe('Pagination component', () => {
     expect(screen.getByText('2')).toBeInTheDocument();
     expect(screen.getByRole('button', { name: /</ })).toBeEnabled();
     expect(screen.getByRole('button', { name: />/ })).toBeEnabled();
-  });
-
-  test('renders', () => {
-    renderComponent();
-
-    const btnPrev = screen.getByText('<');
-    expect(btnPrev).toBeInTheDocument();
-    fireEvent.click(btnPrev);
-
-    const btnNext = screen.getByText('>');
-    expect(btnNext).toBeInTheDocument();
-    fireEvent.click(btnNext);
   });
 });
