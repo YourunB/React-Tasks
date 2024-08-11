@@ -1,0 +1,72 @@
+.controls {
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+  padding: 20px;
+}
+
+.page-main {
+  background-color: black;
+  background-image: url('../../public/rick-morty.png');
+  background-repeat: no-repeat;
+  background-position: left bottom;
+  background-attachment: fixed;
+  background-size: 50vh;
+  color: var(--primary-gray);
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  min-height: 100vh;
+}
+
+.page-main__header {
+  height: 50px;
+  padding: 10px;
+  gap: 10px;
+  display: flex;
+  justify-content: space-between;
+
+  max-width: 1440px;
+  width: 100%;
+  margin: auto;
+}
+
+.page-main__main {
+  max-width: 1440px;
+  width: 100%;
+  padding: 10px;
+  margin: auto;
+}
+
+.theme-img {
+  width: 30px;
+  height: 30px;
+  transition: 0.7s;
+}
+
+@media (hover: hover) {
+  .theme-img:hover {
+    cursor: pointer;
+    transform: scale(1.1);
+  }
+}
+
+.theme-img:active {
+  transition: 0.2;
+  transform: scale(0.8);
+}
+
+.theme-img_light {
+  filter: invert(1);
+}
+
+.light {
+  background-color: white;
+}
+
+.light button {
+  border-color: var(--primary-gray);
+  color: var(--primary-gray);
+}
+
+.light .msg {
+  background: rgb(252, 254, 207);
+}
