@@ -5,10 +5,13 @@ import { RootState } from '../redux/store';
 import { updateCheckedCards, removeCheckedCards } from '../redux/dataSliceElements';
 import ThemeContext from '../components/themeContext';
 import { useContext } from 'react';
+import { updateId } from '../redux/dataSliceCharacter';
+import { useNavigate } from "@remix-run/react";
 
 const Card = (props: CardProps) => {
   const theme = useContext(ThemeContext);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const dataReduxElements = useSelector((state: RootState) => state.dataElements);
   const dataReduxPage = useSelector((state: RootState) => state.dataPage);
 
@@ -37,7 +40,8 @@ const Card = (props: CardProps) => {
 
   const openDetails = (event: React.MouseEvent<HTMLImageElement, MouseEvent>) => {
     event.preventDefault();
-    location.search = `page=${dataReduxPage.page ? dataReduxPage.page : 1}${dataReduxPage.search ? `&search=${dataReduxPage.search}` : ''}&details=${props.id}`;
+    dispatch(updateId(props.id));
+    navigate(`/?page=${dataReduxPage.page ? dataReduxPage.page : 1}${dataReduxPage.search ? `&search=${dataReduxPage.search}` : ''}&details=${props.id}`);
   };
 
   return (

@@ -7,16 +7,18 @@ import { useEffect } from 'react';
 import Loading from './loading';
 import ThemeContext from '../components/themeContext';
 import { useContext } from 'react';
-import { useSearchParams } from 'next/navigation';
+import { useSearchParams } from "@remix-run/react";
+import { useNavigate } from "@remix-run/react";
 
 const CardDescription = (): JSX.Element | null => {
   const theme = useContext(ThemeContext);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const dataReduxDetails = useSelector((state: RootState) => state.dataCharacter);
   const dataDetails = useGetDetailsApiQuery(dataReduxDetails.id);
   const dataReduxPage = useSelector((state: RootState) => state.dataPage);
 
-  const prodId = useSearchParams().get('details');
+  const [prodId, setProdId] = useSearchParams();
   useEffect(() => {
     if (prodId && Number(prodId)) dispatch(updateId(prodId));
   }, [prodId, dispatch]);
@@ -25,8 +27,8 @@ const CardDescription = (): JSX.Element | null => {
   const data = { ...dataDetails.data };
 
   const closeDetails = () => {
-    location.search = `page=${dataReduxPage.page ? dataReduxPage.page : 1}${dataReduxPage.search ? `&search=${dataReduxPage.search}` : ''}`;
     dispatch(updateId(0));
+    navigate(`/?page=${dataReduxPage.page ? dataReduxPage.page : 1}${dataReduxPage.search ? `&search=${dataReduxPage.search}` : ''}`);
   };
 
   return (

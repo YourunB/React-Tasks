@@ -1,5 +1,5 @@
 import s from './search.module.css';
-import { useNavigate, useSearchParams } from "@remix-run/react";
+import { useNavigate } from "@remix-run/react";
 import { useRef } from 'react';
 import { RootState } from '../redux/store';
 import { useSelector, useDispatch } from 'react-redux';
@@ -10,13 +10,6 @@ import { useContext } from 'react';
 const Search = () => {
   const theme = useContext(ThemeContext);
   const navigate = useNavigate();
-
-  const [searchParams, setSearchParams] = useSearchParams();
-  const getSearchParams = {
-    page: searchParams.get("page"),
-    search: searchParams.get("search"),
-    details: searchParams.get("details"),
-  }
 
   const serchInputRef = useRef(null);
   const dataReduxPage = useSelector((state: RootState) => state.dataPage);
