@@ -4,7 +4,7 @@ import dataSliceCharacter, { updateDetails, updateId } from '../../../../src/app
 
 describe('dataSliceCharacter reducer', () => {
   const initialState = {
-    id: null,
+    id: 1,
     details: {},
   };
 
