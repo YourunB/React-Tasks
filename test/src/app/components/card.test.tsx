@@ -12,22 +12,19 @@ beforeAll(() => {
   vi.mock("next/router", () => require("next-router-mock"));
 })
 
-const mockStore = configureStore([]);
-let initialState = {
-  dataElements: {
-    checkedCards: [{ id: 0 }],
-  },
-};
-
 describe('Card Component', () => {
-  let store = mockStore(initialState);
-  const renderComponent = (props: CardProps) => {
-    return render(
-      <Provider store={store}>
-          <Card {...props} />
-      </Provider>
-    );
+  const mockStore = configureStore();
+  const initialState = {
+    dataElements: {
+      checkedCards: [],
+    },
+    dataPage: {
+      page: 1,
+      search: '',
+    },
   };
+  
+  let store = mockStore(initialState);
 
   const props = {
     key: 1,
@@ -35,6 +32,14 @@ describe('Card Component', () => {
     name: 'Test Name',
     image: '',
     species: '',
+  };
+
+  const renderComponent = (props: CardProps) => {
+    return render(
+      <Provider store={store}>
+        <Card {...props} />
+      </Provider>
+    );
   };
 
   test('renders Card component with none props', () => {
@@ -74,12 +79,16 @@ describe('Card Component', () => {
   });
 
   test('renders with checked class if id is in checkedCards', () => {
-    initialState = {
+    const initialStateNew = {
       dataElements: {
         checkedCards: [{ id: 1 }],
       },
+      dataPage: {
+        page: 1,
+        search: '',
+      },
     };
-    store = mockStore(initialState);
+    store = mockStore(initialStateNew);
 
     renderComponent(props);
 
