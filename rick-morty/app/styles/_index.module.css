@@ -7,7 +7,7 @@
 
 .page-main {
   background-color: black;
-  background-image: url('../../public/rick-morty.png');
+  background-image: url('/rick-morty.png');
   background-repeat: no-repeat;
   background-position: left bottom;
   background-attachment: fixed;
