@@ -12,6 +12,7 @@ beforeAll(() => {
     useNavigate: vi.fn(() => vi.fn()),
   }));
 });
+
 const mockStore = configureStore([]);
 let initialState = {
   dataElements: {
