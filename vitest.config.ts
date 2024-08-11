@@ -14,7 +14,9 @@ export default defineConfig({
         'app/**/*.tsx'
       ],
       exclude: [
-        'app/state/**'
+        'app/state/**',
+        'app/entry.client.tsx',
+        'app/entry.server.tsx',
       ],
     },
   },

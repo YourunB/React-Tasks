@@ -44,7 +44,3 @@ export function ErrorBoundary() {
     return <ErrorBoundary />;
   }
 }
-
-export default function App() {
-  return <Outlet />;
-}
