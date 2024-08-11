@@ -17,7 +17,6 @@ import themeImg from '/theme.svg';
 import Msg from '../components/msg';
 import ThemeContext from '../components/themeContext';
 import { useSearchParams } from '@remix-run/react';
-import { updateId } from '~/redux/dataSliceCharacter';
 
 export const meta: MetaFunction = () => {
   return [{ title: 'Rick and Morty' }, { name: 'description', content: 'Rick and Morty characters' }];
@@ -40,8 +39,7 @@ export default function Index() {
   useEffect(() => {
     if (getSearchParams.page && Number(getSearchParams.page)) dispatch(updatePage(getSearchParams.page));
     if (getSearchParams.search) dispatch(updateSearch(getSearchParams.search));
-    if (getSearchParams.details && Number(getSearchParams.details)) dispatch(updateId(getSearchParams.details));
-  }, [getSearchParams.page, getSearchParams.search, getSearchParams.details, dispatch]);
+  }, [getSearchParams.page, getSearchParams.search, dispatch]);
 
   useEffect(() => {
     if (dataCharacters.data && dataCharacters.data.info) dispatch(updateTotalPages(dataCharacters.data.info.pages));
