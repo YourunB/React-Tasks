@@ -1,8 +1,8 @@
 
 export const PageHome = () => {
   return (
-    <div>
+    <main>
       Page home ...
-    </div>
+    </main>
   );
 };

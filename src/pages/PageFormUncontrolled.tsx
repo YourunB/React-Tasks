@@ -1,8 +1,8 @@
 
 export const PageFormUncontrolled = () => {
   return (
-    <div>
+    <main>
       Page home ...
-    </div>
+    </main>
   );
 };

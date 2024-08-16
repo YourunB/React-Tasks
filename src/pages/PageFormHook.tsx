@@ -1,8 +1,8 @@
 
 export const PageFormHook = () => {
   return (
-    <div>
+    <main>
       Page home ...
-    </div>
+    </main>
   );
 };
