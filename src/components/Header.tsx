@@ -9,10 +9,10 @@ export const Header = () => {
           <Link to='/'>Main</Link>
         </li>
         <li>
-          <Link to='/form1'>Uncontrolled Form</Link>
+          <Link to='/uncontrolled'>Uncontrolled Form</Link>
         </li>
         <li>
-          <Link to='/form1'>React Hook Form</Link>
+          <Link to='/controlled'>React Hook Form</Link>
         </li>
       </ul>
     </header>

@@ -8,8 +8,8 @@ export const PagesRouter = () => {
   return (
     <Routes>
       <Route path="/" element={<PageHome />} />
-      <Route path="/form1" element={<PageFormUncontrolled />} />
-      <Route path="/form2" element={<PageFormHook />} />
+      <Route path="/uncontrolled" element={<PageFormUncontrolled />} />
+      <Route path="/controlled" element={<PageFormHook />} />
       <Route path="/*" element={<PageNotFound />} />
     </Routes>
   );
