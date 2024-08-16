@@ -1,4 +1,4 @@
-import './App.css'
+import './App.css';
 
 function App() {
   return (
@@ -7,7 +7,7 @@ function App() {
       <div>Form 1</div>
       <div>Form 2</div>
     </>
-  )
+  );
 }
 
-export default App
+export default App;
