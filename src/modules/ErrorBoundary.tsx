@@ -1,5 +1,4 @@
 import { Component } from 'react';
-import './errorBoundary.css';
 import { PropsChildren } from '../helpers/types';
 
 class ErrorBoundary extends Component<PropsChildren> {

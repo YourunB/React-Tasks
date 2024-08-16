@@ -1,11 +1,13 @@
 import './App.css';
+import { PagesRouter } from './modules/pagesRouter';
+import { BrowserRouter } from 'react-router-dom';
 
 function App() {
   return (
     <>
-      <div>Main</div>
-      <div>Form 1</div>
-      <div>Form 2</div>
+      <BrowserRouter>
+        <PagesRouter />
+      </BrowserRouter>
     </>
   );
 }
