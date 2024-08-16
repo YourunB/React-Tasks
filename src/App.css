@@ -1,0 +1,9 @@
+body {
+  overflow-x: hidden;
+  padding: 0;
+  margin: 0;
+}
+
+::selection {
+  background: #5b5b5b;
+}
