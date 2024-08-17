@@ -1,6 +1,7 @@
 import s from './UserCard.module.css';
 import { useSelector } from 'react-redux';
 import { RootState } from '../redux/store';
+import { Link } from 'react-router-dom';
 
 export const UserCard = () => {
   const dataRedux = useSelector((state: RootState) => state.data);
@@ -20,7 +21,11 @@ export const UserCard = () => {
           </div>
           <img className={s['card__image']} src={dataRedux.user.image} alt='Photo'></img>
         </div>
-      : <p>You need save user data from form ...</p>}
+      : <div className={s.box}>
+          <p>You need save user data:</p>
+          <Link className={s.link} to='/uncontrolled'>Uncontrolled Form</Link>
+          <Link className={s.link} to='/controlled'>React Hook Form</Link>
+        </div>}
     </div>
   );
 };

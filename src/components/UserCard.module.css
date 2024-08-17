@@ -23,6 +23,31 @@
   border-radius: 5px;
 }
 
+.box {
+  font-weight: 700;
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.link {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: white;
+  width: 140px;
+  height: 140px;
+  color: black;
+  transition: 0.7s;
+}
+
+@media(hover:hover) {
+  .link:hover {
+    transform: scale(1.05);
+  }
+}
+
 @media (max-width: 576px) {
   .card {
     flex-wrap: wrap-reverse;
