@@ -31,6 +31,18 @@ export const PageFormUncontrolled = () => {
     userMale: Yup.boolean().oneOf([true], 'Gender is required'),
     userFemale: Yup.boolean().oneOf([true], 'Gender is required'),
     userAgreement: Yup.boolean().oneOf([true], 'You must accept the agreement'),
+    userFile: Yup.mixed()
+        .required('A file is required')
+        .test(
+          'fileSize',
+          'File size must be < 1024 kb',
+          value => value && value.size <= 1024 * 1024
+        )
+        .test(
+          'fileFormat',
+          'Format must be jpeg or png',
+          value => value && ['image/jpeg', 'image/png'].includes(value.type)
+        ),
   });
 
   const validateForm = async (event) => {
@@ -44,6 +56,7 @@ export const PageFormUncontrolled = () => {
       userMale: inputMale.current?.checked,
       userFemale: inputFemale.current?.checked,
       userAgreement: inputAgreement.current?.checked,
+      userFile: inputFile.current?.files[0],
     };
 
     try {
@@ -97,10 +110,17 @@ export const PageFormUncontrolled = () => {
 
         <fieldset>
           <legend>User Agreement:</legend>
-          <input ref={inputAgreement} id="userAgreement" type={'checkbox'}/><label htmlFor="userAgreement">I accept Terms and Conditions agreement.</label>
+          <input ref={inputAgreement} id="userAgreement" type={'checkbox'}/>
+          <label htmlFor="userAgreement">I accept Terms and Conditions agreement.</label>
+          {error.userAgreement && <p>{error.userAgreement}</p>}
         </fieldset>
         
-        <div><label htmlFor="userFile">Upload Picture:</label><input ref={inputFile} id="userFile" type={'file'} /></div>
+        <div>
+          <label htmlFor="userFile">Upload Picture:</label>
+          <input ref={inputFile} id="userFile" type={'file'} />
+          {error.userFile && <p>{error.userFile}</p>}
+        </div>
+
         <div><label htmlFor="userCountry">Choose Country:</label><input ref={inputCountry} id="userCountry" type={'text'} placeholder='Enter country'></input></div>
       
         <button type="submit">Submit</button>
