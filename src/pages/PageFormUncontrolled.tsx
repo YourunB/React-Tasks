@@ -20,7 +20,14 @@ export const PageFormUncontrolled = () => {
   const inputFile = useRef<HTMLInputElement>(null);
   const inputCountry = useRef<HTMLInputElement>(null);
 
-  const [error, setError] = useState({});
+  function convertToBase64(file) {
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.readAsDataURL(file);
+      reader.onload = () => resolve(reader.result);
+      reader.onerror = error => reject(error);
+    });
+  }
 
   const validationSchema = Yup.object({
     userName: Yup.string().matches(/^[A-Z]/, 'Name must start with an uppercase letter').required('Name is required'),
@@ -34,7 +41,6 @@ export const PageFormUncontrolled = () => {
       .matches(/[A-Z]/, 'Must contain one uppercase letter')
       .matches(/[!@#$%^&*(),.?":{}|<>]/, 'Must contain one special character'),
     userPassRepeat: Yup.string().oneOf([Yup.ref('userPass'), null], 'Passwords must match'),
-    //gender: Yup.string().oneOf(['male', 'female'], 'Gender is required'),
     gender: Yup.boolean().oneOf([true], 'Gender is required'),
     userAgreement: Yup.boolean().oneOf([true], 'You must accept the agreement'),
     userFile: Yup.mixed()
@@ -51,6 +57,8 @@ export const PageFormUncontrolled = () => {
         ),
         userCountry: Yup.string().required('Country is required'),
   });
+
+  const [error, setError] = useState({});
 
   const validateForm = async (event) => {
     event.preventDefault();
@@ -69,6 +77,16 @@ export const PageFormUncontrolled = () => {
     try {
       await validationSchema.validate(formData, { abortEarly: false });
       setError({});
+      dispatch(updateUser({
+        name: inputName.current?.value,
+        age: inputAge.current?.value,
+        email: inputEmail.current?.value,
+        pass: inputPass.current?.value,
+        gender: inputMale.current?.checked ? inputMale.current?.value : inputFemale.current?.value,
+        agreement: inputAgreement.current?.checked,
+        image: await convertToBase64(inputFile.current?.files[0]),
+        country: inputCountry.current?.value,
+      }))
     } catch (validationErrors) {
       const errors = validationErrors.inner.reduce((acc, error) => {
         return { ...acc, [error.path]: error.message };
