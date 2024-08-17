@@ -22,7 +22,7 @@ export const UserCard = () => {
           <img className={s['card__image']} src={dataRedux.user.image} alt='Photo'></img>
         </div>
       : <div className={s.box}>
-          <p>You need save user data:</p>
+          <p className={s.title}>You need save user data:</p>
           <Link className={s.link} to='/uncontrolled'>Uncontrolled Form</Link>
           <Link className={s.link} to='/controlled'>React Hook Form</Link>
         </div>}
