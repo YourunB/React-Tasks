@@ -4,6 +4,7 @@ import { useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../redux/store';
 import { updateUser } from '../redux/dataSlice';
+import { convertToBase64 } from '../helpers/convertToBase64';
 
 export const PageFormUncontrolled = () => {
   const dispatch = useDispatch();
@@ -19,15 +20,6 @@ export const PageFormUncontrolled = () => {
   const inputAgreement = useRef<HTMLInputElement>(null);
   const inputFile = useRef<HTMLInputElement>(null);
   const inputCountry = useRef<HTMLInputElement>(null);
-
-  function convertToBase64(file) {
-    return new Promise((resolve, reject) => {
-      const reader = new FileReader();
-      reader.readAsDataURL(file);
-      reader.onload = () => resolve(reader.result);
-      reader.onerror = error => reject(error);
-    });
-  }
 
   const validationSchema = Yup.object({
     userName: Yup.string().matches(/^[A-Z]/, 'Name must start with an uppercase letter').required('Name is required'),
