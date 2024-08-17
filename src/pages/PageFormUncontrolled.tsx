@@ -24,10 +24,10 @@ export const PageFormUncontrolled = () => {
     userPass: Yup.string()
       .required('Password is required')
       .min(8, 'must be at least 8 characters')
-      .matches(/[0-9]/, 'Password must contain at least one number')
-      .matches(/[a-z]/, 'Password must contain at least one lowercase letter')
-      .matches(/[A-Z]/, 'Password must contain at least one uppercase letter')
-      .matches(/[!@#$%^&*(),.?":{}|<>]/, 'Password must contain at least one special character'),
+      .matches(/[0-9]/, 'Must contain one number')
+      .matches(/[a-z]/, 'Must contain one lowercase letter')
+      .matches(/[A-Z]/, 'Must contain one uppercase letter')
+      .matches(/[!@#$%^&*(),.?":{}|<>]/, 'Must contain one special character'),
     userPassRepeat: Yup.string().oneOf([Yup.ref('userPass'), null], 'Passwords must match'),
     userMale: Yup.boolean().oneOf([true], 'Gender is required'),
     userFemale: Yup.boolean().oneOf([true], 'Gender is required'),
@@ -107,26 +107,24 @@ export const PageFormUncontrolled = () => {
           <legend>Gender:</legend>
           <div><input ref={inputMale} id="userMale" type={'radio'} value='male' name='gender' /><label htmlFor="userMale">male</label></div>
           <div><input ref={inputFemale} id="userFemale" type={'radio'} value='female' name='gender'/><label htmlFor="userFemale">female</label></div>
-          {(error.userMale && <span className='error'>{error.userMale}</span>) && (error.userFemale && <span className='error'>{error.userFemale}</span>)}
+          <div className='error-box'>{(error.userMale && <span className='error'>{error.userMale}</span>) && (error.userFemale && <span className='error'>{error.userFemale}</span>)}</div>
         </fieldset>
 
         <fieldset>
           <legend>User Agreement:</legend>
           <input ref={inputAgreement} id="userAgreement" type={'checkbox'}/>
           <label htmlFor="userAgreement">I accept Terms and Conditions agreement.</label>
-          {error.userAgreement && <p>{error.userAgreement}</p>}
+          <div className='error-box'>{error.userAgreement && <span className='error'>{error.userAgreement}</span>}</div>
         </fieldset>
         
-        <div>
-          <label htmlFor="userFile">Upload Picture:</label>
+        <div className='input-box'>
+          <label htmlFor="userFile">Upload Picture:</label> {error.userFile && <span className='error'>{error.userFile}</span>}
           <input ref={inputFile} id="userFile" type={'file'} />
-          {error.userFile && <p>{error.userFile}</p>}
         </div>
 
-        <div>
-          <label htmlFor="userCountry">Choose Country:</label>
+        <div className='input-box'>
+          <label htmlFor="userCountry">Choose Country:</label> {error.userCountry && <span className='error'>{error.userCountry}</span>}
           <input ref={inputCountry} id="userCountry" type={'text'} placeholder='Enter country' />
-          {error.userCountry && <p>{error.userCountry}</p>}
         </div>
       
         <button type="submit">Submit</button>
