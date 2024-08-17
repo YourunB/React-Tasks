@@ -136,7 +136,7 @@ export const PageFormUncontrolled = () => {
         
         <div className='input-box'>
           <label htmlFor="userFile">Upload Picture:</label> {error.userFile && <span className='error'>{error.userFile}</span>}
-          <input ref={inputFile} id="userFile" type={'file'} />
+          <input className='file' ref={inputFile} id="userFile" type={'file'} />
         </div>
 
         <div className='input-box'>
@@ -144,7 +144,7 @@ export const PageFormUncontrolled = () => {
           <input ref={inputCountry} id="userCountry" type={'text'} placeholder='Enter country' />
         </div>
       
-        <button type="submit">Submit</button>
+        <button className='button' type="submit">Submit</button>
       </form>
     </main>
   );

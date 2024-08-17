@@ -35,3 +35,31 @@ fieldset {
 .error-box {
   min-height: 20px;
 }
+
+.file {
+  cursor: pointer;
+}
+
+.button {
+  background: white;
+  outline: none;
+  border-radius: 5px;
+  padding: 5px;
+  border: white 2px solid;
+  font-weight: 700;
+  display: block;
+  margin: auto;
+  transition: 0.7s;
+}
+
+@media(hover:hover) {
+  .button:hover {
+    cursor: pointer;
+    transform: scale(1.1);
+  }
+}
+
+.button:active {
+  transform: scale(0.8);
+  transition: 0.2s;
+}
