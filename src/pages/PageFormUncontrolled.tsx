@@ -18,7 +18,7 @@ export const PageFormUncontrolled = () => {
 
   const validationSchema = Yup.object({
     userName: Yup.string().matches(/^[A-Z]/, 'Name must start with an uppercase letter').required('Name is required'),
-    userAge: Yup.number().required('Age is required'),
+    userAge: Yup.number().min(0, 'Age cannot be negative').required('Age is required'),
     userEmail: Yup.string().email('Invalid email address').required('Email is required'),
     userPass: Yup.string().required('Password is required'),
     userPassRepeat: Yup.string().oneOf([Yup.ref('userPass'), null], 'Passwords must match'),
@@ -58,7 +58,12 @@ export const PageFormUncontrolled = () => {
           {error.userName && <p>{error.userName}</p>}
         </div>
 
-        <div><label htmlFor="userAge">Age:</label><input ref={inputAge} id="userAge" type={'text'} placeholder="Enter age"/></div>
+        <div>
+          <label htmlFor="userAge">Age:</label>
+          <input ref={inputAge} id="userAge" type={'number'} placeholder="Enter age"/>
+          {error.userAge && <p>{error.userAge}</p>}
+        </div>
+
         <div><label htmlFor="userEmail">Email address:</label><input ref={inputEmail} id="userEmail" type={'email'} placeholder="Enter email"/></div>
         <div><label htmlFor="userPass">Password:</label><input ref={inputPass} id="userPass" type={'password'} placeholder="Enter password"/></div>
         <div><label htmlFor="userPassRepeat">Repeat password:</label><input ref={inputPassRepeat} id="userPassRepeat" type={'password'} placeholder="Enter password"/></div>
