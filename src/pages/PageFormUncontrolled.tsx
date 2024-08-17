@@ -53,7 +53,6 @@ export const PageFormUncontrolled = () => {
 
   const countriesList = dataRedux.countriesList;
   const [countriesFilter, setCountriesFilter] = useState([]);
-  const [countrySelect, setCountrySelect] = useState('');
   const [inputValue, setInputValue] = useState('');
 
   const handleInputChange = (e) => {
@@ -66,7 +65,6 @@ export const PageFormUncontrolled = () => {
   };
   
   const handleSelectCountry = (country) => {
-    setCountrySelect(country);
     setInputValue(country);
     setCountriesFilter([]);
   };
