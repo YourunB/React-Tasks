@@ -105,3 +105,9 @@ fieldset {
   transform: scale(0.8);
   transition: 0.2s;
 }
+
+.button:disabled {
+  cursor: none;
+  transform: scale(1);
+  opacity: 0.5;
+}
