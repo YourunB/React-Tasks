@@ -3,6 +3,7 @@ import * as Yup from 'yup';
 import { useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../redux/store';
+import { updateUser } from '../redux/dataSlice';
 
 export const PageFormUncontrolled = () => {
   const dispatch = useDispatch();
@@ -33,8 +34,8 @@ export const PageFormUncontrolled = () => {
       .matches(/[A-Z]/, 'Must contain one uppercase letter')
       .matches(/[!@#$%^&*(),.?":{}|<>]/, 'Must contain one special character'),
     userPassRepeat: Yup.string().oneOf([Yup.ref('userPass'), null], 'Passwords must match'),
-    userMale: Yup.boolean().oneOf([true], 'Gender is required'),
-    userFemale: Yup.boolean().oneOf([true], 'Gender is required'),
+    //gender: Yup.string().oneOf(['male', 'female'], 'Gender is required'),
+    gender: Yup.boolean().oneOf([true], 'Gender is required'),
     userAgreement: Yup.boolean().oneOf([true], 'You must accept the agreement'),
     userFile: Yup.mixed()
         .required('A file is required')
@@ -59,13 +60,12 @@ export const PageFormUncontrolled = () => {
       userEmail: inputEmail.current?.value,
       userPass: inputPass.current?.value,
       userPassRepeat: inputPassRepeat.current?.value,
-      userMale: inputMale.current?.checked,
-      userFemale: inputFemale.current?.checked,
+      gender: inputMale.current?.checked || inputFemale.current?.checked,
       userAgreement: inputAgreement.current?.checked,
       userFile: inputFile.current?.files[0],
       userCountry: inputCountry.current?.value,
     };
-
+    
     try {
       await validationSchema.validate(formData, { abortEarly: false });
       setError({});
@@ -111,7 +111,7 @@ export const PageFormUncontrolled = () => {
           <legend>Gender:</legend>
           <div><input ref={inputMale} id="userMale" type={'radio'} value='male' name='gender' /><label htmlFor="userMale">male</label></div>
           <div><input ref={inputFemale} id="userFemale" type={'radio'} value='female' name='gender'/><label htmlFor="userFemale">female</label></div>
-          <div className='error-box'>{(error.userMale && <span className='error'>{error.userMale}</span>) && (error.userFemale && <span className='error'>{error.userFemale}</span>)}</div>
+          <div className='error-box'>{error.gender && <span className='error'>{error.gender}</span>}</div>
         </fieldset>
 
         <fieldset>
