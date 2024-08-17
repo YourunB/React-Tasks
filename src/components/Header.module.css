@@ -1,8 +1,10 @@
 .header {
   height: 60px;
-  padding: 10px;
   display: flex;
   justify-content: center;
+  align-items: center;
+  background: white;
+  color: black;
 }
 
 .menu {
@@ -12,4 +14,26 @@
   text-align: center;
   margin: 0;
   padding: 0;
+  font-weight: 700;
+}
+
+.menu__item {
+  display: flex;
+  align-items: center;
+  height: 60px;
+  padding: 10px;
+  transition: 0.7s;
+}
+
+@media (hover:hover) {
+  .menu__item:hover {
+    cursor: pointer;
+    background: black;
+    color: white;
+  }
+}
+
+.menu__item_checked {
+  background: black;
+  color: white;
 }
