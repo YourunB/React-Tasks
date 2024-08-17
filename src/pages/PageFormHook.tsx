@@ -2,13 +2,34 @@ import './pages.css';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useNavigate } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { RootState } from '../redux/store';
 import { validationSchema } from '../modules/validationSchema';
 import { dispatchUserData } from '../modules/dispatchUserData';
+import { useState } from 'react';
 
 export const PageFormHook = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const dataRedux = useSelector((state: RootState) => state.data);
+
+  const countriesList = dataRedux.countriesList;
+  const [countriesFilter, setCountriesFilter] = useState([]);
+  const [inputValue, setInputValue] = useState('');
+
+  const handleInputChange = (e) => {
+    const value = e.target.value;
+    setInputValue(value);
+    const filtered = countriesList.filter(country =>
+      country.toLowerCase().includes(value.toLowerCase())
+    );
+    setCountriesFilter(filtered);
+  };
+  
+  const handleSelectCountry = (country) => {
+    setInputValue(country);
+    setCountriesFilter([]);
+  };
 
   const { register, handleSubmit, formState: { errors, isValid } } = useForm({
     resolver: yupResolver(validationSchema),
@@ -77,7 +98,16 @@ export const PageFormHook = () => {
         
         <div className='input-box'>
           <label htmlFor="userCountry">Choose Country:</label> {errors.userCountry?.message && <span className='error'>{errors.userCountry?.message}</span>}
-          <input id="userCountry" type="text" placeholder="Enter country" {...register('userCountry')} />
+          <input id="userCountry" type="text" placeholder="Enter country" {...register('userCountry')} value={inputValue} onChange={handleInputChange} />
+          {countriesFilter.length > 0 && (
+            <ul className="drop-list">
+              {countriesFilter.map((country, index) => (
+                <li key={index} onClick={() => handleSelectCountry(country)}>
+                  {country}
+                </li>
+              ))}
+            </ul>
+          )}
         </div>
 
         <button className='button' type="submit" disabled={!isValid}>Submit</button>
