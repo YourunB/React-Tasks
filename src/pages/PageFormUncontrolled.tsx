@@ -1,6 +1,6 @@
 
 import * as Yup from 'yup';
-import { useRef } from 'react';
+import { useRef, useState } from 'react';
 
 export const PageFormUncontrolled = () => {
   const inputName = useRef<HTMLInputElement>(null);
@@ -14,12 +14,50 @@ export const PageFormUncontrolled = () => {
   const inputFile = useRef<HTMLInputElement>(null);
   const inputCountry = useRef<HTMLInputElement>(null);
 
+  const [error, setError] = useState({});
+
+  const validationSchema = Yup.object({
+    userName: Yup.string().required('Name is required'),
+    userAge: Yup.number().required('Age is required'),
+    userEmail: Yup.string().email('Invalid email address').required('Email is required'),
+    userPass: Yup.string().required('Password is required'),
+    userPassRepeat: Yup.string().oneOf([Yup.ref('userPass'), null], 'Passwords must match'),
+    userAgreement: Yup.boolean().oneOf([true], 'You must accept the agreement'),
+  });
+
+  const validateForm = async (event) => {
+    event.preventDefault();
+    const formData = {
+      userName: inputName.current?.value,
+      userAge: inputAge.current?.value,
+      userEmail: inputEmail.current?.value,
+      userPass: inputPass.current?.value,
+      userPassRepeat: inputPassRepeat.current?.value,
+      userAgreement: inputAgreement.current?.checked,
+    };
+
+    try {
+      await validationSchema.validate(formData, { abortEarly: false });
+      setError({});
+    } catch (validationErrors) {
+      const errors = validationErrors.inner.reduce((acc, error) => {
+        return { ...acc, [error.path]: error.message };
+      }, {});
+      setError(errors);
+    }
+  };
+
   return (
     <main>
-      <form>
+      <form onSubmit={(event) => validateForm(event)}>
         <h2>Uncontrolled Form</h2>
 
-        <div><label htmlFor="userName">Name:</label><input ref={inputName} id="userName" type={'text'} placeholder="Enter name"/></div>
+        <div>
+          <label htmlFor="userName">Name:</label>
+          <input ref={inputName} id="userName" type="text" placeholder="Enter name" />
+          {error.userName && <p>{error.userName}</p>}
+        </div>
+
         <div><label htmlFor="userAge">Age:</label><input ref={inputAge} id="userAge" type={'text'} placeholder="Enter age"/></div>
         <div><label htmlFor="userEmail">Email address:</label><input ref={inputEmail} id="userEmail" type={'email'} placeholder="Enter email"/></div>
         <div><label htmlFor="userPass">Password:</label><input ref={inputPass} id="userPass" type={'password'} placeholder="Enter password"/></div>
