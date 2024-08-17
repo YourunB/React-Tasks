@@ -18,7 +18,7 @@ export const PageFormUncontrolled = () => {
 
   const validationSchema = Yup.object({
     userName: Yup.string().matches(/^[A-Z]/, 'Name must start with an uppercase letter').required('Name is required'),
-    userAge: Yup.number().min(0, 'Age cannot be negative').required('Age is required'),
+    userAge: Yup.number().typeError('Age must be number').positive('Age must be positive number').required('Age is required'),
     userEmail: Yup.string().email('Invalid email address').matches(/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/, 'Invalid email address').required('Email is required'),
     userPass: Yup.string()
       .required('Password is required')
@@ -77,8 +77,7 @@ export const PageFormUncontrolled = () => {
           <label htmlFor="userPass">Password:</label>
           <input ref={inputPass} id="userPass" type={'password'} placeholder="Enter password"/>
           {error.userPass && <p>{error.userPass}</p>}
-        </div>
-        
+        </div>   
         <div>
           <label htmlFor="userPassRepeat">Repeat password:</label>
           <input ref={inputPassRepeat} id="userPassRepeat" type={'password'} placeholder="Enter password"/>
