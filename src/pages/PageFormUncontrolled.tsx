@@ -20,7 +20,13 @@ export const PageFormUncontrolled = () => {
     userName: Yup.string().matches(/^[A-Z]/, 'Name must start with an uppercase letter').required('Name is required'),
     userAge: Yup.number().min(0, 'Age cannot be negative').required('Age is required'),
     userEmail: Yup.string().email('Invalid email address').matches(/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/, 'Invalid email address').required('Email is required'),
-    userPass: Yup.string().required('Password is required'),
+    userPass: Yup.string()
+      .required('Password is required')
+      .min(8, 'Password must be at least 8 characters')
+      .matches(/[0-9]/, 'Password must contain at least one number')
+      .matches(/[a-z]/, 'Password must contain at least one lowercase letter')
+      .matches(/[A-Z]/, 'Password must contain at least one uppercase letter')
+      .matches(/[!@#$%^&*(),.?":{}|<>]/, 'Password must contain at least one special character'),
     userPassRepeat: Yup.string().oneOf([Yup.ref('userPass'), null], 'Passwords must match'),
     userAgreement: Yup.boolean().oneOf([true], 'You must accept the agreement'),
   });
@@ -57,21 +63,27 @@ export const PageFormUncontrolled = () => {
           <input ref={inputName} id="userName" type="text" placeholder="Enter name" />
           {error.userName && <p>{error.userName}</p>}
         </div>
-
         <div>
           <label htmlFor="userAge">Age:</label>
           <input ref={inputAge} id="userAge" type={'number'} placeholder="Enter age"/>
           {error.userAge && <p>{error.userAge}</p>}
         </div>
-
         <div>
           <label htmlFor="userEmail">Email address:</label>
           <input ref={inputEmail} id="userEmail" type={'email'} placeholder="Enter email"/>
           {error.userEmail && <p>{error.userEmail}</p>}
+        </div> 
+        <div>
+          <label htmlFor="userPass">Password:</label>
+          <input ref={inputPass} id="userPass" type={'password'} placeholder="Enter password"/>
+          {error.userPass && <p>{error.userPass}</p>}
         </div>
         
-        <div><label htmlFor="userPass">Password:</label><input ref={inputPass} id="userPass" type={'password'} placeholder="Enter password"/></div>
-        <div><label htmlFor="userPassRepeat">Repeat password:</label><input ref={inputPassRepeat} id="userPassRepeat" type={'password'} placeholder="Enter password"/></div>
+        <div>
+          <label htmlFor="userPassRepeat">Repeat password:</label>
+          <input ref={inputPassRepeat} id="userPassRepeat" type={'password'} placeholder="Enter password"/>
+          {error.userPassRepeat && <p>{error.userPassRepeat}</p>}
+        </div>
 
         <fieldset>
           <legend>Gender:</legend>
