@@ -28,6 +28,8 @@ export const PageFormUncontrolled = () => {
       .matches(/[A-Z]/, 'Password must contain at least one uppercase letter')
       .matches(/[!@#$%^&*(),.?":{}|<>]/, 'Password must contain at least one special character'),
     userPassRepeat: Yup.string().oneOf([Yup.ref('userPass'), null], 'Passwords must match'),
+    userMale: Yup.boolean().oneOf([true], 'Gender is required'),
+    userFemale: Yup.boolean().oneOf([true], 'Gender is required'),
     userAgreement: Yup.boolean().oneOf([true], 'You must accept the agreement'),
   });
 
@@ -39,6 +41,8 @@ export const PageFormUncontrolled = () => {
       userEmail: inputEmail.current?.value,
       userPass: inputPass.current?.value,
       userPassRepeat: inputPassRepeat.current?.value,
+      userMale: inputMale.current?.checked,
+      userFemale: inputFemale.current?.checked,
       userAgreement: inputAgreement.current?.checked,
     };
 
@@ -86,8 +90,9 @@ export const PageFormUncontrolled = () => {
 
         <fieldset>
           <legend>Gender:</legend>
-          <div><input ref={inputMale} id="userMale" type={'radio'} value='male' name='gender' defaultChecked /><label htmlFor="userMale">male</label></div>
+          <div><input ref={inputMale} id="userMale" type={'radio'} value='male' name='gender'  /><label htmlFor="userMale">male</label></div>
           <div><input ref={inputFemale} id="userFemale" type={'radio'} value='female' name='gender'/><label htmlFor="userFemale">female</label></div>
+          {(error.userMale && <p>{error.userMale}</p>) && (error.userFemale && <p>{error.userFemale}</p>)}
         </fieldset>
 
         <fieldset>
