@@ -1,9 +1,13 @@
-
+import './pages.css';
 import * as Yup from 'yup';
 import { useRef, useState } from 'react';
-import './pages.css';
+import { useDispatch, useSelector } from 'react-redux';
+import { RootState } from '../redux/store';
 
 export const PageFormUncontrolled = () => {
+  const dispatch = useDispatch();
+  const dataRedux = useSelector((state: RootState) => state.data);
+
   const inputName = useRef<HTMLInputElement>(null);
   const inputAge = useRef<HTMLInputElement>(null);
   const inputEmail = useRef<HTMLInputElement>(null);

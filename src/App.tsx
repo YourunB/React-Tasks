@@ -2,14 +2,18 @@ import './App.css';
 import { PagesRouter } from './modules/pagesRouter';
 import { BrowserRouter } from 'react-router-dom';
 import { Header } from './components/Header';
+import { Provider } from 'react-redux';
+import { store } from './redux/store';
 
 function App() {
   return (
     <>
-      <BrowserRouter>
-        <Header />
-        <PagesRouter />
-      </BrowserRouter>
+      <Provider store={store}>
+        <BrowserRouter>
+          <Header />
+          <PagesRouter />
+        </BrowserRouter>
+      </Provider>
     </>
   );
 }
