@@ -5,8 +5,10 @@ import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../redux/store';
 import { updateUser } from '../redux/dataSlice';
 import { convertToBase64 } from '../helpers/convertToBase64';
+import { useNavigate } from 'react-router-dom';
 
 export const PageFormUncontrolled = () => {
+  const navigate = useNavigate();
   const dispatch = useDispatch();
   const dataRedux = useSelector((state: RootState) => state.data);
 
@@ -78,7 +80,8 @@ export const PageFormUncontrolled = () => {
         agreement: inputAgreement.current?.checked,
         image: await convertToBase64(inputFile.current?.files[0]),
         country: inputCountry.current?.value,
-      }))
+      }));
+      navigate('/');
     } catch (validationErrors) {
       const errors = validationErrors.inner.reduce((acc, error) => {
         return { ...acc, [error.path]: error.message };
