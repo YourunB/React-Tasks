@@ -1,8 +1,10 @@
+import './pages.css'
+import { UserCard } from '../components/UserCard';
 
 export const PageHome = () => {
   return (
-    <main>
-      Page home ...
+    <main className='page'>
+      <UserCard />
     </main>
   );
 };

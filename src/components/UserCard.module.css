@@ -1,0 +1,39 @@
+.card {
+  display: flex;
+  align-items: center;
+  border-radius: 5px;
+  border: solid 2px white;
+  padding: 10px;
+  width: fit-content;
+  background: white;
+  color: black;
+  margin: auto;
+}
+
+.card__data {
+  max-width: 240px;
+  width: 100%;
+  padding-right: 10px;
+}
+
+.card__image {
+  max-width: 300px;
+  width: 100%;
+  object-fit: cover;
+  border-radius: 5px;
+}
+
+@media (max-width: 576px) {
+  .card {
+    flex-wrap: wrap-reverse;
+    justify-content: center;
+  }
+
+  .card__image {
+    max-width: 100%;
+  }
+
+  .card__data {
+    max-width: 100%;
+  }
+}
