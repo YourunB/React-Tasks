@@ -44,8 +44,8 @@ fieldset {
 .button {
   background: white;
   outline: none;
-  border-radius: 5px;
-  padding: 5px;
+  border-radius: 3px;
+  padding: 10px;
   border: white 2px solid;
   font-weight: 700;
   display: block;
