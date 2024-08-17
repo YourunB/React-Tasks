@@ -53,14 +53,55 @@ fieldset {
   transition: 0.7s;
 }
 
+.not-found {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: calc(100vh - 60px);
+}
+
+.not-found__box {
+  text-align: center;
+}
+
+.not-found__box h3 {
+  color: rgb(208, 34, 34);
+  font-size: 40px;
+}
+
+.not-found__box img {
+  width: 260px;
+  animation: earth-rotate 10s linear infinite;
+}
+
+.not-found__box__link {
+  display: block;
+  background: white;
+  padding: 10px;
+  border-radius: 3px;
+  color: black;
+  transition: 0.7s;
+}
+
+@keyframes earth-rotate {
+  0% {
+    transform: rotate(0);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
 @media(hover:hover) {
-  .button:hover {
+  .button:hover,
+  .not-found__box__link:hover {
     cursor: pointer;
     transform: scale(1.1);
   }
 }
 
-.button:active {
+.button:active,
+.not-found__box__link:active {
   transform: scale(0.8);
   transition: 0.2s;
 }
