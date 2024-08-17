@@ -2,8 +2,17 @@ import './pages.css';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as Yup from 'yup';
+import { useNavigate } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { updateUser } from '../redux/dataSlice';
+import { RootState } from '../redux/store';
+import { convertToBase64 } from '../helpers/convertToBase64';
 
 export const PageFormHook = () => {
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const dataRedux = useSelector((state: RootState) => state.data);
+
   const validationSchema = Yup.object({
     userName: Yup.string().matches(/^[A-Z]/, 'Name must start with an uppercase letter').required('Name is required'),
     userAge: Yup.number().typeError('Age must be number').positive('Age must be positive number').required('Age is required'),
@@ -36,8 +45,19 @@ export const PageFormHook = () => {
 
   const watchAllFields = watch();
 
-  const onSubmit = (data) => {
+  const onSubmit = async (data) => {
     console.log(data);
+    dispatch(updateUser({
+      name: data.userName,
+      age: data.userAge,
+      email: data.userEmail,
+      pass: data.userPass,
+      gender: data.gender,
+      agreement: data.userAgreement,
+      image: await convertToBase64(data.userFile[0]),
+      country: data.userCountry,
+    }));
+    navigate('/');
   };
 
 
