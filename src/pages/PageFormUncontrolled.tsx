@@ -17,7 +17,7 @@ export const PageFormUncontrolled = () => {
   const [error, setError] = useState({});
 
   const validationSchema = Yup.object({
-    userName: Yup.string().required('Name is required'),
+    userName: Yup.string().matches(/^[A-Z]/, 'Name must start with an uppercase letter').required('Name is required'),
     userAge: Yup.number().required('Age is required'),
     userEmail: Yup.string().email('Invalid email address').required('Email is required'),
     userPass: Yup.string().required('Password is required'),
