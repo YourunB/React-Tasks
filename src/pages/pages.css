@@ -1,0 +1,29 @@
+.page {
+  max-width: 1440px;
+  width: 100%;
+  margin: auto;
+}
+
+.error {
+  min-height: 20px;
+  font-size: 14px;
+  color: rgb(208, 34, 34);
+}
+
+.input-box {
+  margin-bottom: 10px;
+}
+
+.input-box input {
+  width: 100%;
+  background: none;
+  color: white;
+  border: none;
+  outline: none;
+  border-bottom: 2px white solid;
+  transition: 0.5s;
+}
+
+.error + input {
+  border-color: rgb(208, 34, 34);
+}

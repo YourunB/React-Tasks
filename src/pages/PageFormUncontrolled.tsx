@@ -1,6 +1,7 @@
 
 import * as Yup from 'yup';
 import { useRef, useState } from 'react';
+import './pages.css';
 
 export const PageFormUncontrolled = () => {
   const inputName = useRef<HTMLInputElement>(null);
@@ -22,7 +23,7 @@ export const PageFormUncontrolled = () => {
     userEmail: Yup.string().email('Invalid email address').matches(/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/, 'Invalid email address').required('Email is required'),
     userPass: Yup.string()
       .required('Password is required')
-      .min(8, 'Password must be at least 8 characters')
+      .min(8, 'must be at least 8 characters')
       .matches(/[0-9]/, 'Password must contain at least one number')
       .matches(/[a-z]/, 'Password must contain at least one lowercase letter')
       .matches(/[A-Z]/, 'Password must contain at least one uppercase letter')
@@ -43,6 +44,7 @@ export const PageFormUncontrolled = () => {
           'Format must be jpeg or png',
           value => value && ['image/jpeg', 'image/png'].includes(value.type)
         ),
+        userCountry: Yup.string().required('Country is required'),
   });
 
   const validateForm = async (event) => {
@@ -57,6 +59,7 @@ export const PageFormUncontrolled = () => {
       userFemale: inputFemale.current?.checked,
       userAgreement: inputAgreement.current?.checked,
       userFile: inputFile.current?.files[0],
+      userCountry: inputCountry.current?.value,
     };
 
     try {
@@ -71,41 +74,40 @@ export const PageFormUncontrolled = () => {
   };
 
   return (
-    <main>
+    <main className='page'>
       <form onSubmit={(event) => validateForm(event)}>
         <h2>Uncontrolled Form</h2>
 
-        <div>
-          <label htmlFor="userName">Name:</label>
+        <div className='input-box'>
+          <label htmlFor="userName">Name:</label> {error.userName && <span className='error'>{error.userName}</span>}
           <input ref={inputName} id="userName" type="text" placeholder="Enter name" />
-          {error.userName && <p>{error.userName}</p>}
         </div>
-        <div>
-          <label htmlFor="userAge">Age:</label>
+
+        <div className='input-box'>
+          <label htmlFor="userAge">Age:</label> {error.userAge && <span className='error'>{error.userAge}</span>}
           <input ref={inputAge} id="userAge" type={'number'} placeholder="Enter age"/>
-          {error.userAge && <p>{error.userAge}</p>}
         </div>
-        <div>
-          <label htmlFor="userEmail">Email address:</label>
+
+        <div className='input-box'>
+          <label htmlFor="userEmail">Email:</label> {error.userEmail && <span className='error'>{error.userEmail}</span>}
           <input ref={inputEmail} id="userEmail" type={'email'} placeholder="Enter email"/>
-          {error.userEmail && <p>{error.userEmail}</p>}
-        </div> 
-        <div>
-          <label htmlFor="userPass">Password:</label>
+        </div>
+
+        <div className='input-box'>
+          <label htmlFor="userPass">Password:</label> {error.userPass && <span className='error'>{error.userPass}</span>}
           <input ref={inputPass} id="userPass" type={'password'} placeholder="Enter password"/>
-          {error.userPass && <p>{error.userPass}</p>}
-        </div>   
-        <div>
-          <label htmlFor="userPassRepeat">Repeat password:</label>
+        </div>
+
+        <div className='input-box'>
+          <label htmlFor="userPassRepeat">Repeat password:</label> {error.userPassRepeat && <span className='error'>{error.userPassRepeat}</span>}
           <input ref={inputPassRepeat} id="userPassRepeat" type={'password'} placeholder="Enter password"/>
-          {error.userPassRepeat && <p>{error.userPassRepeat}</p>}
         </div>
 
         <fieldset>
           <legend>Gender:</legend>
-          <div><input ref={inputMale} id="userMale" type={'radio'} value='male' name='gender'  /><label htmlFor="userMale">male</label></div>
+          <div><input ref={inputMale} id="userMale" type={'radio'} value='male' name='gender' /><label htmlFor="userMale">male</label></div>
           <div><input ref={inputFemale} id="userFemale" type={'radio'} value='female' name='gender'/><label htmlFor="userFemale">female</label></div>
-          {(error.userMale && <p>{error.userMale}</p>) && (error.userFemale && <p>{error.userFemale}</p>)}
+          {(error.userMale && <span className='error'>{error.userMale}</span>) && (error.userFemale && <span className='error'>{error.userFemale}</span>)}
         </fieldset>
 
         <fieldset>
@@ -121,7 +123,11 @@ export const PageFormUncontrolled = () => {
           {error.userFile && <p>{error.userFile}</p>}
         </div>
 
-        <div><label htmlFor="userCountry">Choose Country:</label><input ref={inputCountry} id="userCountry" type={'text'} placeholder='Enter country'></input></div>
+        <div>
+          <label htmlFor="userCountry">Choose Country:</label>
+          <input ref={inputCountry} id="userCountry" type={'text'} placeholder='Enter country' />
+          {error.userCountry && <p>{error.userCountry}</p>}
+        </div>
       
         <button type="submit">Submit</button>
       </form>
