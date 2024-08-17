@@ -1,13 +1,15 @@
 import './pages.css';
 import { useRef, useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { validationSchema } from '../modules/validationSchema';
 import { dispatchUserData } from '../modules/dispatchUserData';
+import { RootState } from '../redux/store';
 
 export const PageFormUncontrolled = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const dataRedux = useSelector((state: RootState) => state.data);
 
   const inputName = useRef<HTMLInputElement>(null);
   const inputAge = useRef<HTMLInputElement>(null);
@@ -47,6 +49,26 @@ export const PageFormUncontrolled = () => {
       }, {});
       setError(errors);
     }
+  };
+
+  const countriesList = dataRedux.countriesList;
+  const [countriesFilter, setCountriesFilter] = useState([]);
+  const [countrySelect, setCountrySelect] = useState('');
+  const [inputValue, setInputValue] = useState('');
+
+  const handleInputChange = (e) => {
+    const value = e.target.value;
+    setInputValue(value);
+    const filtered = countriesList.filter(country =>
+      country.toLowerCase().includes(value.toLowerCase())
+    );
+    setCountriesFilter(filtered);
+  };
+  
+  const handleSelectCountry = (country) => {
+    setCountrySelect(country);
+    setInputValue(country);
+    setCountriesFilter([]);
   };
 
   return (
@@ -99,8 +121,25 @@ export const PageFormUncontrolled = () => {
         </div>
 
         <div className='input-box'>
-          <label htmlFor="userCountry">Choose Country:</label> {error.userCountry && <span className='error'>{error.userCountry}</span>}
-          <input ref={inputCountry} id="userCountry" type={'text'} placeholder='Enter country' />
+          <label htmlFor="userCountry">Choose Country:</label>
+          {error.userCountry && <span className='error'>{error.userCountry}</span>}
+          <input
+            ref={inputCountry}
+            id="userCountry"
+            type="text"
+            placeholder="Enter country"
+            value={inputValue}
+            onChange={handleInputChange}
+          />
+          {countriesFilter.length > 0 && (
+            <ul className="drop-list">
+              {countriesFilter.map((country, index) => (
+                <li key={index} onClick={() => handleSelectCountry(country)}>
+                  {country}
+                </li>
+              ))}
+            </ul>
+          )}
         </div>
       
         <button className='button' type="submit">Submit</button>
