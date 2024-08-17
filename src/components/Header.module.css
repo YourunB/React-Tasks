@@ -9,7 +9,6 @@
 
 .menu {
   display: flex;
-  gap: 10px;
   list-style-type: none;
   text-align: center;
   margin: 0;
