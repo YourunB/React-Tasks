@@ -3,15 +3,13 @@ import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as Yup from 'yup';
 import { useNavigate } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { updateUser } from '../redux/dataSlice';
-import { RootState } from '../redux/store';
 import { convertToBase64 } from '../helpers/convertToBase64';
 
 export const PageFormHook = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const dataRedux = useSelector((state: RootState) => state.data);
 
   const validationSchema = Yup.object({
     userName: Yup.string().matches(/^[A-Z]/, 'Name must start with an uppercase letter').required('Name is required'),
@@ -19,7 +17,7 @@ export const PageFormHook = () => {
     userEmail: Yup.string().email('Invalid email address').matches(/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/, 'Invalid email address').required('Email is required'),
     userPass: Yup.string()
       .required('Password is required')
-      .min(8, 'must be at least 8 characters')
+      .min(8, 'Must be at least 8 characters')
       .matches(/[0-9]/, 'Must contain one number')
       .matches(/[a-z]/, 'Must contain one lowercase letter')
       .matches(/[A-Z]/, 'Must contain one uppercase letter')
@@ -38,15 +36,12 @@ export const PageFormHook = () => {
     userCountry: Yup.string().required('Country is required'),
   });
 
-  const { register, handleSubmit, formState: { errors, isValid }, watch } = useForm({
+  const { register, handleSubmit, formState: { errors, isValid } } = useForm({
     resolver: yupResolver(validationSchema),
     mode: 'onChange'
   });
 
-  const watchAllFields = watch();
-
   const onSubmit = async (data) => {
-    console.log(data);
     dispatch(updateUser({
       name: data.userName,
       age: data.userAge,
@@ -59,7 +54,6 @@ export const PageFormHook = () => {
     }));
     navigate('/');
   };
-
 
   return (
     <main className='page'>

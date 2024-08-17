@@ -1,8 +1,7 @@
 import './pages.css';
 import * as Yup from 'yup';
 import { useRef, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { RootState } from '../redux/store';
+import { useDispatch } from 'react-redux';
 import { updateUser } from '../redux/dataSlice';
 import { convertToBase64 } from '../helpers/convertToBase64';
 import { useNavigate } from 'react-router-dom';
@@ -10,7 +9,6 @@ import { useNavigate } from 'react-router-dom';
 export const PageFormUncontrolled = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const dataRedux = useSelector((state: RootState) => state.data);
 
   const inputName = useRef<HTMLInputElement>(null);
   const inputAge = useRef<HTMLInputElement>(null);
@@ -29,27 +27,23 @@ export const PageFormUncontrolled = () => {
     userEmail: Yup.string().email('Invalid email address').matches(/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/, 'Invalid email address').required('Email is required'),
     userPass: Yup.string()
       .required('Password is required')
-      .min(8, 'must be at least 8 characters')
+      .min(8, 'Must be at least 8 characters')
       .matches(/[0-9]/, 'Must contain one number')
       .matches(/[a-z]/, 'Must contain one lowercase letter')
       .matches(/[A-Z]/, 'Must contain one uppercase letter')
       .matches(/[!@#$%^&*(),.?":{}|<>]/, 'Must contain one special character'),
     userPassRepeat: Yup.string().oneOf([Yup.ref('userPass'), null], 'Passwords must match'),
-    gender: Yup.boolean().oneOf([true], 'Gender is required'),
+    gender: Yup.string().oneOf(['male', 'female'], 'Gender is required'),
     userAgreement: Yup.boolean().oneOf([true], 'You must accept the agreement'),
     userFile: Yup.mixed()
-        .required('A file is required')
-        .test(
-          'fileSize',
-          'File size must be < 1024 kb',
-          value => value && value.size <= 1024 * 1024
-        )
-        .test(
-          'fileFormat',
-          'Format must be jpeg or png',
-          value => value && ['image/jpeg', 'image/png'].includes(value.type)
-        ),
-        userCountry: Yup.string().required('Country is required'),
+    .required('A file is required')
+    .test('fileSize', 'File size must be < 1024 kb', value => {
+      return value && value[0] && value[0].size <= 1024 * 1024;
+    })
+    .test('fileFormat', 'Format must be jpeg or png', value => {
+      return value && value[0] && ['image/jpeg', 'image/png'].includes(value[0].type);
+    }),
+    userCountry: Yup.string().required('Country is required'),
   });
 
   const [error, setError] = useState({});
@@ -62,9 +56,9 @@ export const PageFormUncontrolled = () => {
       userEmail: inputEmail.current?.value,
       userPass: inputPass.current?.value,
       userPassRepeat: inputPassRepeat.current?.value,
-      gender: inputMale.current?.checked || inputFemale.current?.checked,
+      gender: inputMale.current?.checked ? inputMale.current?.value : inputFemale.current?.checked ? inputFemale.current?.value : false,
       userAgreement: inputAgreement.current?.checked,
-      userFile: inputFile.current?.files[0],
+      userFile: inputFile.current?.files,
       userCountry: inputCountry.current?.value,
     };
     
