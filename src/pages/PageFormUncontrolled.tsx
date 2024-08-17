@@ -1,10 +1,9 @@
 import './pages.css';
 import { useRef, useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { updateUser } from '../redux/dataSlice';
-import { convertToBase64 } from '../helpers/convertToBase64';
 import { useNavigate } from 'react-router-dom';
 import { validationSchema } from '../modules/validationSchema';
+import { dispatchUserData } from '../modules/dispatchUserData';
 
 export const PageFormUncontrolled = () => {
   const navigate = useNavigate();
@@ -40,16 +39,7 @@ export const PageFormUncontrolled = () => {
     try {
       await validationSchema.validate(formData, { abortEarly: false });
       setError({});
-      dispatch(updateUser({
-        name: inputName.current?.value,
-        age: inputAge.current?.value,
-        email: inputEmail.current?.value,
-        pass: inputPass.current?.value,
-        gender: inputMale.current?.checked ? inputMale.current?.value : inputFemale.current?.value,
-        agreement: inputAgreement.current?.checked,
-        image: await convertToBase64(inputFile.current?.files[0]),
-        country: inputCountry.current?.value,
-      }));
+      dispatchUserData(formData, dispatch);
       navigate('/');
     } catch (validationErrors) {
       const errors = validationErrors.inner.reduce((acc, error) => {

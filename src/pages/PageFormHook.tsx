@@ -3,9 +3,8 @@ import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-import { updateUser } from '../redux/dataSlice';
-import { convertToBase64 } from '../helpers/convertToBase64';
 import { validationSchema } from '../modules/validationSchema';
+import { dispatchUserData } from '../modules/dispatchUserData';
 
 export const PageFormHook = () => {
   const navigate = useNavigate();
@@ -17,16 +16,7 @@ export const PageFormHook = () => {
   });
 
   const onSubmit = async (data) => {
-    dispatch(updateUser({
-      name: data.userName,
-      age: data.userAge,
-      email: data.userEmail,
-      pass: data.userPass,
-      gender: data.gender,
-      agreement: data.userAgreement,
-      image: await convertToBase64(data.userFile[0]),
-      country: data.userCountry,
-    }));
+    dispatchUserData(data, dispatch);
     navigate('/');
   };
 
