@@ -1,0 +1,139 @@
+.page {
+  max-width: 1440px;
+  width: 100%;
+  margin: auto;
+  padding: 10px;
+}
+
+.error {
+  font-size: 14px;
+  color: rgb(208, 34, 34);
+}
+
+.input-box {
+  margin-bottom: 10px;
+  position: relative;
+}
+
+.input-box input {
+  width: 100%;
+  background: none;
+  color: white;
+  border: none;
+  outline: none;
+  border-bottom: 2px white solid;
+  transition: 0.5s;
+}
+
+.error + input {
+  border-color: rgb(208, 34, 34);
+}
+
+fieldset {
+  border-radius: 5px;
+  margin-bottom: 10px;
+}
+
+.error-box {
+  min-height: 20px;
+}
+
+.file {
+  cursor: pointer;
+}
+
+.button {
+  background: white;
+  outline: none;
+  border-radius: 3px;
+  padding: 10px;
+  border: white 2px solid;
+  font-weight: 700;
+  display: block;
+  margin: auto;
+  margin-top: 120px;
+  transition: 0.7s;
+}
+
+.not-found {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: calc(100vh - 60px);
+}
+
+.not-found__box {
+  text-align: center;
+}
+
+.not-found__box h3 {
+  color: rgb(208, 34, 34);
+  font-size: 40px;
+}
+
+.not-found__box img {
+  width: 260px;
+  animation: earth-rotate 10s linear infinite;
+}
+
+.not-found__box__link {
+  display: block;
+  background: white;
+  padding: 10px;
+  border-radius: 3px;
+  color: black;
+  transition: 0.7s;
+}
+
+.select {
+  color: black;
+}
+
+.drop-list {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  position: absolute;
+  height: 100px;
+  width: 100%;
+  overflow-y: auto;
+  cursor: pointer;
+}
+
+.drop-list li {
+  transition: 0.5s;
+}
+
+@keyframes earth-rotate {
+  0% {
+    transform: rotate(0);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@media (hover: hover) {
+  .button:hover,
+  .not-found__box__link:hover {
+    cursor: pointer;
+    transform: scale(1.1);
+  }
+
+  .drop-list li:hover {
+    background: white;
+    color: black;
+  }
+}
+
+.button:active,
+.not-found__box__link:active {
+  transform: scale(0.8);
+  transition: 0.2s;
+}
+
+.button:disabled {
+  cursor: default;
+  transform: scale(1);
+  opacity: 0.5;
+}
