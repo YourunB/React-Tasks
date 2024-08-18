@@ -99,6 +99,10 @@ fieldset {
   cursor: pointer;
 }
 
+.drop-list li {
+  transition: 0.5s;
+}
+
 @keyframes earth-rotate {
   0% {
     transform: rotate(0);
@@ -114,6 +118,11 @@ fieldset {
     cursor: pointer;
     transform: scale(1.1);
   }
+
+  .drop-list li:hover {
+    background: white;
+    color: black;
+  }  
 }
 
 .button:active,
