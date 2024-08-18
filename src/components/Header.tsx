@@ -11,14 +11,26 @@ export const Header = () => {
   return (
     <header className={s.header}>
       <ul className={s.menu}>
-        <li className={`${s['menu__item']} ${isCurrentPage('/') ? s['menu__item_checked'] : ''}`}>
-          <Link to="/">Main</Link>
+        <li>
+          <Link className={`${s['menu__item']} ${isCurrentPage('/') ? s['menu__item_checked'] : ''}`} to="/">
+            Main
+          </Link>
         </li>
-        <li className={`${s['menu__item']} ${isCurrentPage('/uncontrolled') ? s['menu__item_checked'] : ''}`}>
-          <Link to="/uncontrolled">Uncontrolled Form</Link>
+        <li>
+          <Link
+            className={`${s['menu__item']} ${isCurrentPage('/uncontrolled') ? s['menu__item_checked'] : ''}`}
+            to="/uncontrolled"
+          >
+            Uncontrolled Form
+          </Link>
         </li>
-        <li className={`${s['menu__item']} ${isCurrentPage('/controlled') ? s['menu__item_checked'] : ''}`}>
-          <Link to="/controlled">React Hook Form</Link>
+        <li>
+          <Link
+            className={`${s['menu__item']} ${isCurrentPage('/controlled') ? s['menu__item_checked'] : ''}`}
+            to="/controlled"
+          >
+            React Hook Form
+          </Link>
         </li>
       </ul>
     </header>
