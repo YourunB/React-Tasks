@@ -1,7 +1,7 @@
 import * as Yup from 'yup';
 
 export const validationSchema = Yup.object({
-  userName: Yup.string().matches(/^[A-Z]/, 'Name must start with an uppercase letter').required('Name is required'),
+  userName: Yup.string().matches(/^[A-Z]/, 'Name must start with uppercase letter').required('Name is required'),
   userAge: Yup.number().typeError('Age must be number').positive('Age must be positive number').required('Age is required'),
   userEmail: Yup.string().email('Invalid email address').matches(/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/, 'Invalid email address').required('Email is required'),
   userPass: Yup.string()

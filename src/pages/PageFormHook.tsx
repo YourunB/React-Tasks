@@ -17,24 +17,32 @@ export const PageFormHook = () => {
   const [countriesFilter, setCountriesFilter] = useState([]);
   const [inputValue, setInputValue] = useState('');
 
-  const handleInputChange = (e) => {
-    const value = e.target.value;
-    setInputValue(value);
-    const filtered = countriesList.filter(country =>
-      country.toLowerCase().includes(value.toLowerCase())
-    );
-    setCountriesFilter(filtered);
-  };
-  
-  const handleSelectCountry = (country) => {
-    setInputValue(country);
-    setCountriesFilter([]);
-  };
-
-  const { register, handleSubmit, formState: { errors, isValid } } = useForm({
+  const { register, handleSubmit, formState: { errors, isValid }, setValue, trigger, clearErrors, setError } = useForm({
     resolver: yupResolver(validationSchema),
     mode: 'onChange'
   });
+
+  const handleInputChange = (e) => {
+    const value = e.target.value;
+    setInputValue(value);
+    if (value.length > 0) {
+      const filtered = countriesList.filter(country =>
+        country.toLowerCase().includes(value.toLowerCase())
+      );
+      setCountriesFilter(filtered);
+      clearErrors('userCountry');
+    } else {
+      setCountriesFilter([]);
+      setError('userCountry', { type: 'manual', message: 'Country is required' });
+    }
+  };
+
+  const handleSelectCountry = (country) => {
+    setInputValue(country);
+    setCountriesFilter([]);
+    setValue('userCountry', country);
+    clearErrors('userCountry');
+  };
 
   const onSubmit = async (data) => {
     dispatchUserData(data, dispatch);
