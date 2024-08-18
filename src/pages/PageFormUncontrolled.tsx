@@ -5,6 +5,8 @@ import { useNavigate } from 'react-router-dom';
 import { validationSchema } from '../modules/validationSchema';
 import { dispatchUserData } from '../modules/dispatchUserData';
 import { RootState } from '../redux/store';
+import { UserDataDispatch } from '../helpers/types';
+import { ErrorState } from '../helpers/types';
 
 export const PageFormUncontrolled = () => {
   const navigate = useNavigate();
@@ -21,21 +23,21 @@ export const PageFormUncontrolled = () => {
   const inputAgreement = useRef<HTMLInputElement>(null);
   const inputFile = useRef<HTMLInputElement>(null);
   const inputCountry = useRef<HTMLInputElement>(null);
+ 
+  const [error, setError] = useState<ErrorState>({});
 
-  const [error, setError] = useState({});
-
-  const validateForm = async (event) => {
+  const validateForm = async (event: React.FormEvent) => {
     event.preventDefault();
-    const formData = {
-      userName: inputName.current?.value,
-      userAge: inputAge.current?.value,
-      userEmail: inputEmail.current?.value,
-      userPass: inputPass.current?.value,
-      userPassRepeat: inputPassRepeat.current?.value,
-      gender: inputMale.current?.checked ? inputMale.current?.value : inputFemale.current?.checked ? inputFemale.current?.value : false,
-      userAgreement: inputAgreement.current?.checked,
-      userFile: inputFile.current?.files,
-      userCountry: inputCountry.current?.value,
+    const formData: UserDataDispatch = {
+      userName: String(inputName.current?.value) || '',
+      userAge: Number(inputAge.current?.value) || 0,
+      userEmail: String(inputEmail.current?.value) || '',
+      userPass: String(inputPass.current?.value) || '',
+      userPassRepeat: String(inputPassRepeat.current?.value) || '',
+      gender: inputMale.current?.checked ? inputMale.current?.value : inputFemale.current?.checked ? inputFemale.current?.value : '',
+      userAgreement: inputAgreement.current?.checked || false,
+      userFile: Array.from(inputFile.current?.files || []),
+      userCountry: String(inputCountry.current?.value) || '',
     };
     
     try {
@@ -44,7 +46,7 @@ export const PageFormUncontrolled = () => {
       dispatchUserData(formData, dispatch);
       navigate('/');
     } catch (validationErrors) {
-      const errors = validationErrors.inner.reduce((acc, error) => {
+      const errors = (validationErrors as { inner: Array<{ path: string; message: string }> }).inner.reduce((acc: {}, error: { path: string; message: string }) => {
         return { ...acc, [error.path]: error.message };
       }, {});
       setError(errors);
@@ -52,10 +54,10 @@ export const PageFormUncontrolled = () => {
   };
 
   const countriesList = dataRedux.countriesList;
-  const [countriesFilter, setCountriesFilter] = useState([]);
-  const [inputValue, setInputValue] = useState('');
+  const [countriesFilter, setCountriesFilter] = useState<string[]>([]);
+  const [inputValue, setInputValue] = useState<string>('');
 
-  const handleInputChange = (e) => {
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
     setInputValue(value);
     const filtered = countriesList.filter(country =>
@@ -64,7 +66,7 @@ export const PageFormUncontrolled = () => {
     setCountriesFilter(filtered);
   };
   
-  const handleSelectCountry = (country) => {
+  const handleSelectCountry = (country: string) => {
     setInputValue(country);
     setCountriesFilter([]);
   };

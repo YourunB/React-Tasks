@@ -12,3 +12,27 @@ export interface UserInterface {
   agreement: boolean;
   image: string;
 }
+
+export type UserDataDispatch = {
+  userPassRepeat?: string;
+  gender?: string;
+  userAgreement?: boolean;
+  userName: string;
+  userAge: number;
+  userEmail: string;
+  userPass: string;
+  userFile: File[];
+  userCountry: string;
+};
+
+export type ErrorState = {
+  userName?: string;
+  userAge?: number
+  userEmail?: string;
+  userPass?: string;
+  userPassRepeat?: string;
+  gender?: string;
+  userAgreement?: boolean;
+  userFile?: string;
+  userCountry?: string;
+};

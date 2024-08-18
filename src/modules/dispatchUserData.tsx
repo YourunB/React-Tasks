@@ -1,7 +1,9 @@
 import { updateUser } from '../redux/dataSlice';
 import { convertToBase64 } from '../helpers/convertToBase64';
+import { Dispatch } from 'redux';
+import { UserDataDispatch } from '../helpers/types';
 
-export const dispatchUserData = async (data, dispatch) => {
+export const dispatchUserData = async (data: UserDataDispatch, dispatch: Dispatch) => {
   dispatch(updateUser({
     name: data.userName,
     age: data.userAge,

@@ -7,6 +7,7 @@ import { RootState } from '../redux/store';
 import { validationSchema } from '../modules/validationSchema';
 import { dispatchUserData } from '../modules/dispatchUserData';
 import { useState } from 'react';
+import { UserDataDispatch } from '../helpers/types';
 
 export const PageFormHook = () => {
   const navigate = useNavigate();
@@ -14,15 +15,15 @@ export const PageFormHook = () => {
   const dataRedux = useSelector((state: RootState) => state.data);
 
   const countriesList = dataRedux.countriesList;
-  const [countriesFilter, setCountriesFilter] = useState([]);
-  const [inputValue, setInputValue] = useState('');
+  const [inputValue, setInputValue] = useState<string>('');
+  const [countriesFilter, setCountriesFilter] = useState<string[]>([]);
 
   const { register, handleSubmit, formState: { errors, isValid }, setValue, clearErrors, setError } = useForm({
     resolver: yupResolver(validationSchema),
     mode: 'onChange'
   });
 
-  const handleInputChange = (e) => {
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
     setInputValue(value);
     if (value.length > 0) {
@@ -37,14 +38,14 @@ export const PageFormHook = () => {
     }
   };
 
-  const handleSelectCountry = (country) => {
+  const handleSelectCountry = (country: string) => {
     setInputValue(country);
     setCountriesFilter([]);
     setValue('userCountry', country);
     clearErrors('userCountry');
   };
 
-  const onSubmit = async (data) => {
+  const onSubmit = async (data: UserDataDispatch) => {
     dispatchUserData(data, dispatch);
     navigate('/');
   };
