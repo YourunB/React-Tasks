@@ -2,9 +2,10 @@ import s from './UserCard.module.css';
 import { useSelector } from 'react-redux';
 import { RootState } from '../redux/store';
 import { Link } from 'react-router-dom';
+import { UserInterface } from '../helpers/types';
 
 export const UserCard = () => {
-  const dataRedux = useSelector((state: RootState) => state.data);
+  const dataRedux: { user: UserInterface | null } = useSelector((state: RootState) => state.data);
 
   return (
     <div>

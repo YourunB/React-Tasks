@@ -17,7 +17,7 @@ export const PageFormHook = () => {
   const [countriesFilter, setCountriesFilter] = useState([]);
   const [inputValue, setInputValue] = useState('');
 
-  const { register, handleSubmit, formState: { errors, isValid }, setValue, trigger, clearErrors, setError } = useForm({
+  const { register, handleSubmit, formState: { errors, isValid }, setValue, clearErrors, setError } = useForm({
     resolver: yupResolver(validationSchema),
     mode: 'onChange'
   });

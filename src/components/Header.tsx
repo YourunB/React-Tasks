@@ -4,7 +4,7 @@ import { Link, useLocation } from 'react-router-dom';
 export const Header = () => {
   const location = useLocation();
 
-  const isCurrentPage = (itemPath) => {
+  const isCurrentPage = (itemPath: string) => {
     return itemPath === location.pathname;
   };
 
