@@ -1,5 +1,5 @@
 import './App.css';
-import { PagesRouter } from './modules/pagesRouter';
+import { PagesRouter } from './modules/PagesRouter';
 import { BrowserRouter } from 'react-router-dom';
 import { Header } from './components/Header';
 import { Provider } from 'react-redux';
