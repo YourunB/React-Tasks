@@ -50,7 +50,8 @@ fieldset {
   border: white 2px solid;
   font-weight: 700;
   display: block;
-  margin: 120px auto;
+  margin: auto;
+  margin-top: 120px;
   transition: 0.7s;
 }
 
@@ -132,7 +133,7 @@ fieldset {
 }
 
 .button:disabled {
-  cursor: none;
+  cursor: default;
   transform: scale(1);
   opacity: 0.5;
 }
