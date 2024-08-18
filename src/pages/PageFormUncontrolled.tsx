@@ -46,7 +46,7 @@ export const PageFormUncontrolled = () => {
       dispatchUserData(formData, dispatch);
       navigate('/');
     } catch (validationErrors) {
-      const errors = (validationErrors as { inner: Array<{ path: string; message: string }> }).inner.reduce((acc: {}, error: { path: string; message: string }) => {
+      const errors: Record<string, string> = (validationErrors as { inner: Array<{ path: string; message: string }> }).inner.reduce((acc: Record<string, string>, error: { path: string; message: string }) => {
         return { ...acc, [error.path]: error.message };
       }, {});
       setError(errors);
