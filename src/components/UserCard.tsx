@@ -9,7 +9,7 @@ export const UserCard = () => {
 
   return (
     <div>
-      {dataRedux.user ? 
+      {dataRedux.user ? (
         <div className={s.card}>
           <div className={s['card__data']}>
             <p>Name: {dataRedux.user.name}</p>
@@ -20,13 +20,19 @@ export const UserCard = () => {
             <p>Password: {dataRedux.user.pass}</p>
             <p>Agreement: {String(dataRedux.user.agreement)}</p>
           </div>
-          <img className={s['card__image']} src={dataRedux.user.image} alt='Photo'></img>
+          <img className={s['card__image']} src={dataRedux.user.image} alt="Photo"></img>
         </div>
-      : <div className={s.box}>
+      ) : (
+        <div className={s.box}>
           <p className={s.title}>You need save user data:</p>
-          <Link className={s.link} to='/uncontrolled'>Uncontrolled Form</Link>
-          <Link className={s.link} to='/controlled'>React Hook Form</Link>
-        </div>}
+          <Link className={s.link} to="/uncontrolled">
+            Uncontrolled Form
+          </Link>
+          <Link className={s.link} to="/controlled">
+            React Hook Form
+          </Link>
+        </div>
+      )}
     </div>
   );
 };

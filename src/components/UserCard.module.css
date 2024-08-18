@@ -47,7 +47,7 @@
   transition: 0.7s;
 }
 
-@media(hover:hover) {
+@media (hover: hover) {
   .link:hover {
     transform: scale(1.05);
   }

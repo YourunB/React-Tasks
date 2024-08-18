@@ -3,6 +3,6 @@ export function convertToBase64(file: File): Promise<string | ArrayBuffer | null
     const reader = new FileReader();
     reader.readAsDataURL(file);
     reader.onload = () => resolve(reader.result);
-    reader.onerror = error => reject(error);
+    reader.onerror = (error) => reject(error);
   });
 }

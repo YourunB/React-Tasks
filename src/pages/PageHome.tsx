@@ -1,9 +1,9 @@
-import './pages.css'
+import './pages.css';
 import { UserCard } from '../components/UserCard';
 
 export const PageHome = () => {
   return (
-    <main className='page'>
+    <main className="page">
       <UserCard />
     </main>
   );

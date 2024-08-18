@@ -112,7 +112,7 @@ fieldset {
   }
 }
 
-@media(hover:hover) {
+@media (hover: hover) {
   .button:hover,
   .not-found__box__link:hover {
     cursor: pointer;
@@ -122,7 +122,7 @@ fieldset {
   .drop-list li:hover {
     background: white;
     color: black;
-  }  
+  }
 }
 
 .button:active,

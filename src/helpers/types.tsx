@@ -27,7 +27,7 @@ export type UserDataDispatch = {
 
 export type ErrorState = {
   userName?: string;
-  userAge?: number
+  userAge?: number;
   userEmail?: string;
   userPass?: string;
   userPassRepeat?: string;

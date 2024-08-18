@@ -24,7 +24,7 @@
   transition: 0.7s;
 }
 
-@media (hover:hover) {
+@media (hover: hover) {
   .menu__item:hover {
     cursor: pointer;
     background: black;
